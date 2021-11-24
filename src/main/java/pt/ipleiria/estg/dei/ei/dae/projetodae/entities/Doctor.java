@@ -8,6 +8,12 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(
+                name = "getAllDoctors",
+                query = "SELECT d FROM Doctor d ORDER BY d.name" // JPQL
+        )
+})
 public class Doctor extends User implements Serializable {
     private String office;
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.REMOVE)
@@ -21,5 +27,21 @@ public class Doctor extends User implements Serializable {
         super(username, password, name, birthDate, email, phoneNumber);
         this.office = office;
         prescriptions = new LinkedList<>();
+    }
+
+    public String getOffice() {
+        return office;
+    }
+
+    public void setOffice(String office) {
+        this.office = office;
+    }
+
+    public LinkedList<Prescription> getPrescriptions() {
+        return prescriptions;
+    }
+
+    public void setPrescriptions(LinkedList<Prescription> prescriptions) {
+        this.prescriptions = prescriptions;
     }
 }
