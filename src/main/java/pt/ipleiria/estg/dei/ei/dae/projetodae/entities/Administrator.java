@@ -34,4 +34,15 @@ public class Administrator extends User implements Serializable {
     public void setBiometricsTypes(LinkedList<BiometricsType> biometricsTypes) {
         this.biometricsTypes = biometricsTypes;
     }
+
+    public void addBiometricsType(BiometricsType newType){
+        for (BiometricsType type : biometricsTypes) {
+            if (type.equals(newType)){
+                //throw new exception();
+                //remove return after excpetion implementation
+                return;
+            }
+        }
+        biometricsTypes.add(newType);
+    }
 }

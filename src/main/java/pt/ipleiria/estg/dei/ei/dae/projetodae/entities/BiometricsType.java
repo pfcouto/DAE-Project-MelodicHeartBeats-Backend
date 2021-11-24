@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.LinkedList;
+import java.util.Objects;
 //import java.util.LinkedHashSet;
 
 @Entity
@@ -100,5 +101,18 @@ public class BiometricsType implements Serializable {
 
     public void setAdministrator(Administrator administrator) {
         this.administrator = administrator;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BiometricsType)) return false;
+        BiometricsType that = (BiometricsType) o;
+        return getCode() == that.getCode() && getMax() == that.getMax() && getMin() == that.getMin() && Objects.equals(getType(), that.getType()) && Objects.equals(getUnity(), that.getUnity());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCode(), getType(), getMax(), getMin(), getUnity());
     }
 }

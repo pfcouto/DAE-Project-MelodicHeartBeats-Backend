@@ -34,10 +34,12 @@ public class AdministratorBean {
         }
     }
 
-    public void updateAdministrator(String username, String password, String name, String email) {
+    public void updateAdministrator(String username, String password, String name, Date birthDate, String email, int phoneNumber) {
         Administrator administrator = em.find(Administrator.class, username);
         administrator.setPassword(password);
         administrator.setName(name);
+        administrator.setBirthDate(birthDate);
         administrator.setEmail(email);
+        administrator.setPhoneNumber(phoneNumber);
     }
 }
