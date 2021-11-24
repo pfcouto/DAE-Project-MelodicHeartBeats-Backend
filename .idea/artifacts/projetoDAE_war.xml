@@ -9,7 +9,7 @@
         <unpackNestedArchives>false</unpackNestedArchives>
       </options>
     </properties>
-    <root id="archive" name="projetoDAE-1.0-SNAPSHOT.war">
+    <root id="archive" name="projectDAE.war">
       <element id="artifact" artifact-name="projetoDAE:war exploded" />
     </root>
   </artifact>

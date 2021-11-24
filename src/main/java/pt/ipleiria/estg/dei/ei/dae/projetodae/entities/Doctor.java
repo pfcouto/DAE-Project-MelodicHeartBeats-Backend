@@ -5,23 +5,21 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 
 @Entity
 public class Doctor extends User implements Serializable {
-    @NotNull
-    private int code;
     private String office;
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.REMOVE)
-    private LinkedHashSet<Prescription> prescriptions;
+    private LinkedList<Prescription> prescriptions;
 
     public Doctor() {
-        prescriptions = new LinkedHashSet<>();
+        prescriptions = new LinkedList<>();
     }
 
-    public Doctor(String cc, String name, Date birthDate, String email, int phoneNumber, int code, String office) {
-        super(cc, name, birthDate, email, phoneNumber);
-        this.code = code;
+    public Doctor(String username, String password, String name, Date birthDate, String email, int phoneNumber, int code, String office) {
+        super(username, password, name, birthDate, email, phoneNumber);
         this.office = office;
-        prescriptions = new LinkedHashSet<>();
+        prescriptions = new LinkedList<>();
     }
 }

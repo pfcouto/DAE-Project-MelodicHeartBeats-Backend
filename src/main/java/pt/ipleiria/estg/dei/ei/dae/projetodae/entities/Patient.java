@@ -17,7 +17,7 @@ public class Patient extends User implements Serializable {
         prescriptions = new LinkedHashSet<>();
     }
 
-    public Patient(String cc, String name, Date birthDate, String email, int phoneNumber) {
-        super(cc, name, birthDate, email, phoneNumber);
+    public Patient(String username, String password, String name, Date birthDate, String email, int phoneNumber) {
+        super(username, password, name, birthDate, email, phoneNumber);
     }
 }
