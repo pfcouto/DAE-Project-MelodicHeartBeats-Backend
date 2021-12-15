@@ -10,7 +10,7 @@ public class DoctorDTO {
     String name;
     Date birthDate;
     String email;
-    int phoneNumber;
+    String phoneNumber;
     String office;
 
     List<PresciptionDTO> presciptionDTOS;
@@ -19,7 +19,7 @@ public class DoctorDTO {
         presciptionDTOS = new LinkedList<>();
     }
 
-    public DoctorDTO(String username, String password, String name, Date birthDate, String email, int phoneNumber, String office) {
+    public DoctorDTO(String username, String password, String name, Date birthDate, String email, String phoneNumber, String office) {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -70,11 +70,11 @@ public class DoctorDTO {
         this.birthDate = birthDate;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

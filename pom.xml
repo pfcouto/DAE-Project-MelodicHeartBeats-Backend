@@ -61,7 +61,7 @@
                 <version>3.3.1</version>
                 <configuration>
                     <outputDirectory>target</outputDirectory>
-                    <warName>projectDAE</warName>
+                    <warName>projetoDAE</warName>
                 </configuration>
             </plugin>
         </plugins>

@@ -13,6 +13,7 @@ import java.io.Serializable;
 })
 public class Prescription implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @ManyToOne
     @JoinColumn(name = "DOCTOR_ID")
@@ -27,8 +28,7 @@ public class Prescription implements Serializable {
     public Prescription() {
     }
 
-    public Prescription(int id, Doctor doctor, Patient patient, String description) {
-        this.id = id;
+    public Prescription(Doctor doctor, Patient patient, String description) {
         this.doctor = doctor;
         this.patient = patient;
         this.description = description;

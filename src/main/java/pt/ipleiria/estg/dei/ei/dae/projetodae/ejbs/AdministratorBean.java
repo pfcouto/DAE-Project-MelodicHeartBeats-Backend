@@ -14,7 +14,7 @@ public class AdministratorBean {
     @PersistenceContext
     EntityManager em;
 
-    public void create (String username, String password, String name, Date birthDate, String email, int phoneNumber){
+    public void create (String username, String password, String name, Date birthDate, String email, String phoneNumber){
         Administrator administrator = new Administrator(username, password, name, birthDate, email, phoneNumber);
         em.persist(administrator);
     }
@@ -34,7 +34,7 @@ public class AdministratorBean {
         }
     }
 
-    public void updateAdministrator(String username, String password, String name, Date birthDate, String email, int phoneNumber) {
+    public void updateAdministrator(String username, String password, String name, Date birthDate, String email, String phoneNumber) {
         Administrator administrator = em.find(Administrator.class, username);
         administrator.setPassword(password);
         administrator.setName(name);

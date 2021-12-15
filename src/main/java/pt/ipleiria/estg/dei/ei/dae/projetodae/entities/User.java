@@ -30,14 +30,14 @@ public class User implements Serializable {
     @NotNull
     @Email
     private String email;
-    private int phoneNumber;
+    private String phoneNumber;
     @Version
     private int version;
 
     public User() {
     }
 
-    public User(String username, String password, String name, Date birthDate, String email, int phoneNumber) {
+    public User(String username, String password, String name, Date birthDate, String email, String phoneNumber) {
         this.username = username;
         this.password = hashPassword(password);
         this.name = name;
@@ -86,11 +86,11 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
