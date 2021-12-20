@@ -23,7 +23,7 @@ public class Patient extends User implements Serializable {
         prescriptions = new LinkedList<>();
     }
 
-    public Patient(String username, String password, String name, Date birthDate, String email, String phoneNumber) {
+    public Patient(String username, String password, String name, String birthDate, String email, String phoneNumber) {
         super(username, password, name, birthDate, email, phoneNumber);
         prescriptions = new LinkedList<>();
     }

@@ -23,9 +23,8 @@ public class PrescriptionBean {
         em.persist(prescription);
     }
 
-    public List<Doctor> getAllPrescriptions() {
-        // remember, maps to: “SELECT s FROM Student s ORDER BY s.name”
-        return (List<Doctor>) em.createNamedQuery("getAllDoctors").getResultList();
+    public List<Prescription> getAllPrescriptions() {
+        return (List<Prescription>) em.createNamedQuery("getAllPrescriptions").getResultList();
     }
 
     public Prescription findPrescription(int id) {
@@ -46,15 +45,5 @@ public class PrescriptionBean {
             em.remove(prescription);
         }
     }
-
-//    public void updatePrescription(String username, String password, String name, Date birthDate, String email, int phoneNumber, String office) {
-//        Doctor doctor = em.find(Doctor.class, username);
-//        doctor.setPassword(password);
-//        doctor.setName(name);
-//        doctor.setBirthDate(birthDate);
-//        doctor.setEmail(email);
-//        doctor.setPhoneNumber(phoneNumber);
-//        doctor.setOffice(office);
-//    }
 
 }

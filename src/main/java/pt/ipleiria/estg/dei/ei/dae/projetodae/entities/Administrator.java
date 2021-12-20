@@ -22,7 +22,7 @@ public class Administrator extends User implements Serializable {
         biometricsTypes = new LinkedList<>();
     }
 
-    public Administrator(String username, String password, String name, Date birthDate, String email, String phoneNumber) {
+    public Administrator(String username, String password, String name, String birthDate, String email, String phoneNumber) {
         super(username, password, name, birthDate, email, phoneNumber);
         biometricsTypes = new LinkedList<>();
     }

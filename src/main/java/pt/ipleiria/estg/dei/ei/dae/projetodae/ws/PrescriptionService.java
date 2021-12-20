@@ -10,10 +10,7 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
 
 import javax.ejb.EJB;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -34,31 +31,37 @@ public class PrescriptionService {
                 prescription.getDescription()
         );
     }
-    DoctorDTO toDTO(Doctor doctor){
-        return new DoctorDTO(
-                doctor.getUsername(),
-                doctor.getPassword(),
-                doctor.getName(),
-                doctor.getBirthDate(),
-                doctor.getEmail(),
-                doctor.getPhoneNumber(),
-                doctor.getOffice()
-        );
-    }
-
-    PatientDTO toDTO(Patient patient){
-        return new PatientDTO(
-                patient.getUsername(),
-                patient.getPassword(),
-                patient.getName(),
-                patient.getBirthDate(),
-                patient.getEmail(),
-                patient.getPhoneNumber()
-        );
-    }
+//    DoctorDTO toDTO(Doctor doctor){
+//        return new DoctorDTO(
+//                doctor.getUsername(),
+//                doctor.getPassword(),
+//                doctor.getName(),
+//                doctor.getBirthDate(),
+//                doctor.getEmail(),
+//                doctor.getPhoneNumber(),
+//                doctor.getOffice()
+//        );
+//    }
+//
+//    PatientDTO toDTO(Patient patient){
+//        return new PatientDTO(
+//                patient.getUsername(),
+//                patient.getPassword(),
+//                patient.getName(),
+//                patient.getBirthDate(),
+//                patient.getEmail(),
+//                patient.getPhoneNumber()
+//        );
+//    }
 
     private List<PresciptionDTO> toDTOs(List<Prescription> prescriptions) {
         return prescriptions.stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
+    @GET
+    @Path("/")
+    public List<PresciptionDTO> getAllPrescriptions() {
+       return toDTOs(prescriptionBean.getAllPrescriptions());
     }
 
     @POST

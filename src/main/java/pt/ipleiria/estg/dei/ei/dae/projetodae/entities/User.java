@@ -10,6 +10,8 @@ import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +28,7 @@ public class User implements Serializable {
     @NotNull
     private String name;
     @NotNull
-    private Date birthDate;
+    private Calendar birthDate;
     @NotNull
     @Email
     private String email;
@@ -37,11 +39,13 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String username, String password, String name, Date birthDate, String email, String phoneNumber) {
+    public User(String username, String password, String name, String birthDate, String email, String phoneNumber) {
         this.username = username;
         this.password = hashPassword(password);
         this.name = name;
-        this.birthDate = birthDate;
+        String[] date = birthDate.split("-");
+        this.birthDate = Calendar.getInstance();
+        this.birthDate.set(Integer.parseInt(date[0]),Integer.parseInt(date[1]),Integer.parseInt(date[2]));
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
@@ -70,12 +74,15 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
+    public String getBirthDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(birthDate.getTime());
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthDate(String birthDate) {
+        String[] date = birthDate.split("-");
+        this.birthDate = Calendar.getInstance();
+        this.birthDate.set(Integer.parseInt(date[0]),Integer.parseInt(date[1]),Integer.parseInt(date[2]));
     }
 
     public String getEmail() {
