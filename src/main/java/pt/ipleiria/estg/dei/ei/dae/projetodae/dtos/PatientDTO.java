@@ -10,14 +10,14 @@ public class PatientDTO {
     String name;
     Date birthDate;
     String email;
-    int phoneNumber;
+    String phoneNumber;
     List<PresciptionDTO> presciptionDTOS;
 
     public PatientDTO() {
         presciptionDTOS = new LinkedList<>();
     }
 
-    public PatientDTO(String username, String password, String name, Date birthDate, String email, int phoneNumber) {
+    public PatientDTO(String username, String password, String name, Date birthDate, String email, String phoneNumber) {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -74,11 +74,11 @@ public class PatientDTO {
         this.birthDate = birthDate;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }

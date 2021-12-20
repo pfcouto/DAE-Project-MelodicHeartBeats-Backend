@@ -14,7 +14,7 @@ public class DoctorBean {
     @PersistenceContext
     EntityManager em;
 
-    public void create(String username, String password, String name, Date birthDate, String email, int phoneNumber, String office){
+    public void create(String username, String password, String name, Date birthDate, String email, String phoneNumber, String office){
         Doctor doctor = new Doctor(username, password, name, birthDate, email, phoneNumber, office);
         em.persist(doctor);
     }
@@ -35,7 +35,7 @@ public class DoctorBean {
         }
     }
 
-    public void updateDoctor(String username, String password, String name, Date birthDate, String email, int phoneNumber, String office) {
+    public void updateDoctor(String username, String password, String name, Date birthDate, String email, String phoneNumber, String office) {
         Doctor doctor = em.find(Doctor.class, username);
         doctor.setPassword(password);
         doctor.setName(name);

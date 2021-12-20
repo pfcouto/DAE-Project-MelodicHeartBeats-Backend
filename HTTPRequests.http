@@ -1,0 +1,12 @@
+POST http://localhost:8080/projetoDAE/api/doctors
+Content-Type: application/json
+
+{
+    "birthDate": "02-12-2001",
+    "email": "pedrocouto2001@my.ipleiria.pt",
+    "name": "Pedro Félix Couto",
+    "office": "2",
+    "password": "1234",
+    "phoneNumber": "967733870",
+    "username": "Doutor1"
+}

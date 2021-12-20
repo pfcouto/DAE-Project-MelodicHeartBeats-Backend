@@ -42,7 +42,6 @@ public class DoctorService {
     }
 
 
-    //    String username, String password, String name, Date birthDate, String email, int phoneNumber, String office
     @POST
     @Path("/")
     public Response createNewDoctor(DoctorDTO doctorDTO) {
@@ -88,7 +87,6 @@ public class DoctorService {
                     .entity("ERROR_FINDING_DOCTOR")
                     .build();
         }
-//        String username, String password, String name, Date birthDate, String email, int phoneNumber, String office
         doctorBean.updateDoctor(
                 username,
                 doctorDTO.getPassword(),
