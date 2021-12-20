@@ -1,11 +1,14 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.print.Doc;
+import javax.validation.ConstraintViolationException;
 import java.util.Date;
 import java.util.List;
 
@@ -14,15 +17,20 @@ public class DoctorBean {
     @PersistenceContext
     EntityManager em;
 
-    public void create(String username, String password, String name, String email, String phoneNumber, String office){
-        Doctor doctor = new Doctor(username, password, name, email, phoneNumber, office);
-        System.out.println(doctor.getUsername());
-        System.out.println(doctor.getPassword());
-        System.out.println(doctor.getName());
-        System.out.println(doctor.getEmail());
-        System.out.println(doctor.getPhoneNumber());
-        System.out.println(doctor.getOffice());
-        em.persist(doctor);
+    public void create(String username, String password, String name, String email, String phoneNumber, String office) throws MyEntityExistsException, MyConstraintViolationException {
+
+        Doctor newDoctor = findDoctor(username);
+
+        if (newDoctor != null) {
+            throw new MyEntityExistsException("Doctor with username: " + username + " already exists");
+        }
+        try {
+            newDoctor = new Doctor(username, password, name, email, phoneNumber, office);
+            em.persist(newDoctor);
+        } catch (ConstraintViolationException e) {
+            throw new MyConstraintViolationException(e);
+        }
+
     }
 
     public List<Doctor> getAllDoctors() {

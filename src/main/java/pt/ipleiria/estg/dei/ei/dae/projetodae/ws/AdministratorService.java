@@ -3,6 +3,8 @@ package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.AdministratorDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.AdministratorBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Administrator;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -38,7 +40,7 @@ public class AdministratorService {
 
     @POST
     @Path("/")
-    public Response createNewAdministrator(AdministratorDTO administratorDTO) {
+    public Response createNewAdministrator(AdministratorDTO administratorDTO) throws MyConstraintViolationException, MyEntityExistsException {
         administratorBean.create(administratorDTO.getUsername(),
                 administratorDTO.getPassword(),
                 administratorDTO.getName(),

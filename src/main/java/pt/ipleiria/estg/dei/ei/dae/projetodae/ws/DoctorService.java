@@ -6,6 +6,8 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.AdministratorBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.DoctorBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Administrator;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -44,7 +46,7 @@ public class DoctorService {
 
     @POST
     @Path("/")
-    public Response createNewDoctor(DoctorDTO doctorDTO) {
+    public Response createNewDoctor(DoctorDTO doctorDTO) throws MyConstraintViolationException, MyEntityExistsException {
         doctorBean.create(
                 doctorDTO.getUsername(),
                 doctorDTO.getPassword(),
