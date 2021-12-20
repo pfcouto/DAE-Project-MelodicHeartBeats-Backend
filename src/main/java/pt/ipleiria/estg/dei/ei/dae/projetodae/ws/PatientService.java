@@ -47,7 +47,6 @@ public class PatientService {
                 patientDTO.getUsername(),
                 patientDTO.getPassword(),
                 patientDTO.getName(),
-                patientDTO.getBirthDate(),
                 patientDTO.getEmail(),
                 patientDTO.getPhoneNumber()
         );
@@ -88,7 +87,6 @@ public class PatientService {
         patientBean.updatePatient(username,
                 patientDTO.getPassword(),
                 patientDTO.getName(),
-                patientDTO.getBirthDate(),
                 patientDTO.getEmail(),
                 patientDTO.getPhoneNumber()
         );
@@ -106,7 +104,6 @@ public class PatientService {
                 patient.getUsername(),
                 patient.getPassword(),
                 patient.getName(),
-                patient.getBirthDate(),
                 patient.getEmail(),
                 patient.getPhoneNumber()
         );

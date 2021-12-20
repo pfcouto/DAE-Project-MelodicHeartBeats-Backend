@@ -14,8 +14,14 @@ public class DoctorBean {
     @PersistenceContext
     EntityManager em;
 
-    public void create(String username, String password, String name, Date birthDate, String email, String phoneNumber, String office){
-        Doctor doctor = new Doctor(username, password, name, birthDate, email, phoneNumber, office);
+    public void create(String username, String password, String name, String email, String phoneNumber, String office){
+        Doctor doctor = new Doctor(username, password, name, email, phoneNumber, office);
+        System.out.println(doctor.getUsername());
+        System.out.println(doctor.getPassword());
+        System.out.println(doctor.getName());
+        System.out.println(doctor.getEmail());
+        System.out.println(doctor.getPhoneNumber());
+        System.out.println(doctor.getOffice());
         em.persist(doctor);
     }
 
@@ -35,11 +41,10 @@ public class DoctorBean {
         }
     }
 
-    public void updateDoctor(String username, String password, String name, Date birthDate, String email, String phoneNumber, String office) {
+    public void updateDoctor(String username, String password, String name, String email, String phoneNumber, String office) {
         Doctor doctor = em.find(Doctor.class, username);
         doctor.setPassword(password);
         doctor.setName(name);
-        doctor.setBirthDate(birthDate);
         doctor.setEmail(email);
         doctor.setPhoneNumber(phoneNumber);
         doctor.setOffice(office);

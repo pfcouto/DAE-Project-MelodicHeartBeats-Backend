@@ -49,7 +49,6 @@ public class DoctorService {
                 doctorDTO.getUsername(),
                 doctorDTO.getPassword(),
                 doctorDTO.getName(),
-                doctorDTO.getBirthDate(),
                 doctorDTO.getEmail(),
                 doctorDTO.getPhoneNumber(),
                 doctorDTO.getOffice()
@@ -91,7 +90,6 @@ public class DoctorService {
                 username,
                 doctorDTO.getPassword(),
                 doctorDTO.getName(),
-                doctorDTO.getBirthDate(),
                 doctorDTO.getEmail(),
                 doctorDTO.getPhoneNumber(),
                 doctorDTO.getOffice()
@@ -110,7 +108,6 @@ public class DoctorService {
                 doctor.getUsername(),
                 doctor.getPassword(),
                 doctor.getName(),
-                doctor.getBirthDate(),
                 doctor.getEmail(),
                 doctor.getPhoneNumber(),
                 doctor.getOffice()

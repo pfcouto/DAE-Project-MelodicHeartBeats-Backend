@@ -25,8 +25,8 @@ public class User implements Serializable {
     String password;
     @NotNull
     private String name;
-    @NotNull
-    private Date birthDate;
+//    @NotNull
+//    private Date birthDate;
     @NotNull
     @Email
     private String email;
@@ -37,11 +37,11 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String username, String password, String name, Date birthDate, String email, String phoneNumber) {
+    public User(String username, String password, String name, String email, String phoneNumber) {
         this.username = username;
         this.password = hashPassword(password);
         this.name = name;
-        this.birthDate = birthDate;
+//        this.birthDate = birthDate;
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
@@ -70,13 +70,13 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
+//    public Date getBirthDate() {
+//        return birthDate;
+//    }
+//
+//    public void setBirthDate(Date birthDate) {
+//        this.birthDate = birthDate;
+//    }
 
     public String getEmail() {
         return email;

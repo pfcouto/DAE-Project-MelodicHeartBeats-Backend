@@ -27,12 +27,12 @@ public class ConfigBean {
 
         try {
 
-            administratorBean.create("admin", "1234", "Administrator", new Date(1997, 07, 13), "admin@mail.com", "963123123");
+            administratorBean.create("admin", "1234", "Administrator", "admin@mail.com", "963123123");
 
-            doctorBean.create("Lacerda", "1234", "Jorge Lacerda", new Date(2001, 05, 14), "lacerga@mail.com", "967733870", "A");
-            doctorBean.create("Silva", "1234", "Eduardo Silva", new Date(2000, 12, 30), "silva@mail.com", "123123123", "B");
+            doctorBean.create("Lacerda", "1234", "Jorge Lacerda", "lacerga@mail.com", "967733870", "A");
+            doctorBean.create("Silva", "1234", "Eduardo Silva", "silva@mail.com", "123123123", "B");
 
-            patientBean.create("patient", "1234", "Patient1", new Date(1992, 07, 13), "patient@mail.com", "963321321" );
+            patientBean.create("patient", "1234", "Patient1",  "patient@mail.com", "963321321" );
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage());
         }
