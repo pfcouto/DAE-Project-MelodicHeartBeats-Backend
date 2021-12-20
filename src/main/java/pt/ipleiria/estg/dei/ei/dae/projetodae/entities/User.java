@@ -12,7 +12,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,7 +44,7 @@ public class User implements Serializable {
         this.name = name;
         String[] date = birthDate.split("-");
         this.birthDate = Calendar.getInstance();
-        this.birthDate.set(Integer.parseInt(date[0]),Integer.parseInt(date[1]),Integer.parseInt(date[2]));
+        this.birthDate.set(Integer.parseInt(date[0]), Integer.parseInt(date[1]) - 1, Integer.parseInt(date[2]));
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
@@ -82,7 +81,7 @@ public class User implements Serializable {
     public void setBirthDate(String birthDate) {
         String[] date = birthDate.split("-");
         this.birthDate = Calendar.getInstance();
-        this.birthDate.set(Integer.parseInt(date[0]),Integer.parseInt(date[1]),Integer.parseInt(date[2]));
+        this.birthDate.set(Integer.parseInt(date[0]), Integer.parseInt(date[1]) - 1, Integer.parseInt(date[2]));
     }
 
     public String getEmail() {

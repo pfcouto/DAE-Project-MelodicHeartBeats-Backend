@@ -28,7 +28,7 @@ public class ConfigBean {
 
             patientBean.create("pLeandro","1234","Leandro","1997-06-23","pleandro@mail.pt","919000111");
 
-            prescriptionBean.create("dJoao","pLeandro","TEXTO DA DESCRICAO");
+            prescriptionBean.create("dJoao","pLeandro","TEXTO DA DESCRICAO","2020-06-23","2020-07-23");
 
 
         } catch (Exception e) {

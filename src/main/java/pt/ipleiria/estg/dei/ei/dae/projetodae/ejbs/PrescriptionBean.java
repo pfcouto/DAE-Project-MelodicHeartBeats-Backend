@@ -7,8 +7,6 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.print.Doc;
-import java.util.Date;
 import java.util.List;
 
 @Stateless
@@ -16,10 +14,10 @@ public class PrescriptionBean {
     @PersistenceContext
     EntityManager em;
 
-    public void create(String doctorUsername, String patientUsername, String description) {
+    public void create(String doctorUsername, String patientUsername, String description, String startDate, String endDate) {
         Doctor doctor = findDoctor(doctorUsername);
         Patient patient = findPatient(patientUsername);
-        Prescription prescription = new Prescription(doctor, patient, description);
+        Prescription prescription = new Prescription(doctor, patient, description, startDate, endDate);
         em.persist(prescription);
     }
 

@@ -28,7 +28,9 @@ public class PrescriptionService {
                 prescription.getId(),
                 prescription.getDoctor().getUsername(),
                 prescription.getPatient().getUsername(),
-                prescription.getDescription()
+                prescription.getDescription(),
+                prescription.getStartDate(),
+                prescription.getEndDate()
         );
     }
 //    DoctorDTO toDTO(Doctor doctor){
@@ -70,7 +72,9 @@ public class PrescriptionService {
         prescriptionBean.create(
                 presciptionDTO.getDoctor(),
                 presciptionDTO.getPatient(),
-                presciptionDTO.getDescription()
+                presciptionDTO.getDescription(),
+                presciptionDTO.getStartDate(),
+                presciptionDTO.getEndDate()
         );
         return Response.status(Response.Status.CREATED)
                 .build();
