@@ -20,6 +20,7 @@ public class Doctor extends User implements Serializable {
     private LinkedList<Prescription> prescriptions;
 
     public Doctor() {
+        super();
         prescriptions = new LinkedList<>();
     }
 
@@ -35,6 +36,16 @@ public class Doctor extends User implements Serializable {
 
     public void setOffice(String office) {
         this.office = office;
+    }
+
+    public void addPrescription(Prescription prescription) {
+        if (prescription != null && !prescriptions.contains(prescription))
+            prescriptions.add(prescription);
+    }
+
+    public void removePrescription(Prescription prescription) {
+        if (prescription != null && prescriptions.contains(prescription))
+            prescriptions.remove(prescription);
     }
 
     public LinkedList<Prescription> getPrescriptions() {

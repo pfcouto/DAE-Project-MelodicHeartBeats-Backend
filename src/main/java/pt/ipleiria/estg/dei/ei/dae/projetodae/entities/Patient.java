@@ -35,4 +35,14 @@ public class Patient extends User implements Serializable {
     public void setPrescriptions(LinkedList<Prescription> prescriptions) {
         this.prescriptions = prescriptions;
     }
+
+    public void addPrescription(Prescription prescription) {
+        if (prescription != null && !prescriptions.contains(prescription))
+            prescriptions.add(prescription);
+    }
+
+    public void removePrescription(Prescription prescription) {
+        if (prescription != null && prescriptions.contains(prescription))
+            prescriptions.remove(prescription);
+    }
 }

@@ -1,6 +1,6 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.dtos;
 
-public class PresciptionDTO {
+public class PrescriptionDTO {
     private int id;
     private String doctor;
     private String patient;
@@ -8,10 +8,10 @@ public class PresciptionDTO {
     private String startDate;
     private String endDate;
 
-    public PresciptionDTO() {
+    public PrescriptionDTO() {
     }
 
-    public PresciptionDTO(int id, String doctor, String patient, String description, String startDate, String endDate) {
+    public PrescriptionDTO(int id, String doctor, String patient, String description, String startDate, String endDate) {
         this.id = id;
         this.doctor = doctor;
         this.patient = patient;

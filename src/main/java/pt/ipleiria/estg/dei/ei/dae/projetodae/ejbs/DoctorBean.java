@@ -58,4 +58,6 @@ public class DoctorBean {
         doctor.setOffice(office);
         doctor.setBirthDate(birthDate);
     }
+
+
 }

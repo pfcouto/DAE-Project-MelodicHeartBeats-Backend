@@ -11,6 +11,7 @@ pt\ipleiria\estg\dei\ei\dae\projetodae\exceptions\MyEntityExistsExceptionMapper.
 pt\ipleiria\estg\dei\ei\dae\projetodae\ws\BiometricsTypeService.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\BiometricDTO.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\entities\Patient.class
+pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\PrescriptionDTO.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\entities\Prescription.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\ws\BiometricService.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\entities\Administrator.class
@@ -34,5 +35,4 @@ pt\ipleiria\estg\dei\ei\dae\projetodae\exceptions\MyIllegalArgumentExceptionMapp
 pt\ipleiria\estg\dei\ei\dae\projetodae\ejbs\PrescriptionBean.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\ejbs\DoctorBean.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\exceptions\MyEntityExistsException.class
-pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\PresciptionDTO.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\entities\Doctor.class
