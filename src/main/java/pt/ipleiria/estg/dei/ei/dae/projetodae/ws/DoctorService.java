@@ -89,7 +89,6 @@ public class DoctorService {
         }
         doctorBean.updateDoctor(
                 username,
-                doctorDTO.getPassword(),
                 doctorDTO.getName(),
                 doctor.getBirthDate(),
                 doctorDTO.getEmail(),
@@ -108,7 +107,7 @@ public class DoctorService {
     DoctorDTO toDTONoPrescriptions(Doctor doctor) {
         return new DoctorDTO(
                 doctor.getUsername(),
-                doctor.getPassword(),
+                null,
                 doctor.getName(),
                 doctor.getBirthDate(),
                 doctor.getEmail(),
@@ -125,7 +124,7 @@ public class DoctorService {
         List<PrescriptionDTO> prescriptionsDTOS = prescriptionsToDTOs(doctor.getPrescriptions());
         DoctorDTO doctorDTO = new DoctorDTO(
                 doctor.getUsername(),
-                doctor.getPassword(),
+                null,
                 doctor.getName(),
                 doctor.getBirthDate(),
                 doctor.getEmail(),

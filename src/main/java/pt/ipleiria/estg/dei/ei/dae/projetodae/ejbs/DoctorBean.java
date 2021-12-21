@@ -49,9 +49,8 @@ public class DoctorBean {
         }
     }
 
-    public void updateDoctor(String username, String password, String name, String birthDate, String email, String phoneNumber, String office) {
+    public void updateDoctor(String username, String name, String birthDate, String email, String phoneNumber, String office) {
         Doctor doctor = em.find(Doctor.class, username);
-        doctor.setPassword(password);
         doctor.setName(name);
         doctor.setEmail(email);
         doctor.setPhoneNumber(phoneNumber);
