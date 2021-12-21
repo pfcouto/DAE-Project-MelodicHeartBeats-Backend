@@ -17,7 +17,7 @@ public class AdministratorBean {
     @PersistenceContext
     EntityManager em;
 
-    public void create (String username, String password, String name, String email, String phoneNumber) throws MyEntityExistsException, MyConstraintViolationException {
+    public void create (String username, String password, String name, String birthDate, String email, String phoneNumber) throws MyEntityExistsException, MyConstraintViolationException {
         Administrator newAdmin = findAdministrator(username);
 
         if (newAdmin != null) {
@@ -25,7 +25,7 @@ public class AdministratorBean {
         }
 
         try {
-            newAdmin = new Administrator(username, password, name, email, phoneNumber);
+            newAdmin = new Administrator(username, password, name, birthDate, email, phoneNumber);
             em.persist(newAdmin);
         } catch (ConstraintViolationException e) {
             throw new MyConstraintViolationException(e);
@@ -48,11 +48,12 @@ public class AdministratorBean {
         }
     }
 
-    public void updateAdministrator(String username, String password, String name, String email, String phoneNumber) {
+    public void updateAdministrator(String username, String password, String name, String birthDate, String email, String phoneNumber) {
         Administrator administrator = em.find(Administrator.class, username);
         administrator.setPassword(password);
         administrator.setName(name);
         administrator.setEmail(email);
         administrator.setPhoneNumber(phoneNumber);
+        administrator.setBirthDate(birthDate);
     }
 }

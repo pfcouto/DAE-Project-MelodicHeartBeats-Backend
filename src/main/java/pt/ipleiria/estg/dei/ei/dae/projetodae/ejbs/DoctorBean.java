@@ -17,7 +17,7 @@ public class DoctorBean {
     @PersistenceContext
     EntityManager em;
 
-    public void create(String username, String password, String name, String email, String phoneNumber, String office) throws MyEntityExistsException, MyConstraintViolationException {
+    public void create(String username, String password, String name, String birthDate, String email, String phoneNumber, String office) throws MyEntityExistsException, MyConstraintViolationException {
 
         Doctor newDoctor = findDoctor(username);
 
@@ -25,7 +25,7 @@ public class DoctorBean {
             throw new MyEntityExistsException("Doctor with username: " + username + " already exists");
         }
         try {
-            newDoctor = new Doctor(username, password, name, email, phoneNumber, office);
+            newDoctor = new Doctor(username, password, name, birthDate, email, phoneNumber, office);
             em.persist(newDoctor);
         } catch (ConstraintViolationException e) {
             throw new MyConstraintViolationException(e);
@@ -49,12 +49,13 @@ public class DoctorBean {
         }
     }
 
-    public void updateDoctor(String username, String password, String name, String email, String phoneNumber, String office) {
+    public void updateDoctor(String username, String password, String name, String birthDate, String email, String phoneNumber, String office) {
         Doctor doctor = em.find(Doctor.class, username);
         doctor.setPassword(password);
         doctor.setName(name);
         doctor.setEmail(email);
         doctor.setPhoneNumber(phoneNumber);
         doctor.setOffice(office);
+        doctor.setBirthDate(birthDate);
     }
 }

@@ -17,7 +17,7 @@ public class PatientBean {
     @PersistenceContext
     EntityManager em;
 
-    public void create(String username, String password, String name, String email, String phoneNumber) throws MyEntityExistsException, MyConstraintViolationException {
+    public void create(String username, String password, String name, String birthDate, String email, String phoneNumber) throws MyEntityExistsException, MyConstraintViolationException {
         Patient newPatient = findPatient(username);
 
         if (newPatient != null){
@@ -25,7 +25,7 @@ public class PatientBean {
         }
 
         try {
-            newPatient = new Patient(username, password, name, email, phoneNumber);
+            newPatient = new Patient(username, password, name, birthDate, email, phoneNumber);
             em.persist(newPatient);
         } catch (ConstraintViolationException e) {
             throw new MyConstraintViolationException(e);
@@ -48,11 +48,12 @@ public class PatientBean {
         }
     }
 
-    public void updatePatient(String username, String password, String name, String email, String phoneNumber) {
+    public void updatePatient(String username, String password, String name, String birthDate, String email, String phoneNumber) {
         Patient patient = em.find(Patient.class, username);
         patient.setPassword(password);
         patient.setName(name);
         patient.setEmail(email);
         patient.setPhoneNumber(phoneNumber);
+        patient.setBirthDate(birthDate);
     }
 }

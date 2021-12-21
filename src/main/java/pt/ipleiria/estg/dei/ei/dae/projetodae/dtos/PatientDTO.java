@@ -8,6 +8,10 @@ public class PatientDTO {
     String username;
     String password;
     String name;
+<<<<<<< HEAD
+=======
+    String birthDate;
+>>>>>>> main
     String email;
     String phoneNumber;
     List<PresciptionDTO> presciptionDTOS;
@@ -16,10 +20,14 @@ public class PatientDTO {
         presciptionDTOS = new LinkedList<>();
     }
 
-    public PatientDTO(String username, String password, String name, String email, String phoneNumber) {
+    public PatientDTO(String username, String password, String name, String birthDate, String email, String phoneNumber) {
         this.username = username;
         this.password = password;
         this.name = name;
+<<<<<<< HEAD
+=======
+        this.birthDate = birthDate;
+>>>>>>> main
         this.email = email;
         this.phoneNumber = phoneNumber;
         presciptionDTOS = new LinkedList<>();
@@ -63,6 +71,14 @@ public class PatientDTO {
 
     public void setPresciptionDTOS(List<PresciptionDTO> presciptionDTOS) {
         this.presciptionDTOS = presciptionDTOS;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getPhoneNumber() {
