@@ -38,8 +38,8 @@ public class AdministratorBean {
         Administrator administrator = em.find(Administrator.class, username);
         administrator.setPassword(password);
         administrator.setName(name);
-        administrator.setBirthDate(birthDate);
         administrator.setEmail(email);
         administrator.setPhoneNumber(phoneNumber);
+        administrator.setBirthDate(birthDate);
     }
 }

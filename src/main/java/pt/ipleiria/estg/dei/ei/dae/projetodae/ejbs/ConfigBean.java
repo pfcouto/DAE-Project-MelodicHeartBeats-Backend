@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 @Singleton
 @Startup
 public class ConfigBean {
@@ -30,6 +31,12 @@ public class ConfigBean {
 
             prescriptionBean.create("dJoao","pLeandro","TEXTO DA DESCRICAO","2020-06-23","2020-07-23");
 
+            administratorBean.create("admin", "1234", "Administrator", "admin@mail.com", "963123123");
+
+            doctorBean.create("Lacerda", "1234", "Jorge Lacerda", "lacerga@mail.com", "967733870", "A");
+            doctorBean.create("Silva", "1234", "Eduardo Silva", "silva@mail.com", "123123123", "B");
+
+            patientBean.create("patient", "1234", "Patient1",  "patient@mail.com", "963321321" );
 
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage());

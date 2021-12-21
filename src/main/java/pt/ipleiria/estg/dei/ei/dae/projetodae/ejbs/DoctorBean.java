@@ -39,9 +39,9 @@ public class DoctorBean {
         Doctor doctor = em.find(Doctor.class, username);
         doctor.setPassword(password);
         doctor.setName(name);
-        doctor.setBirthDate(birthDate);
         doctor.setEmail(email);
         doctor.setPhoneNumber(phoneNumber);
         doctor.setOffice(office);
+        doctor.setBirthDate(birthDate);
     }
 }

@@ -39,8 +39,8 @@ public class PatientBean {
         Patient patient = em.find(Patient.class, username);
         patient.setPassword(password);
         patient.setName(name);
-        patient.setBirthDate(birthDate);
         patient.setEmail(email);
         patient.setPhoneNumber(phoneNumber);
+        patient.setBirthDate(birthDate);
     }
 }
