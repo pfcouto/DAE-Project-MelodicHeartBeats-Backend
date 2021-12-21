@@ -4,7 +4,6 @@ C:\Users\pedro\IdeaProjects\DAE\projetoDAE\src\main\java\pt\ipleiria\estg\dei\ei
 C:\Users\pedro\IdeaProjects\DAE\projetoDAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\entities\Patient.java
 C:\Users\pedro\IdeaProjects\DAE\projetoDAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\ws\PatientService.java
 C:\Users\pedro\IdeaProjects\DAE\projetoDAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\exceptions\MyEntityNotFoundExceptionMapper.java
-C:\Users\pedro\IdeaProjects\DAE\projetoDAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\PresciptionDTO.java
 C:\Users\pedro\IdeaProjects\DAE\projetoDAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\entities\Biometric.java
 C:\Users\pedro\IdeaProjects\DAE\projetoDAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\exceptions\MyIllegalArgumentExceptionMapper.java
 C:\Users\pedro\IdeaProjects\DAE\projetoDAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\ws\BiometricService.java
@@ -23,6 +22,7 @@ C:\Users\pedro\IdeaProjects\DAE\projetoDAE\src\main\java\pt\ipleiria\estg\dei\ei
 C:\Users\pedro\IdeaProjects\DAE\projetoDAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\entities\Prescription.java
 C:\Users\pedro\IdeaProjects\DAE\projetoDAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\ejbs\BiometricBean.java
 C:\Users\pedro\IdeaProjects\DAE\projetoDAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\PatientDTO.java
+C:\Users\pedro\IdeaProjects\DAE\projetoDAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\PrescriptionDTO.java
 C:\Users\pedro\IdeaProjects\DAE\projetoDAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\ejbs\DoctorBean.java
 C:\Users\pedro\IdeaProjects\DAE\projetoDAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\ejbs\PrescriptionBean.java
 C:\Users\pedro\IdeaProjects\DAE\projetoDAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\ejbs\PatientBean.java

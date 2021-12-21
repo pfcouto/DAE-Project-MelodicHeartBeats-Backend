@@ -1,13 +1,10 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 
-import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.DoctorDTO;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PatientDTO;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PresciptionDTO;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.PatientBean;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PrescriptionDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.PrescriptionBean;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -23,8 +20,8 @@ public class PrescriptionService {
     @EJB
     PrescriptionBean prescriptionBean;
 
-    PresciptionDTO toDTO(Prescription prescription) {
-        return new PresciptionDTO(
+    PrescriptionDTO toDTO(Prescription prescription) {
+        return new PrescriptionDTO(
                 prescription.getId(),
                 prescription.getDoctor().getUsername(),
                 prescription.getPatient().getUsername(),
@@ -56,26 +53,30 @@ public class PrescriptionService {
 //        );
 //    }
 
-    private List<PresciptionDTO> toDTOs(List<Prescription> prescriptions) {
+    private List<PrescriptionDTO> toDTOs(List<Prescription> prescriptions) {
         return prescriptions.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
     @GET
     @Path("/")
-    public List<PresciptionDTO> getAllPrescriptions() {
+    public List<PrescriptionDTO> getAllPrescriptions() {
        return toDTOs(prescriptionBean.getAllPrescriptions());
     }
 
     @POST
     @Path("/")
-    public Response createNewPrescription(PresciptionDTO presciptionDTO) {
-        prescriptionBean.create(
+    public Response createNewPrescription(PrescriptionDTO presciptionDTO) throws MyEntityNotFoundException {
+        int precriptionId = prescriptionBean.create(
                 presciptionDTO.getDoctor(),
                 presciptionDTO.getPatient(),
                 presciptionDTO.getDescription(),
                 presciptionDTO.getStartDate(),
                 presciptionDTO.getEndDate()
         );
+        prescriptionBean.assignPrescriptionToPatientAndDoctor(
+                presciptionDTO.getDoctor(),
+                presciptionDTO.getPatient(),
+                precriptionId);
         return Response.status(Response.Status.CREATED)
                 .build();
     }

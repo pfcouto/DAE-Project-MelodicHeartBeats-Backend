@@ -1,11 +1,10 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 
-import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.AdministratorDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.DoctorDTO;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.AdministratorBean;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PrescriptionDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.DoctorBean;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Administrator;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
 
@@ -13,7 +12,6 @@ import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,7 +26,7 @@ public class DoctorService {
     @GET
     @Path("/")
     public List<DoctorDTO> getAllDoctors() {
-        return toDTOs(doctorBean.getAllDoctors());
+        return toDTOsNoPrescriptions(doctorBean.getAllDoctors());
     }
 
     @GET
@@ -36,10 +34,10 @@ public class DoctorService {
     public Response getDoctorDetails(@PathParam("doctor") String username) {
         Doctor doctor = doctorBean.findDoctor(username);
         if (doctor != null) {
-            return Response.ok(toDTO(doctor)).build();
+            return Response.ok(toDTOWithPrescriptions(doctor)).build();
         }
         return Response.status(Response.Status.NOT_FOUND)
-                .entity("ERROR_FINDING_STUDENT")
+                .entity("ERROR_FINDING_DOCTOR")
                 .build();
     }
 
@@ -60,7 +58,7 @@ public class DoctorService {
         if (newDoctor == null)
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         return Response.status(Response.Status.CREATED)
-                .entity(toDTO(newDoctor))
+                .entity(toDTONoPrescriptions(newDoctor))
                 .build();
     }
 
@@ -103,11 +101,11 @@ public class DoctorService {
         if (newDoctor == null)
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         return Response.status(Response.Status.CREATED)
-                .entity(toDTO(newDoctor))
+                .entity(toDTONoPrescriptions(newDoctor))
                 .build();
     }
 
-    DoctorDTO toDTO(Doctor doctor) {
+    DoctorDTO toDTONoPrescriptions(Doctor doctor) {
         return new DoctorDTO(
                 doctor.getUsername(),
                 doctor.getPassword(),
@@ -119,8 +117,42 @@ public class DoctorService {
         );
     }
 
-    private List<DoctorDTO> toDTOs(List<Doctor> doctors) {
-        return doctors.stream().map(this::toDTO).collect(Collectors.toList());
+    private List<DoctorDTO> toDTOsNoPrescriptions(List<Doctor> doctors) {
+        return doctors.stream().map(this::toDTONoPrescriptions).collect(Collectors.toList());
+    }
+
+    DoctorDTO toDTOWithPrescriptions(Doctor doctor) {
+        List<PrescriptionDTO> prescriptionsDTOS = prescriptionsToDTOs(doctor.getPrescriptions());
+        DoctorDTO doctorDTO = new DoctorDTO(
+                doctor.getUsername(),
+                doctor.getPassword(),
+                doctor.getName(),
+                doctor.getBirthDate(),
+                doctor.getEmail(),
+                doctor.getPhoneNumber(),
+                doctor.getOffice()
+        );
+        doctorDTO.setPrescriptionDTOS(prescriptionsDTOS);
+        return doctorDTO;
+    }
+
+    private List<DoctorDTO> toDTOsWithPrescriptions(List<Doctor> doctors) {
+        return doctors.stream().map(this::toDTOWithPrescriptions).collect(Collectors.toList());
+    }
+
+    PrescriptionDTO toDTO(Prescription prescription) {
+        return new PrescriptionDTO(
+                prescription.getId(),
+                prescription.getDoctor().getName(),
+                prescription.getPatient().getName(),
+                prescription.getDescription(),
+                prescription.getStartDate(),
+                prescription.getEndDate()
+        );
+    }
+
+    private List<PrescriptionDTO> prescriptionsToDTOs(List<Prescription> prescriptions) {
+        return prescriptions.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
 }
