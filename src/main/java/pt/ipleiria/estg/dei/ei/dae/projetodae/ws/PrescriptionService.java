@@ -1,12 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 
-import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.DoctorDTO;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PatientDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PresciptionDTO;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.PatientBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.PrescriptionBean;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
 
 import javax.ejb.EJB;
@@ -63,7 +58,19 @@ public class PrescriptionService {
     @GET
     @Path("/")
     public List<PresciptionDTO> getAllPrescriptions() {
-       return toDTOs(prescriptionBean.getAllPrescriptions());
+        return toDTOs(prescriptionBean.getAllPrescriptions());
+    }
+
+    @GET
+    @Path("{prescription}")
+    public Response getDoctorDetails(@PathParam("prescription") int prescriptionId) {
+        Prescription prescription = prescriptionBean.findPrescription(prescriptionId);
+        if (prescription != null) {
+            return Response.ok(toDTO(prescription)).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND)
+                .entity("ERROR_FINDING_PRESCRIPTION")
+                .build();
     }
 
     @POST
