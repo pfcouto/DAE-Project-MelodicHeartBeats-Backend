@@ -44,6 +44,7 @@ public class AdministratorService {
         administratorBean.create(administratorDTO.getUsername(),
                 administratorDTO.getPassword(),
                 administratorDTO.getName(),
+                administratorDTO.getBirthDate(),
                 administratorDTO.getEmail(),
                 administratorDTO.getPhoneNumber()
         );
@@ -85,6 +86,7 @@ public class AdministratorService {
                 username,
                 administratorDTO.getPassword(),
                 administratorDTO.getName(),
+                administratorDTO.getBirthDate(),
                 administratorDTO.getEmail(),
                 administratorDTO.getPhoneNumber()
         );
@@ -103,6 +105,7 @@ public class AdministratorService {
                 administrator.getUsername(),
                 administrator.getPassword(),
                 administrator.getName(),
+                administrator.getBirthDate(),
                 administrator.getEmail(),
                 administrator.getPhoneNumber()
         );
