@@ -28,6 +28,7 @@ public class BiometricsType implements Serializable {
     private String unity;
     @OneToMany(mappedBy = "biometricsType")
     private LinkedList<Biometric> biometrics;
+    private boolean deleted = Boolean.FALSE;
 
     @ManyToOne
     @JoinColumn(name = "ADMINISTRATOR_USERNAME")
@@ -45,6 +46,14 @@ public class BiometricsType implements Serializable {
         this.unity = unity;
         this.administrator = administrator;
         biometrics = new LinkedList<>();
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public int getCode() {

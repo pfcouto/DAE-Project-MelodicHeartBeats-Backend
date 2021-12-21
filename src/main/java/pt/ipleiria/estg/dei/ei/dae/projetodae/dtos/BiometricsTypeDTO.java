@@ -14,25 +14,35 @@ import java.util.LinkedList;
 public class BiometricsTypeDTO implements Serializable {
     public int code;
     public String type;
-    public int max;
-    public int min;
+    public int max=-1;
+    public int min=-1;
     public String unity;
     public LinkedList<BiometricDTO> biometricsDTO;
-    public String administratorUsername;
+    public String admin;
+    public boolean delete;
 
 
     public BiometricsTypeDTO() {
         this.biometricsDTO=new LinkedList<>();
     }
 
-    public BiometricsTypeDTO(int code, String type, int max, int min, String unity, String administratorUsername) {
+    public BiometricsTypeDTO(int code, String type, int max, int min, String unity, String administratorUsername,boolean delete) {
         this.code = code;
         this.type = type;
         this.max = max;
         this.min = min;
         this.unity = unity;
-        this.administratorUsername = administratorUsername;
+        this.delete=delete;
+        this.admin = administratorUsername;
         this.biometricsDTO=new LinkedList<>();
+    }
+
+    public boolean isDelete() {
+        return delete;
+    }
+
+    public void setDelete(boolean delete) {
+        this.delete = delete;
     }
 
     public int getCode() {
@@ -84,10 +94,10 @@ public class BiometricsTypeDTO implements Serializable {
     }
 
     public String getAdministrator() {
-        return administratorUsername;
+        return admin;
     }
 
     public void setAdministratorDTO(String administratorUsername) {
-        this.administratorUsername = administratorUsername;
+        this.admin = administratorUsername;
     }
 }

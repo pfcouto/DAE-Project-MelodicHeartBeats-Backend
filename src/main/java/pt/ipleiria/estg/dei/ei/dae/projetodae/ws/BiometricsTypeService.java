@@ -25,7 +25,7 @@ public class BiometricsTypeService {
     AdministratorBean administratorBean;
     private BiometricsTypeDTO toDTO(BiometricsType biometricsType) {
         AdministratorDTO administratorDTO = new AdministratorDTO(biometricsType.getAdministrator().getUsername(), biometricsType.getAdministrator().getName(), biometricsType.getAdministrator().getEmail(), biometricsType.getAdministrator().getPhoneNumber());
-        return new BiometricsTypeDTO(biometricsType.getCode(), biometricsType.getType(), biometricsType.getMax(), biometricsType.getMin(), biometricsType.getUnity(), administratorDTO.getUsername());
+        return new BiometricsTypeDTO(biometricsType.getCode(), biometricsType.getType(), biometricsType.getMax(), biometricsType.getMin(), biometricsType.getUnity(), administratorDTO.getUsername(),biometricsType.isDeleted());
     }
 
     private List<BiometricsTypeDTO> toDTOs(List<BiometricsType> biometricsType) {
@@ -36,6 +36,18 @@ public class BiometricsTypeService {
     @Path("/") // means: the relative url path is “/api/students/”
     public List<BiometricsTypeDTO> getAllBiometricsTypesWS() {
         return toDTOs(biometricsTypeBean.getAllBiometricsTypes());
+    }
+
+    @GET
+    @Path("{code}")
+    public Response getBiometricsTypeDetails(@PathParam("code") int code) {
+        BiometricsType biometricsType = biometricsTypeBean.find(code);
+        if (biometricsType != null) {
+            return Response.ok(toDTO(biometricsType)).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND)
+                .entity("ERROR_FINDING_BIOMETRIC_TYPE")
+                .build();
     }
 
     @POST // means: to call this endpoint, we need to use the HTTP GET method
@@ -56,10 +68,9 @@ public class BiometricsTypeService {
     }
 
     @DELETE
-    @Path("delete/{code}")
+    @Path("{code}")
     public Response delete(@PathParam("code") int code){
         BiometricsType biometricsType= biometricsTypeBean.find(code);
-        System.out.println(biometricsType);
         if(biometricsType == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -72,10 +83,13 @@ public class BiometricsTypeService {
     @PATCH
     @Path("update/{code}")
     public Response Update(@PathParam("code") int code,BiometricsTypeDTO biometricsTypeDTO){
-        System.out.println(biometricsTypeDTO.getType());
         System.out.println(biometricsTypeDTO.getMax());
+        boolean updated=biometricsTypeBean.update(code,biometricsTypeDTO);
         //FUNCIONAAA
-        return Response.status(Response.Status.CREATED)
+        if(!updated) {
+            return Response.status(Response.Status.NOT_MODIFIED).build();
+        }
+        return Response.status(Response.Status.OK)
                 .build();
     }
 
