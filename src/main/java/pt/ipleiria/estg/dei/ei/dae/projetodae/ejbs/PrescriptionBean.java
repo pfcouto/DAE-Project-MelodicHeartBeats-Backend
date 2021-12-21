@@ -3,7 +3,6 @@ package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.Stateless;
@@ -40,11 +39,33 @@ public class PrescriptionBean {
         return em.find(Patient.class, username);
     }
 
-    public void deletePrescription(int id) {
+    public void deletePrescription(int id) throws MyEntityNotFoundException {
         Prescription prescription = findPrescription(id);
-        if (prescription != null) {
-            em.remove(prescription);
+        if (prescription == null) {
+            throw new MyEntityNotFoundException("Prescription " + id + " does not exist");
         }
+        unassignPrescriptionFromPatientAndDoctor(id);
+        em.remove(prescription);
+    }
+
+    public void updatePrescription(int id, String doctorName, String patientName, String description, String startDate, String endDate) throws MyEntityNotFoundException {
+        Doctor doctor = em.find(Doctor.class, doctorName);
+        if (doctor == null) {
+            throw new MyEntityNotFoundException();
+        }
+        Patient patient = em.find(Patient.class, patientName);
+        if (patient == null) {
+            throw new MyEntityNotFoundException();
+        }
+        Prescription prescription = em.find(Prescription.class, id);
+        if (prescription == null) {
+            throw new MyEntityNotFoundException();
+        }
+        prescription.setDoctor(doctor);
+        prescription.setPatient(patient);
+        prescription.setDescription(description);
+        prescription.setStartDate(startDate);
+        prescription.setEndDate(endDate);
     }
 
     public void assignPrescriptionToPatientAndDoctor(String doctor_username,
@@ -71,23 +92,20 @@ public class PrescriptionBean {
         prescription.setPatient(patient);
     }
 
-    public void unassignPrescriptionFromPatientAndDoctor(String doctor_username,
-                                         String patient_username,
-                                         int prescription_id) throws MyEntityNotFoundException {
-
-        Doctor doctor = findDoctor(doctor_username);
-        if (doctor == null) {
-            throw new MyEntityNotFoundException("Doctor " + doctor_username + " does not exist");
-        }
-
-        Patient patient = findPatient(patient_username);
-        if (patient == null) {
-            throw new MyEntityNotFoundException("Doctor " + patient_username + " does not exist");
-        }
-
+    public void unassignPrescriptionFromPatientAndDoctor(int prescription_id) throws MyEntityNotFoundException {
         Prescription prescription = findPrescription(prescription_id);
         if (prescription == null) {
             throw new MyEntityNotFoundException("Prescription " + prescription_id + " does not exist");
+        }
+
+        Doctor doctor = findDoctor(prescription.getDoctor().getUsername());
+        if (doctor == null) {
+            throw new MyEntityNotFoundException("Doctor " + prescription.getDoctor().getUsername() + " does not exist");
+        }
+
+        Patient patient = findPatient(prescription.getPatient().getUsername());
+        if (patient == null) {
+            throw new MyEntityNotFoundException("Doctor " + prescription.getPatient().getUsername() + " does not exist");
         }
 
         prescription.setPatient(null);
