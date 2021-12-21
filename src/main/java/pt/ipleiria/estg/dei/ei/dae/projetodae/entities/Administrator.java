@@ -45,4 +45,8 @@ public class Administrator extends User implements Serializable {
         }
         biometricsTypes.add(newType);
     }
+
+    public void removeBiometricType(BiometricsType biometricsType) {
+        this.biometricsTypes.remove(biometricsType);
+    }
 }

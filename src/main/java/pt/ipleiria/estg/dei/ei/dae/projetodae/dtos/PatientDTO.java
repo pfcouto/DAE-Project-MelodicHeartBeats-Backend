@@ -14,7 +14,7 @@ public class PatientDTO {
     List<PresciptionDTO> presciptionDTOS;
 
     public PatientDTO() {
-        presciptionDTOS = new LinkedList<>();
+        this.presciptionDTOS = new LinkedList<>();
     }
 
     public PatientDTO(String username, String password, String name, String email, String phoneNumber) {
@@ -24,6 +24,7 @@ public class PatientDTO {
 //        this.birthDate = birthDate;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.presciptionDTOS = new LinkedList<>();
     }
 
     public String getUsername() {

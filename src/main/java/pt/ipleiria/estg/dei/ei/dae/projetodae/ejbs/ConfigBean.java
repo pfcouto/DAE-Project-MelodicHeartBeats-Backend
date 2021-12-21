@@ -1,5 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.BiometricsType;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
@@ -19,6 +21,8 @@ public class ConfigBean {
     PatientBean patientBean;
     @EJB
     AdministratorBean administratorBean;
+    @EJB
+    BiometricsTypeBean biometricsTypeBean;
 
     private static final Logger logger = Logger.getLogger("ejbs.ConfigBean");
 
@@ -33,6 +37,7 @@ public class ConfigBean {
             doctorBean.create("Silva", "1234", "Eduardo Silva", "silva@mail.com", "123123123", "B");
 
             patientBean.create("patient", "1234", "Patient1",  "patient@mail.com", "963321321" );
+            biometricsTypeBean.create("teste",2,1,"g","admin");
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage());
         }

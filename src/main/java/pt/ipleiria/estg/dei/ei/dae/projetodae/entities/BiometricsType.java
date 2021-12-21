@@ -16,6 +16,7 @@ import java.util.Objects;
 })
 public class BiometricsType implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int code;
     @NotNull
     private String type;
@@ -37,8 +38,7 @@ public class BiometricsType implements Serializable {
         biometrics = new LinkedList<>();
     }
 
-    public BiometricsType(int code, String type, int max, int min, String unity, Administrator administrator) {
-        this.code = code;
+    public BiometricsType(String type, int max, int min, String unity, Administrator administrator) {
         this.type = type;
         this.max = max;
         this.min = min;

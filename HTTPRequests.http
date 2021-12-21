@@ -9,3 +9,32 @@ Content-Type: application/json
     "phoneNumber": "967733870",
     "username": "Doutor1"
 }
+
+###
+GET http://localhost:8080/projetoDAE/api/biometricsType
+Accept: application/json
+###
+POST http://localhost:8080/projetoDAE/api/biometricsType
+Content-Type: application/json
+
+{
+  "type": "teste",
+  "max": "3",
+  "min": "1",
+  "unity": "g",
+  "administratorUsername": "admin"
+}
+###
+DELETE http://localhost:8080/projetoDAE/api/biometricsType/delete/1
+###
+
+PATCH http://localhost:8080/projetoDAE/api/biometricsType/update/1
+Content-Type: application/json
+
+{
+  "max": "3",
+  "min": "1",
+  "unity": "g",
+  "administratorUsername": "admin"
+}
+###

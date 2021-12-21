@@ -25,6 +25,13 @@ public class AdministratorDTO {
         biometricsTypeDTOS = new LinkedList<>();
     }
 
+    public AdministratorDTO(String username, String name, String email, String phoneNumber) {
+        this.username = username;
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getUsername() {
         return username;
     }

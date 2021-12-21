@@ -41,4 +41,12 @@ public class AdministratorBean {
         administrator.setEmail(email);
         administrator.setPhoneNumber(phoneNumber);
     }
+
+    public Administrator find(String username){
+        Administrator administrator = em.find(Administrator.class, username);
+        if(administrator==null){
+            return null;
+        }
+        return administrator;
+    }
 }
