@@ -11,6 +11,7 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -80,7 +81,7 @@ public class AdministratorService {
 
     @PUT
     @Path("{username}")
-    public Response updateAdministrator(@PathParam("username") String username, AdministratorDTO administratorDTO) {
+    public Response updateAdministrator(@PathParam("username") String username, AdministratorDTO administratorDTO) throws MyEntityNotFoundException {
         Administrator administrator = administratorBean.findAdministrator(username);
         if (administrator == null) {
             return Response.status(Response.Status.NOT_FOUND)

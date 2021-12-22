@@ -3,9 +3,11 @@ package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintViolationException;
 import java.util.Date;
@@ -48,8 +50,12 @@ public class PatientBean {
         }
     }
 
-    public void updatePatient(String username, String password, String name, String birthDate, String email, String phoneNumber) {
+    public void updatePatient(String username, String password, String name, String birthDate, String email, String phoneNumber) throws MyEntityNotFoundException {
         Patient patient = em.find(Patient.class, username);
+        if (patient == null){
+            throw new MyEntityNotFoundException("Patient" + username + "t NOT FOUND");
+        }
+        em.lock(patient, LockModeType.OPTIMISTIC);
         patient.setPassword(password);
         patient.setName(name);
         patient.setEmail(email);

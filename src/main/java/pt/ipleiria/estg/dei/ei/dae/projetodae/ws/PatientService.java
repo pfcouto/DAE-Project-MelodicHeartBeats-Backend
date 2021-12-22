@@ -10,6 +10,7 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -81,7 +82,7 @@ public class PatientService {
 
     @PUT
     @Path("{username}")
-    public Response updatePatient(@PathParam("username") String username, PatientDTO patientDTO) {
+    public Response updatePatient(@PathParam("username") String username, PatientDTO patientDTO) throws MyEntityNotFoundException {
         Patient patient = patientBean.findPatient(username);
         if (patient == null) {
             return Response.status(Response.Status.NOT_FOUND)

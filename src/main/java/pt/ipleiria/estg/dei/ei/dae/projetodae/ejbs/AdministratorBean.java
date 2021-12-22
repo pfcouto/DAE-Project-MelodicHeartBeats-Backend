@@ -3,9 +3,11 @@ package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Administrator;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintViolationException;
 import java.util.Date;
@@ -48,8 +50,12 @@ public class AdministratorBean {
         }
     }
 
-    public void updateAdministrator(String username, String password, String name, String birthDate, String email, String phoneNumber) {
+    public void updateAdministrator(String username, String password, String name, String birthDate, String email, String phoneNumber) throws MyEntityNotFoundException {
         Administrator administrator = em.find(Administrator.class, username);
+        if (administrator == null){
+            throw new MyEntityNotFoundException("Administrator" + username + " NOT FOUND");
+        }
+        em.lock(administrator, LockModeType.OPTIMISTIC);
         administrator.setPassword(password);
         administrator.setName(name);
         administrator.setEmail(email);

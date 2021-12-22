@@ -3,9 +3,11 @@ package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import javax.print.Doc;
 import javax.validation.ConstraintViolationException;
@@ -49,8 +51,12 @@ public class DoctorBean {
         }
     }
 
-    public void updateDoctor(String username, String name, String birthDate, String email, String phoneNumber, String office) {
+    public void updateDoctor(String username, String name, String birthDate, String email, String phoneNumber, String office) throws MyEntityNotFoundException {
         Doctor doctor = em.find(Doctor.class, username);
+        if (doctor == null){
+            throw new MyEntityNotFoundException("Doctor" + username + " NOT FOUND");
+        }
+        em.lock(doctor, LockModeType.OPTIMISTIC);
         doctor.setName(name);
         doctor.setEmail(email);
         doctor.setPhoneNumber(phoneNumber);
