@@ -2,9 +2,8 @@ package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.BiometricsTypeDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Administrator;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Biometric;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Observation;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.BiometricsType;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -17,13 +16,13 @@ public class BiometricsTypeBean {
     @PersistenceContext
     EntityManager em;
 
-    public BiometricsType create(String type, int max, int min, String unity, String administratorUsername){
-        if((max<0 || min<0) || max<min){
+    public BiometricsType create(String name,String description, int valueMax, int valueMin, String unity, String administratorUsername){
+        if((valueMax<0 || valueMin<0) || valueMax<valueMin){
             return null;
         }
         Administrator administrator=em.find(Administrator.class,administratorUsername);
         if(administrator!=null){
-            BiometricsType biometricsType = new BiometricsType(type,max,min,unity,administrator);
+            BiometricsType biometricsType = new BiometricsType(name,description,valueMax,valueMin,unity,administrator);
             em.persist(biometricsType);
             administrator.addBiometricsType(biometricsType);
             em.merge(administrator);
@@ -47,12 +46,12 @@ public class BiometricsTypeBean {
         em.persist(biometricsType.getAdministrator());
 
         //get a list of Biometrics by Type.
-        String queryString = "select b from Biometric b where b.biometricsType=:code";
+        String queryString = "select b from Observation b where b.biometricsType=:code";
         Query query=em.createQuery( queryString );
         query.setParameter("code",biometricsType);
-        List<Biometric> biometrics=(List<Biometric>) query.getResultList();
+        List<Observation> observations =(List<Observation>) query.getResultList();
 
-        if(biometrics.isEmpty()){
+        if(observations.isEmpty()){
             //hard Delete
             em.remove(biometricsType);
         }else{
@@ -65,19 +64,19 @@ public class BiometricsTypeBean {
     public boolean update(int code, BiometricsTypeDTO biometricsTypeDTO) {
         BiometricsType biometricsType=em.find(BiometricsType.class,code);
         if(biometricsType!=null){
-            if(biometricsTypeDTO.getType()!=null){
-                biometricsType.setType(biometricsTypeDTO.getType());
+            if(biometricsTypeDTO.getName()!=null){
+                biometricsType.setName(biometricsTypeDTO.getName());
             }
-            if(biometricsTypeDTO.getMax()!=-1){
-                if(biometricsTypeDTO.getMax()>=biometricsType.getMin()){
-                    biometricsType.setMax(biometricsTypeDTO.getMax());
+            if(biometricsTypeDTO.getValueMax()!=-1){
+                if(biometricsTypeDTO.getValueMax()>=biometricsType.getValueMin()){
+                    biometricsType.setValueMax(biometricsTypeDTO.getValueMax());
                 }else{
                     return false;
                 }
             }
-            if(biometricsTypeDTO.getMin()!=-1){
-                if(biometricsType.getMax()>=biometricsTypeDTO.getMin()){
-                    biometricsType.setMin(biometricsTypeDTO.getMin());
+            if(biometricsTypeDTO.getValueMin()!=-1){
+                if(biometricsType.getValueMax()>=biometricsTypeDTO.getValueMin()){
+                    biometricsType.setValueMin(biometricsTypeDTO.getValueMin());
                 }else{
                     return false;
                 }

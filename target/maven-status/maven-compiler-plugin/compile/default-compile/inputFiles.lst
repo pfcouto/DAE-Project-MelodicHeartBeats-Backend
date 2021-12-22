@@ -1,4 +1,5 @@
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\HelloResource.java
+C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\entities\Observation.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\ejbs\ConfigBean.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\entities\Doctor.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\ws\PatientService.java
@@ -13,7 +14,6 @@ C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiri
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\PresciptionDTO.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\AdministratorDTO.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\DoctorDTO.java
-C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\entities\Biometric.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\BiometricDTO.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\HelloApplication.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\BiometricsTypeDTO.java

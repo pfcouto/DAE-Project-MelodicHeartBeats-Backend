@@ -23,7 +23,7 @@ Content-Type: application/json
 {
   "type": "teste",
   "max": "3",
-  "min": "2",
+  "valueMin": "2",
   "unity": "g",
   "administratorUsername": "admin"
 }
@@ -37,7 +37,7 @@ Content-Type: application/json
 {
   "type": "teste2",
   "max": "3",
-  "min": "1",
+  "valueMin": "1",
   "unity": "g",
   "administratorUsername": "admin"
 }

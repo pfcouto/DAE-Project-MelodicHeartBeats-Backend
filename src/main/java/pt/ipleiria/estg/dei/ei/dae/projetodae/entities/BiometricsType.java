@@ -19,33 +19,43 @@ public class BiometricsType implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int code;
     @NotNull
-    private String type;
+    private String name;
     @NotNull
-    private int max;
+    private String description;
     @NotNull
-    private int min;
+    private int valueMax;
+    @NotNull
+    private int valueMin;
     @NotNull
     private String unity;
-    @OneToMany(mappedBy = "biometricsType")
-    private LinkedList<Biometric> biometrics;
+    /*@OneToMany(mappedBy = "biometricsType")
+    private LinkedList<Biometric> biometrics;*/
     private boolean deleted = Boolean.FALSE;
-
     @ManyToOne
     @JoinColumn(name = "ADMINISTRATOR_USERNAME")
     @NotNull
     private Administrator administrator;
 
     public BiometricsType() {
-        biometrics = new LinkedList<>();
+        //biometrics = new LinkedList<>();
     }
 
-    public BiometricsType(String type, int max, int min, String unity, Administrator administrator) {
-        this.type = type;
-        this.max = max;
-        this.min = min;
+    public BiometricsType(String name,String description, int valueMax, int valueMin, String unity, Administrator administrator) {
+        this.name = name;
+        this.description=description;
+        this.valueMax = valueMax;
+        this.valueMin = valueMin;
         this.unity = unity;
         this.administrator = administrator;
-        biometrics = new LinkedList<>();
+        //biometrics = new LinkedList<>();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public boolean isDeleted() {
@@ -64,28 +74,28 @@ public class BiometricsType implements Serializable {
         this.code = code;
     }
 
-    public String getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setName(String type) {
+        this.name = type;
     }
 
-    public int getMax() {
-        return max;
+    public int getValueMax() {
+        return valueMax;
     }
 
-    public void setMax(int max) {
-        this.max = max;
+    public void setValueMax(int max) {
+        this.valueMax = max;
     }
 
-    public int getMin() {
-        return min;
+    public int getValueMin() {
+        return valueMin;
     }
 
-    public void setMin(int min) {
-        this.min = min;
+    public void setValueMin(int min) {
+        this.valueMin = min;
     }
 
     public String getUnity() {
@@ -96,13 +106,13 @@ public class BiometricsType implements Serializable {
         this.unity = unity;
     }
 
-    public LinkedList<Biometric> getBiometrics() {
+    /*public LinkedList<Biometric> getBiometrics() {
         return biometrics;
     }
 
     public void setBiometrics(LinkedList<Biometric> biometrics) {
         this.biometrics = biometrics;
-    }
+    }*/
 
     public Administrator getAdministrator() {
         return administrator;
@@ -117,11 +127,11 @@ public class BiometricsType implements Serializable {
         if (this == o) return true;
         if (!(o instanceof BiometricsType)) return false;
         BiometricsType that = (BiometricsType) o;
-        return getCode() == that.getCode() && getMax() == that.getMax() && getMin() == that.getMin() && Objects.equals(getType(), that.getType()) && Objects.equals(getUnity(), that.getUnity());
+        return getCode() == that.getCode() && getValueMax() == that.getValueMax() && getValueMin() == that.getValueMin() && Objects.equals(getName(), that.getName()) && Objects.equals(getUnity(), that.getUnity());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCode(), getType(), getMax(), getMin(), getUnity());
+        return Objects.hash(getCode(), getName(), getValueMax(), getValueMin(), getUnity());
     }
 }

@@ -1,7 +1,7 @@
 pt\ipleiria\estg\dei\ei\dae\projetodae\ejbs\PatientBean.class
+pt\ipleiria\estg\dei\ei\dae\projetodae\entities\Observation.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\ejbs\BiometricBean.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\ws\DoctorService.class
-pt\ipleiria\estg\dei\ei\dae\projetodae\entities\Biometric.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\ejbs\AdministratorBean.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\ws\AdministratorService.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\AdministratorDTO.class

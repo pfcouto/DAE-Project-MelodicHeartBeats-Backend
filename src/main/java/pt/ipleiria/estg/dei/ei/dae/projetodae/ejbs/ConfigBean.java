@@ -37,7 +37,7 @@ public class ConfigBean {
             doctorBean.create("Silva", "1234", "Eduardo Silva", "silva@mail.com", "123123123", "B");
 
             patientBean.create("patient", "1234", "Patient1",  "patient@mail.com", "963321321" );
-            biometricsTypeBean.create("teste",2,1,"g","admin");
+            biometricsTypeBean.create("teste","description",2,1,"g","admin");
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage());
         }

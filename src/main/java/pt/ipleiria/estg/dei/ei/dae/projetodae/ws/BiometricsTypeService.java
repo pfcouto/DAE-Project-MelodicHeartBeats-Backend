@@ -1,12 +1,9 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 
-import org.jboss.resteasy.annotations.Body;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.AdministratorDTO;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.BiometricDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.BiometricsTypeDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.AdministratorBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.BiometricsTypeBean;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Administrator;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.BiometricsType;
 
 import javax.ejb.EJB;
@@ -25,7 +22,7 @@ public class BiometricsTypeService {
     AdministratorBean administratorBean;
     private BiometricsTypeDTO toDTO(BiometricsType biometricsType) {
         AdministratorDTO administratorDTO = new AdministratorDTO(biometricsType.getAdministrator().getUsername(), biometricsType.getAdministrator().getName(), biometricsType.getAdministrator().getEmail(), biometricsType.getAdministrator().getPhoneNumber());
-        return new BiometricsTypeDTO(biometricsType.getCode(), biometricsType.getType(), biometricsType.getMax(), biometricsType.getMin(), biometricsType.getUnity(), administratorDTO.getUsername(),biometricsType.isDeleted());
+        return new BiometricsTypeDTO(biometricsType.getCode(), biometricsType.getName(),biometricsType.getDescription(), biometricsType.getValueMax(), biometricsType.getValueMin(), biometricsType.getUnity(), administratorDTO.getUsername(),biometricsType.isDeleted());
     }
 
     private List<BiometricsTypeDTO> toDTOs(List<BiometricsType> biometricsType) {
@@ -54,9 +51,10 @@ public class BiometricsTypeService {
     @Path("/") // means: the relative url path is “/api/students/”
     public Response createBiometricsTypesWS(BiometricsTypeDTO biometricsTypeDTO) {
         BiometricsType biometricsType=biometricsTypeBean.create(
-                biometricsTypeDTO.getType(),
-                biometricsTypeDTO.getMax(),
-                biometricsTypeDTO.getMin(),
+                biometricsTypeDTO.getName(),
+                biometricsTypeDTO.getDescription(),
+                biometricsTypeDTO.getValueMax(),
+                biometricsTypeDTO.getValueMin(),
                 biometricsTypeDTO.getUnity(),
                 biometricsTypeDTO.getAdministrator()
         );
@@ -83,7 +81,7 @@ public class BiometricsTypeService {
     @PATCH
     @Path("update/{code}")
     public Response Update(@PathParam("code") int code,BiometricsTypeDTO biometricsTypeDTO){
-        System.out.println(biometricsTypeDTO.getMax());
+        System.out.println(biometricsTypeDTO.getValueMax());
         boolean updated=biometricsTypeBean.update(code,biometricsTypeDTO);
         //FUNCIONAAA
         if(!updated) {
