@@ -91,7 +91,6 @@ public class PatientService {
         }
 
         patientBean.updatePatient(username,
-                patientDTO.getPassword(),
                 patientDTO.getName(),
                 patientDTO.getBirthDate(),
                 patientDTO.getEmail(),

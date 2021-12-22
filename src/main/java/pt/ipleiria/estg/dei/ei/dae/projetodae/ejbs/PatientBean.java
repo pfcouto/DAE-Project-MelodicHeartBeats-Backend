@@ -50,13 +50,12 @@ public class PatientBean {
         }
     }
 
-    public void updatePatient(String username, String password, String name, String birthDate, String email, String phoneNumber) throws MyEntityNotFoundException {
+    public void updatePatient(String username, String name, String birthDate, String email, String phoneNumber) throws MyEntityNotFoundException {
         Patient patient = em.find(Patient.class, username);
         if (patient == null){
             throw new MyEntityNotFoundException("Patient" + username + "t NOT FOUND");
         }
         em.lock(patient, LockModeType.OPTIMISTIC);
-        patient.setPassword(password);
         patient.setName(name);
         patient.setEmail(email);
         patient.setPhoneNumber(phoneNumber);

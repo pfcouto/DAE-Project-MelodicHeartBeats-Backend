@@ -91,7 +91,6 @@ public class AdministratorService {
 
         administratorBean.updateAdministrator(
                 username,
-                administratorDTO.getPassword(),
                 administratorDTO.getName(),
                 administratorDTO.getBirthDate(),
                 administratorDTO.getEmail(),
@@ -110,7 +109,7 @@ public class AdministratorService {
     AdministratorDTO toDTONoBiometricsType(Administrator administrator) {
         return new AdministratorDTO(
                 administrator.getUsername(),
-                administrator.getPassword(),
+                null,
                 administrator.getName(),
                 administrator.getBirthDate(),
                 administrator.getEmail(),

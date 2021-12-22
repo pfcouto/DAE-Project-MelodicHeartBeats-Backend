@@ -50,13 +50,12 @@ public class AdministratorBean {
         }
     }
 
-    public void updateAdministrator(String username, String password, String name, String birthDate, String email, String phoneNumber) throws MyEntityNotFoundException {
+    public void updateAdministrator(String username, String name, String birthDate, String email, String phoneNumber) throws MyEntityNotFoundException {
         Administrator administrator = em.find(Administrator.class, username);
         if (administrator == null){
             throw new MyEntityNotFoundException("Administrator" + username + " NOT FOUND");
         }
         em.lock(administrator, LockModeType.OPTIMISTIC);
-        administrator.setPassword(password);
         administrator.setName(name);
         administrator.setEmail(email);
         administrator.setPhoneNumber(phoneNumber);
