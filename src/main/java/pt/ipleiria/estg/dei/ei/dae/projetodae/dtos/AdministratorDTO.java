@@ -8,6 +8,7 @@ public class AdministratorDTO {
     String username;
     String password;
     String name;
+    String birthDate;
     String email;
     String phoneNumber;
     List<BiometricsTypeDTO> biometricsTypeDTOS;
@@ -16,10 +17,11 @@ public class AdministratorDTO {
         biometricsTypeDTOS = new LinkedList<>();
     }
 
-    public AdministratorDTO(String username, String password, String name, String email, String phoneNumber) {
+    public AdministratorDTO(String username, String password, String name, String birthDate, String email, String phoneNumber) {
         this.username = username;
         this.password = password;
         this.name = name;
+        this.birthDate = birthDate;
         this.email = email;
         this.phoneNumber = phoneNumber;
         biometricsTypeDTOS = new LinkedList<>();
@@ -70,6 +72,14 @@ public class AdministratorDTO {
 
     public void setBiometricsTypeDTOS(List<BiometricsTypeDTO> biometricsTypeDTOS) {
         this.biometricsTypeDTOS = biometricsTypeDTOS;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getPhoneNumber() {

@@ -1,10 +1,15 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
+import javax.validation.ConstraintViolationException;
 import java.util.Date;
 import java.util.List;
 
@@ -14,9 +19,19 @@ public class PatientBean {
     @PersistenceContext
     EntityManager em;
 
-    public void create(String username, String password, String name, String email, String phoneNumber) {
-        Patient patient = new Patient(username, password, name, email, phoneNumber);
-        em.persist(patient);
+    public void create(String username, String password, String name, String birthDate, String email, String phoneNumber) throws MyEntityExistsException, MyConstraintViolationException {
+        Patient newPatient = findPatient(username);
+
+        if (newPatient != null){
+            throw new MyEntityExistsException("Patient with username: " + username + " already exists");
+        }
+
+        try {
+            newPatient = new Patient(username, password, name, birthDate, email, phoneNumber);
+            em.persist(newPatient);
+        } catch (ConstraintViolationException e) {
+            throw new MyConstraintViolationException(e);
+        }
     }
 
     public List<Patient> getAllPatients() {
@@ -35,11 +50,15 @@ public class PatientBean {
         }
     }
 
-    public void updatePatient(String username, String password, String name, String email, String phoneNumber) {
+    public void updatePatient(String username, String name, String birthDate, String email, String phoneNumber) throws MyEntityNotFoundException {
         Patient patient = em.find(Patient.class, username);
-        patient.setPassword(password);
+        if (patient == null){
+            throw new MyEntityNotFoundException("Patient" + username + "t NOT FOUND");
+        }
+        em.lock(patient, LockModeType.OPTIMISTIC);
         patient.setName(name);
         patient.setEmail(email);
         patient.setPhoneNumber(phoneNumber);
+        patient.setBirthDate(birthDate);
     }
 }

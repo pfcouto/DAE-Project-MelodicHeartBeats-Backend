@@ -6,38 +6,45 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@Startup
-@Singleton
-public class ConfigBean {
 
+@Singleton
+@Startup
+public class ConfigBean {
+    private static final Logger logger = Logger.getLogger("ejbs.ConfigBean");
     @EJB
-    DoctorBean doctorBean;
+    private DoctorBean doctorBean;
     @EJB
-    PatientBean patientBean;
+    private PatientBean patientBean;
     @EJB
-    AdministratorBean administratorBean;
+    private AdministratorBean administratorBean;
+    @EJB
+    private PrescriptionBean prescriptionBean;
     @EJB
     BiometricsTypeBean biometricsTypeBean;
 
-    private static final Logger logger = Logger.getLogger("ejbs.ConfigBean");
-
     @PostConstruct
-    public void populateBD() {
-
+    public void populateDB() {
         try {
+            System.out.println("Hello Java EE!");
 
-            administratorBean.create("admin", "1234", "Administrator", "admin@mail.com", "963123123");
+            doctorBean.create("dJoao","1234","Joao","1997-06-23","djoao@mail.pt","919000222","Of.1");
 
-            doctorBean.create("Lacerda", "1234", "Jorge Lacerda", "lacerga@mail.com", "967733870", "A");
-            doctorBean.create("Silva", "1234", "Eduardo Silva", "silva@mail.com", "123123123", "B");
+            patientBean.create("pLeandro","1234","Leandro","1997-06-23","pleandro@mail.pt","919000111");
 
-            patientBean.create("patient", "1234", "Patient1",  "patient@mail.com", "963321321" );
             biometricsTypeBean.create("teste","description",2,1,"g","admin");
+            prescriptionBean.create("dJoao","pLeandro","TEXTO DA DESCRICAO","2020-06-23","2020-07-23");
+
+            administratorBean.create("admin", "1234", "Administrator", "1987-02-19" ,"admin@mail.com", "963123123");
+
+//            doctorBean.create("Lacerda", "1234", "Jorge Lacerda", "lacerga@mail.com", "967733870", "A");
+//            doctorBean.create("Silva", "1234", "Eduardo Silva", "silva@mail.com", "123123123", "B");
+//
+//            patientBean.create("patient", "1234", "Patient1",  "patient@mail.com", "963321321" );
+
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage());
         }

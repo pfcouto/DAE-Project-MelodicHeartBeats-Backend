@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.entities;
 
 import javax.persistence.*;
+import javax.swing.*;
 import java.io.Serializable;
 import java.util.Date;
 //import java.util.LinkedHashSet;
@@ -22,8 +23,8 @@ public class Patient extends User implements Serializable {
         prescriptions = new LinkedList<>();
     }
 
-    public Patient(String username, String password, String name, String email, String phoneNumber) {
-        super(username, password, name, email, phoneNumber);
+    public Patient(String username, String password, String name, String birthDate, String email, String phoneNumber) {
+        super(username, password, name, birthDate, email, phoneNumber);
         prescriptions = new LinkedList<>();
     }
 
@@ -33,5 +34,15 @@ public class Patient extends User implements Serializable {
 
     public void setPrescriptions(LinkedList<Prescription> prescriptions) {
         this.prescriptions = prescriptions;
+    }
+
+    public void addPrescription(Prescription prescription) {
+        if (prescription != null && !prescriptions.contains(prescription))
+            prescriptions.add(prescription);
+    }
+
+    public void removePrescription(Prescription prescription) {
+        if (prescription != null && prescriptions.contains(prescription))
+            prescriptions.remove(prescription);
     }
 }

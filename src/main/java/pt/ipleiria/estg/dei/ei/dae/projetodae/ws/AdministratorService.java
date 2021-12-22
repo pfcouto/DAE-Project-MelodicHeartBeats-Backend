@@ -1,8 +1,17 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.AdministratorDTO;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.BiometricsTypeDTO;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.DoctorDTO;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PrescriptionDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.AdministratorBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Administrator;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.BiometricsType;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -21,7 +30,7 @@ public class AdministratorService {
     @GET
     @Path("/")
     public List<AdministratorDTO> getAllAdministrators() {
-        return toDTOs(administratorBean.getAllAdministrators());
+        return toDTOsNoBiometricsType(administratorBean.getAllAdministrators());
     }
 
     @GET
@@ -29,7 +38,7 @@ public class AdministratorService {
     public Response getAdministratorDetails(@PathParam("administrator") String username) {
         Administrator administrator = administratorBean.findAdministrator(username);
         if (administrator != null) {
-            return Response.ok(toDTO(administrator)).build();
+            return Response.ok(toDTOWithBiometricsTypes(administrator)).build();
         }
         return Response.status(Response.Status.NOT_FOUND)
                 .entity("ERROR_FINDING_STUDENT")
@@ -38,10 +47,11 @@ public class AdministratorService {
 
     @POST
     @Path("/")
-    public Response createNewAdministrator(AdministratorDTO administratorDTO) {
+    public Response createNewAdministrator(AdministratorDTO administratorDTO) throws MyConstraintViolationException, MyEntityExistsException {
         administratorBean.create(administratorDTO.getUsername(),
                 administratorDTO.getPassword(),
                 administratorDTO.getName(),
+                administratorDTO.getBirthDate(),
                 administratorDTO.getEmail(),
                 administratorDTO.getPhoneNumber()
         );
@@ -49,7 +59,7 @@ public class AdministratorService {
         if (newAdministrator == null)
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         return Response.status(Response.Status.CREATED)
-                .entity(toDTO(newAdministrator))
+                .entity(toDTONoBiometricsType(newAdministrator))
                 .build();
     }
 
@@ -71,7 +81,7 @@ public class AdministratorService {
 
     @PUT
     @Path("{username}")
-    public Response updateAdministrator(@PathParam("username") String username, AdministratorDTO administratorDTO) {
+    public Response updateAdministrator(@PathParam("username") String username, AdministratorDTO administratorDTO) throws MyEntityNotFoundException {
         Administrator administrator = administratorBean.findAdministrator(username);
         if (administrator == null) {
             return Response.status(Response.Status.NOT_FOUND)
@@ -81,8 +91,8 @@ public class AdministratorService {
 
         administratorBean.updateAdministrator(
                 username,
-                administratorDTO.getPassword(),
                 administratorDTO.getName(),
+                administratorDTO.getBirthDate(),
                 administratorDTO.getEmail(),
                 administratorDTO.getPhoneNumber()
         );
@@ -91,22 +101,51 @@ public class AdministratorService {
         if (newAdministrator == null)
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         return Response.status(Response.Status.CREATED)
-                .entity(toDTO(newAdministrator))
+                .entity(toDTONoBiometricsType(newAdministrator))
                 .build();
     }
 
 
-    AdministratorDTO toDTO(Administrator administrator) {
+    AdministratorDTO toDTONoBiometricsType(Administrator administrator) {
         return new AdministratorDTO(
                 administrator.getUsername(),
-                administrator.getPassword(),
+                null,
                 administrator.getName(),
+                administrator.getBirthDate(),
                 administrator.getEmail(),
                 administrator.getPhoneNumber()
         );
     }
 
-    private List<AdministratorDTO> toDTOs(List<Administrator> administrators) {
-        return administrators.stream().map(this::toDTO).collect(Collectors.toList());
+    private List<AdministratorDTO> toDTOsNoBiometricsType(List<Administrator> administrators) {
+        return administrators.stream().map(this::toDTONoBiometricsType).collect(Collectors.toList());
+    }
+
+    AdministratorDTO toDTOWithBiometricsTypes(Administrator administrator) {
+        List<BiometricsTypeDTO> biometricsTypeDTOS = biometricsTypesToDTOs(administrator.getBiometricsTypes());
+        AdministratorDTO administratorDTO = new AdministratorDTO(
+                administrator.getUsername(),
+                null,
+                administrator.getName(),
+                administrator.getBirthDate(),
+                administrator.getEmail(),
+                administrator.getPhoneNumber()
+        );
+        administratorDTO.setBiometricsTypeDTOS(biometricsTypeDTOS);
+        return administratorDTO;
+    }
+
+    private List<AdministratorDTO> toDTOsWithBiometricsTypes(List<Administrator> administrators) {
+        return administrators.stream().map(this::toDTOWithBiometricsTypes).collect(Collectors.toList());
+    }
+
+    BiometricsTypeDTO toDTO(BiometricsType biometricsType) {
+        return new BiometricsTypeDTO(
+                // TODO
+        );
+    }
+
+    private List<BiometricsTypeDTO> biometricsTypesToDTOs(List<BiometricsType> biometricsTypes) {
+        return biometricsTypes.stream().map(this::toDTO).collect(Collectors.toList());
     }
 }
