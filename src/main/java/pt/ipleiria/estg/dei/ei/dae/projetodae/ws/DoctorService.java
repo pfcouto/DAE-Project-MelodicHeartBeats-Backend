@@ -75,7 +75,7 @@ public class DoctorService {
         }
 
         return Response.status(Response.Status.NOT_FOUND)
-                .entity("ERROR_FINDING_ADMINISTRATOR")
+                .entity("ERROR_FINDING_DOCTOR")
                 .build();
     }
 

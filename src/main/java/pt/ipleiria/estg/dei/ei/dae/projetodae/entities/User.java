@@ -34,6 +34,8 @@ public class User implements Serializable {
     private String phoneNumber;
     @Version
     private int version;
+    @NotNull
+    private boolean deleted;
 
     public User() {
     }
@@ -47,6 +49,7 @@ public class User implements Serializable {
         this.birthDate.set(Integer.parseInt(date[0]), Integer.parseInt(date[1]) - 1, Integer.parseInt(date[2]));
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.deleted = false;
     }
 
     public String getUsername() {
@@ -98,6 +101,18 @@ public class User implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public void setBirthDate(Calendar birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public static String hashPassword(String password) {
