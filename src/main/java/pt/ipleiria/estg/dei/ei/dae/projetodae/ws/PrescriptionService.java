@@ -3,7 +3,6 @@ package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PrescriptionDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.PrescriptionBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.EJB;
@@ -30,28 +29,6 @@ public class PrescriptionService {
                 prescription.getEndDate()
         );
     }
-//    DoctorDTO toDTO(Doctor doctor){
-//        return new DoctorDTO(
-//                doctor.getUsername(),
-//                doctor.getPassword(),
-//                doctor.getName(),
-//                doctor.getBirthDate(),
-//                doctor.getEmail(),
-//                doctor.getPhoneNumber(),
-//                doctor.getOffice()
-//        );
-//    }
-//
-//    PatientDTO toDTO(Patient patient){
-//        return new PatientDTO(
-//                patient.getUsername(),
-//                patient.getPassword(),
-//                patient.getName(),
-//                patient.getBirthDate(),
-//                patient.getEmail(),
-//                patient.getPhoneNumber()
-//        );
-//    }
 
     private List<PrescriptionDTO> toDTOs(List<Prescription> prescriptions) {
         return prescriptions.stream().map(this::toDTO).collect(Collectors.toList());
@@ -61,7 +38,7 @@ public class PrescriptionService {
     @Path("/")
 
     public List<PrescriptionDTO> getAllPrescriptions() {
-       return toDTOs(prescriptionBean.getAllPrescriptions());
+        return toDTOs(prescriptionBean.getAllPrescriptions());
     }
 
     @GET
@@ -92,6 +69,48 @@ public class PrescriptionService {
                 presciptionDTO.getPatient(),
                 precriptionId);
         return Response.status(Response.Status.CREATED)
+                .build();
+    }
+
+    @PUT
+    @Path("{prescription}")
+    public Response createNewPrescription(@PathParam("prescription") int prescriptionId, PrescriptionDTO presciptionDTO) throws MyEntityNotFoundException {
+        Prescription prescription = prescriptionBean.findPrescription(prescriptionId);
+        if (prescription == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("ERROR_FINDING_PRESCRIPTION")
+                    .build();
+        }
+        prescriptionBean.updatePrescription(
+                prescriptionId,
+                presciptionDTO.getDoctor(),
+                presciptionDTO.getPatient(),
+                presciptionDTO.getDescription(),
+                presciptionDTO.getStartDate(),
+                presciptionDTO.getEndDate()
+        );
+
+        Prescription newPrescription = prescriptionBean.findPrescription(prescriptionId);
+        if (newPrescription == null)
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        return Response.status(Response.Status.OK)
+                .entity(toDTO(newPrescription))
+                .build();
+    }
+
+    @DELETE
+    @Path("{prescription}")
+    public Response deleteDoctor(@PathParam("prescription") int prescriptionId) throws MyEntityNotFoundException {
+
+        prescriptionBean.deletePrescription(prescriptionId);
+
+        if (prescriptionBean.findPrescription(prescriptionId) == null) {
+            return Response.ok().build();
+
+        }
+
+        return Response.status(Response.Status.NOT_FOUND)
+                .entity("ERROR_FINDING_PRESCRIPTION")
                 .build();
     }
 }
