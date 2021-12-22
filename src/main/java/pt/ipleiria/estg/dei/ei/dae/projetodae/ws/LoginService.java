@@ -2,6 +2,7 @@ package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 
 import com.nimbusds.jwt.JWT;
 import com.nimbusds.jwt.JWTParser;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.AuthDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.JwtBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.UserBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.User;
@@ -13,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.text.ParseException;
 import java.util.logging.Logger;
+
 @Path("/auth")
 public class LoginService {
     private static final Logger log =
@@ -21,14 +23,14 @@ public class LoginService {
     JwtBean jwtBean;
     @EJB
     UserBean userBean;
+
     @POST
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response authenticateUser(@FormParam("username") String username,
-                                     @FormParam("password") String password) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response authenticateUser(AuthDTO auth) {
         try {
-            User user = userBean.authenticate(username, password);
+            User user = userBean.authenticate(auth.getUsername(), auth.getPassword());
             if (user != null) {
                 if (user.getUsername() != null) {
                     log.info("Generating JWT for user " + user.getUsername());
@@ -42,6 +44,7 @@ public class LoginService {
         }
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }
+
     @GET
     @Path("/user")
     public Response demonstrateClaims(@HeaderParam("Authorization") String auth) {
