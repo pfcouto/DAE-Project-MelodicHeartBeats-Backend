@@ -1,6 +1,5 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.dtos;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,21 +10,21 @@ public class AdministratorDTO {
     String birthDate;
     String email;
     String phoneNumber;
-    boolean isDeleted;
+    boolean blocked;
     List<BiometricsTypeDTO> biometricsTypeDTOS;
 
     public AdministratorDTO() {
         biometricsTypeDTOS = new LinkedList<>();
     }
 
-    public AdministratorDTO(String username, String password, String name, String birthDate, String email, String phoneNumber, boolean isDeleted) {
+    public AdministratorDTO(String username, String password, String name, String birthDate, String email, String phoneNumber, boolean blocked) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.birthDate = birthDate;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.isDeleted = isDeleted;
+        this.blocked = blocked;
         biometricsTypeDTOS = new LinkedList<>();
     }
 
@@ -85,11 +84,11 @@ public class AdministratorDTO {
         this.phoneNumber = phoneNumber;
     }
 
-    public boolean isDeleted() {
-        return isDeleted;
+    public boolean isBlocked() {
+        return blocked;
     }
 
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 }

@@ -11,7 +11,7 @@ public class DoctorDTO {
     String email;
     String phoneNumber;
     String office;
-    boolean isDeleted;
+    boolean blocked;
 
     List<PrescriptionDTO> prescriptionDTOS;
 
@@ -19,7 +19,7 @@ public class DoctorDTO {
         prescriptionDTOS = new LinkedList<>();
     }
 
-    public DoctorDTO(String username, String password, String name, String birthDate, String email, String phoneNumber, String office, boolean isDeleted) {
+    public DoctorDTO(String username, String password, String name, String birthDate, String email, String phoneNumber, String office, boolean blocked) {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -27,7 +27,7 @@ public class DoctorDTO {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.office = office;
-        this.isDeleted = isDeleted;
+        this.blocked = blocked;
         prescriptionDTOS = new LinkedList<>();
     }
 
@@ -95,11 +95,11 @@ public class DoctorDTO {
         this.prescriptionDTOS = prescriptionDTOS;
     }
 
-    public boolean isDeleted() {
-        return isDeleted;
+    public boolean isBlocked() {
+        return blocked;
     }
 
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 }

@@ -1,7 +1,6 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Administrator;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
@@ -11,7 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintViolationException;
-import java.util.Date;
 import java.util.List;
 
 @Stateless
@@ -48,14 +46,13 @@ public class AdministratorBean {
         Administrator administrator = findAdministrator(username);
         if (administrator != null){
             em.remove(administrator);
-//            administrator.setDeleted(true);
         }
     }
 
-    public void softDeleteOrUndeleteAdministrator(String username) {
+    public void blockOrUnBlockAdministrator(String username) {
         Administrator administrator = findAdministrator(username);
         if (administrator != null) {
-            administrator.setDeleted(!administrator.isDeleted());
+            administrator.setBlocked(!administrator.isBlocked());
         }
     }
 

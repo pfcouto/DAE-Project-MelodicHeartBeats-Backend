@@ -2,13 +2,9 @@ package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.AdministratorDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.BiometricsTypeDTO;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.DoctorDTO;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PrescriptionDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.AdministratorBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Administrator;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.BiometricsType;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
@@ -81,11 +77,11 @@ public class AdministratorService {
 
     @PATCH
     @Path("{administrator}")
-    public Response softDeleteOrUndeleteAdministrator(@PathParam("administrator") String username) {
+    public Response blockOrUnblockAdministrator(@PathParam("administrator") String username) {
 
-        administratorBean.softDeleteOrUndeleteAdministrator(username);
+        administratorBean.blockOrUnBlockAdministrator(username);
 
-        Administrator administratorDeletedOrUndeleted = administratorBean.findAdministrator(username);
+        Administrator administratorBlockedOrUnblocked = administratorBean.findAdministrator(username);
 
         return Response.ok().build();
 
@@ -126,7 +122,7 @@ public class AdministratorService {
                 administrator.getBirthDate(),
                 administrator.getEmail(),
                 administrator.getPhoneNumber(),
-                administrator.isDeleted()
+                administrator.isBlocked()
         );
     }
 
@@ -143,7 +139,7 @@ public class AdministratorService {
                 administrator.getBirthDate(),
                 administrator.getEmail(),
                 administrator.getPhoneNumber(),
-                administrator.isDeleted()
+                administrator.isBlocked()
         );
         administratorDTO.setBiometricsTypeDTOS(biometricsTypeDTOS);
         return administratorDTO;

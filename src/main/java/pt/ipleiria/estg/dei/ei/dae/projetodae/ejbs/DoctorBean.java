@@ -1,7 +1,6 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
@@ -10,9 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
-import javax.print.Doc;
 import javax.validation.ConstraintViolationException;
-import java.util.Date;
 import java.util.List;
 
 @Stateless
@@ -49,14 +46,13 @@ public class DoctorBean {
         Doctor doctor = findDoctor(username);
         if (doctor != null) {
             em.remove(doctor);
-//            doctor.setDeleted(true);
         }
     }
 
-    public void softDeleteOrUndeleteDoctor(String username) {
+    public void blockOrUnBlockDoctor(String username) {
         Doctor doctor = findDoctor(username);
         if (doctor != null) {
-            doctor.setDeleted(!doctor.isDeleted());
+            doctor.setBlocked(!doctor.isBlocked());
         }
     }
 

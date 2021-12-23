@@ -1,11 +1,9 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 
-import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.DoctorDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PatientDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PrescriptionDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.DoctorBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.PatientBean;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
@@ -81,7 +79,7 @@ public class PatientService {
 
         Patient patientDeleted = patientBean.findPatient(username);
 
-        if (patientDeleted.isDeleted()) {
+        if (patientDeleted.isBlocked()) {
             return Response.ok().build();
         }
 
@@ -92,9 +90,9 @@ public class PatientService {
 
     @PATCH
     @Path("{patient}")
-    public Response softDeleteOrUndeletePatient(@PathParam("patient") String username) {
+    public Response blockOrUnblockPatient(@PathParam("patient") String username) {
 
-        patientBean.softDeleteOrUndeletePatient(username);
+        patientBean.blockOrUnBlockPatient(username);
 
         Patient patientDeletedOrUndeleted = patientBean.findPatient(username);
 
@@ -140,7 +138,7 @@ public class PatientService {
                 patient.getBirthDate(),
                 patient.getEmail(),
                 patient.getPhoneNumber(),
-                patient.isDeleted()
+                patient.isBlocked()
         );
     }
 
@@ -157,7 +155,7 @@ public class PatientService {
                 patient.getBirthDate(),
                 patient.getEmail(),
                 patient.getPhoneNumber(),
-                patient.isDeleted()
+                patient.isBlocked()
         );
         patientDTO.setPrescriptionDTOS(prescriptionsDTOS);
         return patientDTO;

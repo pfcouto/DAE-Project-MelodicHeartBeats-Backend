@@ -10,7 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintViolationException;
-import java.util.Date;
 import java.util.List;
 
 @Stateless
@@ -53,10 +52,10 @@ public class PatientBean {
         }
     }
 
-    public void softDeleteOrUndeletePatient(String username) {
+    public void blockOrUnBlockPatient(String username) {
         Patient patient = findPatient(username);
         if (patient != null) {
-            patient.setDeleted(!patient.isDeleted());
+            patient.setBlocked(!patient.isBlocked());
         }
     }
 
