@@ -46,7 +46,8 @@ public class AdministratorBean {
     public void deleteAdministrator(String username) {
         Administrator administrator = findAdministrator(username);
         if (administrator != null){
-            em.remove(administrator);
+//            em.remove(administrator);
+            administrator.setDeleted(true);
         }
     }
 

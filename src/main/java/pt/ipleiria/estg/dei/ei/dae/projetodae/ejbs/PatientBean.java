@@ -39,6 +39,11 @@ public class PatientBean {
         return (List<Patient>) em.createNamedQuery("getAllPatients").getResultList();
     }
 
+    public List<Patient> getAllPatientsNotDeleted() {
+        // remember, maps to: “SELECT s FROM Student s ORDER BY s.name”
+        return (List<Patient>) em.createNamedQuery("getAllPatientsNotDeleted").getResultList();
+    }
+
     public Patient findPatient(String username) {
         return em.find(Patient.class, username);
     }
@@ -46,7 +51,8 @@ public class PatientBean {
     public void deletePatient(String username) {
         Patient patient = findPatient(username);
         if (patient != null) {
-            em.remove(patient);
+//            em.remove(patient);
+            patient.setDeleted(true);
         }
     }
 

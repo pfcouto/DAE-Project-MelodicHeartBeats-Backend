@@ -47,7 +47,8 @@ public class DoctorBean {
     public void deleteDoctor(String username) {
         Doctor doctor = findDoctor(username);
         if (doctor != null) {
-            em.remove(doctor);
+//            em.remove(doctor);
+            doctor.setDeleted(true);
         }
     }
 

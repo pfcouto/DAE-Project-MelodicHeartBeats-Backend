@@ -26,6 +26,8 @@ public class PatientService {
 
     @EJB
     PatientBean patientBean;
+    @EJB
+    DoctorBean doctorBean;
 
     @GET
     @Path("/")
@@ -112,7 +114,8 @@ public class PatientService {
                 patient.getName(),
                 patient.getBirthDate(),
                 patient.getEmail(),
-                patient.getPhoneNumber()
+                patient.getPhoneNumber(),
+                patient.isDeleted()
         );
     }
 
@@ -128,7 +131,8 @@ public class PatientService {
                 patient.getName(),
                 patient.getBirthDate(),
                 patient.getEmail(),
-                patient.getPhoneNumber()
+                patient.getPhoneNumber(),
+                patient.isDeleted()
         );
         patientDTO.setPrescriptionDTOS(prescriptionsDTOS);
         return patientDTO;

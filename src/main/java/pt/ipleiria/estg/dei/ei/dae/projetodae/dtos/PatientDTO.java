@@ -10,19 +10,21 @@ public class PatientDTO {
     String birthDate;
     String email;
     String phoneNumber;
+    boolean isDeleted;
     List<PrescriptionDTO> prescriptionDTOS;
 
     public PatientDTO() {
         prescriptionDTOS = new LinkedList<>();
     }
 
-    public PatientDTO(String username, String password, String name, String birthDate, String email, String phoneNumber) {
+    public PatientDTO(String username, String password, String name, String birthDate, String email, String phoneNumber, boolean isDeleted) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.birthDate = birthDate;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.isDeleted = isDeleted;
         prescriptionDTOS = new LinkedList<>();
     }
 
@@ -80,5 +82,13 @@ public class PatientDTO {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 }
