@@ -45,6 +45,34 @@ public class PatientService {
                 .build();
     }
 
+    @GET
+    @Path("{patient}/prescriptions")
+    public Response getDoctorPrescriptions(@PathParam("patient") String username) {
+        Patient patient = patientBean.findPatient(username);
+        if (patient == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("ERROR_FINDING_PATIENT")
+                    .build();
+        }
+        return Response.ok(toDTOs(patientBean.getPrescriptions(patient))).build();
+
+    }
+
+    private List<PrescriptionDTO> toDTOs(List<Prescription> prescriptions) {
+        return prescriptions.stream().map(this::toPrescriptionDTO).collect(Collectors.toList());
+    }
+
+    PrescriptionDTO toPrescriptionDTO(Prescription prescription) {
+        return new PrescriptionDTO(
+                prescription.getId(),
+                prescription.getDoctor().getUsername(),
+                prescription.getPatient().getUsername(),
+                prescription.getDescription(),
+                prescription.getStartDate(),
+                prescription.getEndDate()
+        );
+    }
+
     @POST
     @Path("/")
     public Response createNewPatient(PatientDTO patientDTO) throws MyConstraintViolationException, MyEntityExistsException {

@@ -1,6 +1,8 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
@@ -60,5 +62,10 @@ public class PatientBean {
         patient.setEmail(email);
         patient.setPhoneNumber(phoneNumber);
         patient.setBirthDate(birthDate);
+    }
+
+    public List<Prescription> getPrescriptions(Patient patient) {
+        String query = "SELECT p FROM Prescription p WHERE p.patient.username = '" + patient.getUsername() + "'";
+        return em.createQuery(query, Prescription.class).getResultList();
     }
 }
