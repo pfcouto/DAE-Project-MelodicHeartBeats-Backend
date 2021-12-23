@@ -35,6 +35,12 @@ public class BiometricsTypeService {
         return toDTOs(biometricsTypeBean.getAllBiometricsTypes());
     }
 
+    @GET // means: to call this endpoint, we need to use the HTTP GET method
+    @Path("/nonDeleted") // means: the relative url path is “/api/students/”
+    public List<BiometricsTypeDTO> getAllBiometricsTypesNonDeletedWS() {
+        return toDTOs(biometricsTypeBean.getAllBiometricsTypesNonDeleted());
+    }
+
     @GET
     @Path("{code}")
     public Response getBiometricsTypeDetails(@PathParam("code") int code) {

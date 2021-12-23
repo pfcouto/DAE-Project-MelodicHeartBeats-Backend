@@ -18,6 +18,7 @@ public class ObservationBean {
     @PersistenceContext
     EntityManager em;
 
+
     public Observation create(String date, String patientUsername, int biometricName, int quantitativeValue, String qualitativeValue, String what, String local){
         BiometricsType biometricsType=em.find(BiometricsType.class,biometricName);
         System.out.println(biometricsType);
@@ -30,6 +31,10 @@ public class ObservationBean {
         }
         System.out.println("aqui nao");
         return null;
+    }
+
+    public Observation find(int code) {
+        return em.find(Observation.class,code);
     }
 
     public List<Observation> getAllObservations() {

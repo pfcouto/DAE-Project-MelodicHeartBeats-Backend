@@ -12,6 +12,9 @@ import java.util.Objects;
         @NamedQuery(
                 name = "getAllBiometricsTypes",
                 query = "SELECT b FROM BiometricsType b ORDER BY b.code" // JPQL
+        ),
+        @NamedQuery(name="getAllBiometricsTypesNonDeleted",
+                    query="SELECT b FROM BiometricsType b WHERE b.deleted=false ORDER BY b.code"
         )
 })
 public class BiometricsType implements Serializable {
@@ -20,7 +23,6 @@ public class BiometricsType implements Serializable {
     private int code;
     @NotNull
     private String name;
-    @NotNull
     private String description;
     @NotNull
     private int valueMax;

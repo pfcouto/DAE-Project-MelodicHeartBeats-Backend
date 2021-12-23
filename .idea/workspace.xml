@@ -5,122 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00d0a9ba-0be2-42eb-92c6-fad13311fdd9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/ObservationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/projetoDAE_war.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/projetoDAE_war_exploded.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_11_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_11_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_11_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_jaxrs_jackson_jaxrs_base_2_11_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_jaxrs_jackson_jaxrs_json_provider_2_11_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_jaxb_annotations_2_11_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_java_json_tools_btf_1_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_java_json_tools_jackson_coreutils_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_java_json_tools_json_patch_1_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_java_json_tools_msg_simple_1_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_stephenc_jcip_jcip_annotations_1_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_ibm_async_asyncutil_0_1_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_nimbusds_nimbus_jose_jwt_9_15_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_activation_jakarta_activation_1_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_smallrye_common_smallrye_common_annotation_1_6_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_smallrye_common_smallrye_common_classloader_1_6_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_smallrye_common_smallrye_common_constraint_1_6_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_smallrye_common_smallrye_common_expression_1_6_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_smallrye_common_smallrye_common_function_1_6_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_smallrye_config_smallrye_config_2_3_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_smallrye_config_smallrye_config_common_2_3_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_smallrye_config_smallrye_config_core_2_3_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_activation_jakarta_activation_api_1_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_validation_jakarta_validation_api_2_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_javaee_web_api_8_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_microprofile_config_microprofile_config_api_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_persistence_commonj_sdo_2_1_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_persistence_eclipselink_2_7_9.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_persistence_jakarta_persistence_2_2_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_4_2_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_resteasy_resteasy_core_4_6_1_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_resteasy_resteasy_core_spi_4_6_1_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_resteasy_resteasy_jackson2_provider_4_6_0_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_resteasy_resteasy_servlet_initializer_4_6_1_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_spec_javax_annotation_jboss_annotations_api_1_3_spec_2_0_1_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_spec_javax_ws_rs_jboss_jaxrs_api_2_1_spec_2_0_1_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_spec_javax_xml_bind_jboss_jaxb_api_2_3_spec_2_0_0_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_7_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_7_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_7_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_7_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_9_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_reactivestreams_reactive_streams_1_0_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HTTPRequests.http" beforeDir="false" afterPath="$PROJECT_DIR$/HTTPRequests.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/BiometricDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/ObservationDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/BiometricsTypeDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/BiometricsTypeDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/BiometricBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/ObservationBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/BiometricsTypeBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/BiometricsTypeBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/ConfigBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/ConfigBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/ObservationBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/ObservationBean.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/BiometricsType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/BiometricsType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Observation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Observation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/BiometricService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/AdministratorDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/AdministratorDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/BiometricDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/BiometricsTypeDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/BiometricsTypeDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/DoctorDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/DoctorDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/PatientDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/PatientDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/PresciptionDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/AdministratorBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/AdministratorBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/BiometricBean.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/BiometricsTypeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/BiometricsTypeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/ObservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/ObservationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/BiometricsTypeBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/BiometricsTypeBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/ConfigBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/ConfigBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/DoctorBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/DoctorBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/PatientBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/PatientBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/PrescriptionBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/PrescriptionBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Administrator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Administrator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/BiometricsType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/BiometricsType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Doctor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Doctor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Observation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Observation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Patient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Patient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Prescription.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Prescription.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/AdministratorService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/AdministratorService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/BiometricService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/DoctorService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/DoctorService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/PatientService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/PatientService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/PrescriptionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/PrescriptionService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/AdministratorDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/AdministratorDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/BiometricDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/BiometricsTypeDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/BiometricsTypeDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/DoctorDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/DoctorDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/PatientDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/PatientDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/PresciptionDTO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/AdministratorBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/AdministratorBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/BiometricBean.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/BiometricsTypeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/BiometricsTypeService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/BiometricsTypeBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/BiometricsTypeBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/ConfigBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/ConfigBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/DoctorBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/DoctorBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/PatientBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/PatientBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/PrescriptionBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/PrescriptionBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Administrator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Administrator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/BiometricsType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/BiometricsType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Doctor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Doctor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Observation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Observation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Patient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Patient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Prescription.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Prescription.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/AdministratorService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/AdministratorService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/BiometricService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/DoctorService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/DoctorService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/PatientService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/PatientService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/PrescriptionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/PrescriptionService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/BiometricsTypeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/BiometricsTypeService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/projetoDAE.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE.war" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -185,7 +81,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1640189815357</updated>
-      <workItem from="1640189816645" duration="13528000" />
+      <workItem from="1640189816645" duration="19436000" />
     </task>
     <servers />
   </component>

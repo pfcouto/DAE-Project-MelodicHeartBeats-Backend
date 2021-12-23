@@ -35,6 +35,19 @@ public class ObservationService {
         return toDTOs(observationBean.getAllObservations());
     }
 
+
+    @GET
+    @Path("{code}")
+    public Response getObservationDetails(@PathParam("code") int code) {
+        Observation observation = observationBean.find(code);
+        if (observation != null) {
+            return Response.ok(toDTO(observation)).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND)
+                .entity("ERROR_FINDING_BIOMETRIC_TYPE")
+                .build();
+    }
+
     @POST // means: to call this endpoint, we need to use the HTTP GET method
     @Path("/") // means: the relative url path is “/api/students/”
     public Response createObservationWS(ObservationDTO observationDTO) {

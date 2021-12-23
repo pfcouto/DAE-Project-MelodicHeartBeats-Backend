@@ -86,10 +86,17 @@ public class BiometricsTypeBean {
             if(biometricsTypeDTO.getUnity()!=null){
                 biometricsType.setUnity(biometricsTypeDTO.getUnity());
             }
+            if(biometricsTypeDTO.getDescription().length()<255){
+                biometricsType.setDescription(biometricsTypeDTO.getDescription());
+            }
         }else{
             return false;
         }
         em.merge(biometricsType);
         return true;
+    }
+
+    public List<BiometricsType> getAllBiometricsTypesNonDeleted() {
+        return (List<BiometricsType>) em.createNamedQuery("getAllBiometricsTypesNonDeleted").getResultList();
     }
 }
