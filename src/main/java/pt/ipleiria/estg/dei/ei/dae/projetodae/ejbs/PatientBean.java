@@ -35,12 +35,10 @@ public class PatientBean {
     }
 
     public List<Patient> getAllPatients() {
-        // remember, maps to: “SELECT s FROM Student s ORDER BY s.name”
         return (List<Patient>) em.createNamedQuery("getAllPatients").getResultList();
     }
 
     public List<Patient> getAllPatientsNotDeleted() {
-        // remember, maps to: “SELECT s FROM Student s ORDER BY s.name”
         return (List<Patient>) em.createNamedQuery("getAllPatientsNotDeleted").getResultList();
     }
 

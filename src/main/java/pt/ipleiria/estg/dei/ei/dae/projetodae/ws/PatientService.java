@@ -31,6 +31,13 @@ public class PatientService {
 
     @GET
     @Path("/")
+    public List<PatientDTO> getAllPatientsNotDeleted() {
+        System.out.println(patientBean.getAllPatientsNotDeleted());
+        return toDTOsNoPrescriptions(patientBean.getAllPatientsNotDeleted());
+    }
+
+    @GET
+    @Path("/all")
     public List<PatientDTO> getAllPatients() {
         return toDTOsNoPrescriptions(patientBean.getAllPatients());
     }
@@ -43,7 +50,7 @@ public class PatientService {
             return Response.ok(toDTOWithPrescriptions(patient)).build();
         }
         return Response.status(Response.Status.NOT_FOUND)
-                .entity("ERROR_FINDING_STUDENT")
+                .entity("ERROR_FINDING_PATIENT")
                 .build();
     }
 
@@ -72,13 +79,14 @@ public class PatientService {
 
         patientBean.deletePatient(username);
 
-        if (patientBean.findPatient(username) == null) {
-            return Response.ok().build();
+        Patient patientDeleted = patientBean.findPatient(username);
 
+        if (patientDeleted.isDeleted()) {
+            return Response.ok().build();
         }
 
         return Response.status(Response.Status.NOT_FOUND)
-                .entity("ERROR_FINDING_ADMINISTRATOR")
+                    .entity("ERROR_FINDING_PATIENT")
                 .build();
     }
 
@@ -88,7 +96,7 @@ public class PatientService {
         Patient patient = patientBean.findPatient(username);
         if (patient == null) {
             return Response.status(Response.Status.NOT_FOUND)
-                    .entity("ERROR_FINDING_STUDENT")
+                    .entity("ERROR_FINDING_PATIENT")
                     .build();
         }
 
