@@ -11,19 +11,21 @@ public class AdministratorDTO {
     String birthDate;
     String email;
     String phoneNumber;
+    boolean isDeleted;
     List<BiometricsTypeDTO> biometricsTypeDTOS;
 
     public AdministratorDTO() {
         biometricsTypeDTOS = new LinkedList<>();
     }
 
-    public AdministratorDTO(String username, String password, String name, String birthDate, String email, String phoneNumber) {
+    public AdministratorDTO(String username, String password, String name, String birthDate, String email, String phoneNumber, boolean isDeleted) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.birthDate = birthDate;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.isDeleted = isDeleted;
         biometricsTypeDTOS = new LinkedList<>();
     }
 
@@ -81,5 +83,13 @@ public class AdministratorDTO {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 }

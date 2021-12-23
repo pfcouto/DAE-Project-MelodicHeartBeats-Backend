@@ -4,6 +4,7 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.DoctorDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PrescriptionDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.DoctorBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
@@ -79,6 +80,18 @@ public class DoctorService {
                 .build();
     }
 
+    @PATCH
+    @Path("{doctor}")
+    public Response softDeleteOrUndeleteDoctor(@PathParam("doctor") String username) {
+
+        doctorBean.softDeleteOrUndeleteDoctor(username);
+
+        Doctor doctorDeletedOrUndeleted = doctorBean.findDoctor(username);
+
+        return Response.ok().build();
+
+    }
+
     @PUT
     @Path("{username}")
     public Response updateDoctor(@PathParam("username") String username, DoctorDTO doctorDTO) throws MyEntityNotFoundException {
@@ -113,7 +126,8 @@ public class DoctorService {
                 doctor.getBirthDate(),
                 doctor.getEmail(),
                 doctor.getPhoneNumber(),
-                doctor.getOffice()
+                doctor.getOffice(),
+                doctor.isDeleted()
         );
     }
 
@@ -130,7 +144,8 @@ public class DoctorService {
                 doctor.getBirthDate(),
                 doctor.getEmail(),
                 doctor.getPhoneNumber(),
-                doctor.getOffice()
+                doctor.getOffice(),
+                doctor.isDeleted()
         );
         doctorDTO.setPrescriptionDTOS(prescriptionsDTOS);
         return doctorDTO;

@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
@@ -47,8 +48,15 @@ public class DoctorBean {
     public void deleteDoctor(String username) {
         Doctor doctor = findDoctor(username);
         if (doctor != null) {
-//            em.remove(doctor);
-            doctor.setDeleted(true);
+            em.remove(doctor);
+//            doctor.setDeleted(true);
+        }
+    }
+
+    public void softDeleteOrUndeleteDoctor(String username) {
+        Doctor doctor = findDoctor(username);
+        if (doctor != null) {
+            doctor.setDeleted(!doctor.isDeleted());
         }
     }
 

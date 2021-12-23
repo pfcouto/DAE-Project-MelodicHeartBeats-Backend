@@ -49,8 +49,14 @@ public class PatientBean {
     public void deletePatient(String username) {
         Patient patient = findPatient(username);
         if (patient != null) {
-//            em.remove(patient);
-            patient.setDeleted(true);
+            em.remove(patient);
+        }
+    }
+
+    public void softDeleteOrUndeletePatient(String username) {
+        Patient patient = findPatient(username);
+        if (patient != null) {
+            patient.setDeleted(!patient.isDeleted());
         }
     }
 

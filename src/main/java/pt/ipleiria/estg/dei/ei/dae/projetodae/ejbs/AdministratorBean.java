@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Administrator;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
@@ -46,8 +47,15 @@ public class AdministratorBean {
     public void deleteAdministrator(String username) {
         Administrator administrator = findAdministrator(username);
         if (administrator != null){
-//            em.remove(administrator);
-            administrator.setDeleted(true);
+            em.remove(administrator);
+//            administrator.setDeleted(true);
+        }
+    }
+
+    public void softDeleteOrUndeleteAdministrator(String username) {
+        Administrator administrator = findAdministrator(username);
+        if (administrator != null) {
+            administrator.setDeleted(!administrator.isDeleted());
         }
     }
 

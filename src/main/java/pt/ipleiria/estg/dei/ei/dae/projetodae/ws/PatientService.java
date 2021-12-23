@@ -86,8 +86,25 @@ public class PatientService {
         }
 
         return Response.status(Response.Status.NOT_FOUND)
-                    .entity("ERROR_FINDING_PATIENT")
+                .entity("ERROR_FINDING_PATIENT")
                 .build();
+    }
+
+    @PATCH
+    @Path("{patient}")
+    public Response softDeleteOrUndeletePatient(@PathParam("patient") String username) {
+
+        patientBean.softDeleteOrUndeletePatient(username);
+
+        Patient patientDeletedOrUndeleted = patientBean.findPatient(username);
+
+//        if (patientDeletedOrUndeleted.isDeleted()) {
+        return Response.ok().build();
+//        }
+
+//        return Response.status(Response.Status.NOT_FOUND)
+//                .entity("ERROR_FINDING_PATIENT")
+//                .build();
     }
 
     @PUT

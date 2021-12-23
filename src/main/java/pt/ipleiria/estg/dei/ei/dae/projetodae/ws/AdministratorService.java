@@ -79,6 +79,18 @@ public class AdministratorService {
                 .build();
     }
 
+    @PATCH
+    @Path("{administrator}")
+    public Response softDeleteOrUndeleteAdministrator(@PathParam("administrator") String username) {
+
+        administratorBean.softDeleteOrUndeleteAdministrator(username);
+
+        Administrator administratorDeletedOrUndeleted = administratorBean.findAdministrator(username);
+
+        return Response.ok().build();
+
+    }
+
     @PUT
     @Path("{username}")
     public Response updateAdministrator(@PathParam("username") String username, AdministratorDTO administratorDTO) throws MyEntityNotFoundException {
@@ -113,7 +125,8 @@ public class AdministratorService {
                 administrator.getName(),
                 administrator.getBirthDate(),
                 administrator.getEmail(),
-                administrator.getPhoneNumber()
+                administrator.getPhoneNumber(),
+                administrator.isDeleted()
         );
     }
 
@@ -129,7 +142,8 @@ public class AdministratorService {
                 administrator.getName(),
                 administrator.getBirthDate(),
                 administrator.getEmail(),
-                administrator.getPhoneNumber()
+                administrator.getPhoneNumber(),
+                administrator.isDeleted()
         );
         administratorDTO.setBiometricsTypeDTOS(biometricsTypeDTOS);
         return administratorDTO;
