@@ -70,4 +70,12 @@ public class PatientBean {
         patient.setPhoneNumber(phoneNumber);
         patient.setBirthDate(birthDate);
     }
+
+    public boolean changePasswordPatient(String username, String passwordOld, String passwordNew) throws MyEntityNotFoundException {
+        Patient patient = findPatient(username);
+        if (patient == null){
+            throw new MyEntityNotFoundException("Patient" + username + " NOT FOUND");
+        }
+        return patient.changePassword(passwordOld, passwordNew);
+    }
 }

@@ -2,6 +2,7 @@ package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PatientDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PrescriptionDTO;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.UserPasswordsDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.DoctorBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.PatientBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
@@ -104,6 +105,20 @@ public class PatientService {
 //                .entity("ERROR_FINDING_PATIENT")
 //                .build();
     }
+
+    @PATCH
+    @Path("{patient}/changePassword")
+    public Response changePasswordPatient(@PathParam("patient") String username, UserPasswordsDTO userPasswordsDTO) throws MyEntityNotFoundException {
+
+        if (patientBean.changePasswordPatient(username, userPasswordsDTO.getPasswordOld(), userPasswordsDTO.getPasswordNew())) {
+            return Response.ok().build();
+        }
+
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                .entity("ERROR_CHANGING_PASSWORD")
+                .build();
+    }
+
 
     @PUT
     @Path("{username}")

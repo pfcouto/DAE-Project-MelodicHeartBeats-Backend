@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
@@ -69,5 +70,11 @@ public class DoctorBean {
         doctor.setBirthDate(birthDate);
     }
 
-
+    public boolean changePasswordDoctor(String username, String passwordOld, String passwordNew) throws MyEntityNotFoundException {
+        Doctor doctor = em.find(Doctor.class, username);
+        if (doctor == null){
+            throw new MyEntityNotFoundException("Doctor" + username + " NOT FOUND");
+        }
+        return doctor.changePassword(passwordOld, passwordNew);
+    }
 }

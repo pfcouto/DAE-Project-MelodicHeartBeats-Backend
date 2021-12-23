@@ -128,4 +128,12 @@ public class User implements Serializable {
         }
         return new String(encoded);
     }
+
+    public boolean changePassword(String passwordOld, String passwordNew){
+        if (hashPassword(passwordOld).equals(this.password)){
+            setPassword(hashPassword(passwordNew));
+            return true;
+        }
+        return false;
+    }
 }

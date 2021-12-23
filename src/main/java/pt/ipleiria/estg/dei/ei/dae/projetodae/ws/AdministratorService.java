@@ -2,6 +2,7 @@ package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.AdministratorDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.BiometricsTypeDTO;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.UserPasswordsDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.AdministratorBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Administrator;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.BiometricsType;
@@ -84,6 +85,18 @@ public class AdministratorService {
         Administrator administratorBlockedOrUnblocked = administratorBean.findAdministrator(username);
 
         return Response.ok().build();
+
+    }
+
+    @PATCH
+    @Path("{administrator}/changePassword")
+    public Response changePasswordPatient(@PathParam("administrator") String username, UserPasswordsDTO userPasswordsDTO) throws MyEntityNotFoundException {
+        if (administratorBean.changePasswordAdministrator(username, userPasswordsDTO.getPasswordOld(), userPasswordsDTO.getPasswordNew())) {
+            return Response.ok().build();
+        }
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                .entity("ERROR_CHANGING_PASSWORD")
+                .build();
 
     }
 

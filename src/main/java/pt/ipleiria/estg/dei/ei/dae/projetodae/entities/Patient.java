@@ -52,4 +52,6 @@ public class Patient extends User implements Serializable {
         if (prescription != null && prescriptions.contains(prescription))
             prescriptions.remove(prescription);
     }
+
+
 }

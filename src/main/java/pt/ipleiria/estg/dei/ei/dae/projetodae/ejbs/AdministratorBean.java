@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Administrator;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
@@ -66,5 +67,13 @@ public class AdministratorBean {
         administrator.setEmail(email);
         administrator.setPhoneNumber(phoneNumber);
         administrator.setBirthDate(birthDate);
+    }
+
+    public boolean changePasswordAdministrator(String username, String passwordOld, String passwordNew) throws MyEntityNotFoundException {
+        Administrator administrator = em.find(Administrator.class, username);
+        if (administrator == null){
+            throw new MyEntityNotFoundException("Administrator" + username + " NOT FOUND");
+        }
+        return administrator.changePassword(passwordOld, passwordNew);
     }
 }
