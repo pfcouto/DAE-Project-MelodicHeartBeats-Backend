@@ -16,7 +16,7 @@ import java.util.LinkedList;
 
         @NamedQuery(
                 name = "getAllPatientsNotDeleted",
-                query = "SELECT p FROM Patient p WHERE p.isDeleted <> true ORDER BY p.name" // JPQL
+                query = "SELECT p FROM Patient p WHERE p.blocked <> true ORDER BY p.name" // JPQL
         )
 })
 
