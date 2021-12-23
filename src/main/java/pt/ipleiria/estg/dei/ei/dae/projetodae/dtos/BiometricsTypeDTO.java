@@ -10,7 +10,7 @@ public class BiometricsTypeDTO implements Serializable {
     public int valueMax=-1;
     public int valueMin =-1;
     public String unity;
-    public LinkedList<BiometricDTO> biometricsDTO;
+    public LinkedList<ObservationDTO> biometricsDTO;
     public String admin;
     public boolean delete;
 
@@ -95,11 +95,11 @@ public class BiometricsTypeDTO implements Serializable {
         this.unity = unity;
     }
 
-    public LinkedList<BiometricDTO> getBiometricsDTO() {
+    public LinkedList<ObservationDTO> getBiometricsDTO() {
         return biometricsDTO;
     }
 
-    public void setBiometrics(LinkedList<BiometricDTO> biometricsDTO) {
+    public void setBiometrics(LinkedList<ObservationDTO> biometricsDTO) {
         this.biometricsDTO = biometricsDTO;
     }
 

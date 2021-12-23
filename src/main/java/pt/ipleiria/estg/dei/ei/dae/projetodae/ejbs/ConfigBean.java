@@ -1,12 +1,9 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 
-import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.BiometricsType;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,6 +22,8 @@ public class ConfigBean {
     private PrescriptionBean prescriptionBean;
     @EJB
     BiometricsTypeBean biometricsTypeBean;
+    @EJB
+    ObservationBean observationBean;
 
     @PostConstruct
     public void populateDB() {
@@ -35,11 +34,13 @@ public class ConfigBean {
 
             patientBean.create("pLeandro","1234","Leandro","1997-06-23","pleandro@mail.pt","919000111");
 
-            biometricsTypeBean.create("teste","description",2,1,"g","admin");
+
             prescriptionBean.create("dJoao","pLeandro","TEXTO DA DESCRICAO","2020-06-23","2020-07-23");
 
             administratorBean.create("admin", "1234", "Administrator", "1987-02-19" ,"admin@mail.com", "963123123");
-
+            biometricsTypeBean.create("teste","description",2,1,"g","admin");
+            observationBean.create("2000-03-18","pLeandro",2,1,"Fraco","perna","Lisboa");
+            System.out.println("DEUUU");
 //            doctorBean.create("Lacerda", "1234", "Jorge Lacerda", "lacerga@mail.com", "967733870", "A");
 //            doctorBean.create("Silva", "1234", "Eduardo Silva", "silva@mail.com", "123123123", "B");
 //

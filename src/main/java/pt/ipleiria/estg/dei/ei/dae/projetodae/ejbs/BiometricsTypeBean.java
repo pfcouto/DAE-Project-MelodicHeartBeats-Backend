@@ -20,6 +20,7 @@ public class BiometricsTypeBean {
         if((valueMax<0 || valueMin<0) || valueMax<valueMin){
             return null;
         }
+        System.out.println(administratorUsername);
         Administrator administrator=em.find(Administrator.class,administratorUsername);
         if(administrator!=null){
             BiometricsType biometricsType = new BiometricsType(name,description,valueMax,valueMin,unity,administrator);
@@ -30,6 +31,7 @@ public class BiometricsTypeBean {
         }
         return null;
     }
+
     public List<BiometricsType> getAllBiometricsTypes() {
         return (List<BiometricsType>) em.createNamedQuery("getAllBiometricsTypes").getResultList();
     }

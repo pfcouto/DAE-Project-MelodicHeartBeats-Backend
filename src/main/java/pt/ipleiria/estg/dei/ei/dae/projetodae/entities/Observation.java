@@ -1,8 +1,12 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.entities;
 
+import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.ObservationDTO;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -14,34 +18,73 @@ import java.util.Date;
 })
 public class Observation implements Serializable {
     @Id
-    private Date date;
-    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    @NotNull
+    private Calendar date;
+    @NotNull
     @ManyToOne
     private Patient patient;
-    @Id
+    @NotNull
     @ManyToOne
     private BiometricsType biometricsType;
+    private int quantitativeValue;
     @NotNull
-    private int value;
-    private String source;
+    private String qualitativeValue;
+    @NotNull
+    private String what;
+    @NotNull
+    private String local;
 
     public Observation() {
     }
 
-    public Observation(Date date, Patient patient, BiometricsType biometricsType, int value, String source) {
-        this.date = date;
+    public Observation(String date, Patient patient, BiometricsType biometricsType, int quantitativeValue, String qualitativeValue, String what, String local) {
+        String[] ArrayDate = date.split("-");
+        this.date = Calendar.getInstance();
+        this.date.set(Integer.parseInt(ArrayDate[0]), Integer.parseInt(ArrayDate[1]) - 1, Integer.parseInt(ArrayDate[2]));
         this.patient = patient;
         this.biometricsType = biometricsType;
-        this.value = value;
-        this.source = source;
+        this.quantitativeValue = quantitativeValue;
+        this.qualitativeValue=qualitativeValue;
+        this.what=what;
+        this.local = local;
     }
 
-    public Date getDate() {
-        return date;
+
+    public int getId() {
+        return id;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getQualitativeValue() {
+        return qualitativeValue;
+    }
+
+    public void setQualitativeValue(String qualitativeValue) {
+        this.qualitativeValue = qualitativeValue;
+    }
+
+    public String getWhat() {
+        return what;
+    }
+
+    public void setWhat(String what) {
+        this.what = what;
+    }
+
+    public String getDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(date.getTime());
+    }
+
+    public void setDate(String date) {
+        String[] ArrayDate = date.split("-");
+        this.date = Calendar.getInstance();
+        this.date.set(Integer.parseInt(ArrayDate[0]), Integer.parseInt(ArrayDate[1]) - 1, Integer.parseInt(ArrayDate[2]));
     }
 
     public Patient getPatient() {
@@ -60,19 +103,19 @@ public class Observation implements Serializable {
         this.biometricsType = biometricsType;
     }
 
-    public int getValue() {
-        return value;
+    public int getQuantitativeValue() {
+        return quantitativeValue;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    public void setQuantitativeValue(int value) {
+        this.quantitativeValue = value;
     }
 
-    public String getSource() {
-        return source;
+    public String getLocal() {
+        return local;
     }
 
-    public void setSource(String source) {
-        this.source = source;
+    public void setLocal(String source) {
+        this.local = source;
     }
 }

@@ -28,8 +28,8 @@ public class BiometricsType implements Serializable {
     private int valueMin;
     @NotNull
     private String unity;
-    /*@OneToMany(mappedBy = "biometricsType")
-    private LinkedList<Biometric> biometrics;*/
+    @OneToMany(mappedBy = "biometricsType")
+    private LinkedList<Observation> observations;
     private boolean deleted = Boolean.FALSE;
     @ManyToOne
     @JoinColumn(name = "ADMINISTRATOR_USERNAME")
@@ -37,7 +37,7 @@ public class BiometricsType implements Serializable {
     private Administrator administrator;
 
     public BiometricsType() {
-        //biometrics = new LinkedList<>();
+        observations = new LinkedList<>();
     }
 
     public BiometricsType(String name,String description, int valueMax, int valueMin, String unity, Administrator administrator) {
@@ -47,7 +47,7 @@ public class BiometricsType implements Serializable {
         this.valueMin = valueMin;
         this.unity = unity;
         this.administrator = administrator;
-        //biometrics = new LinkedList<>();
+        observations = new LinkedList<>();
     }
 
     public String getDescription() {
@@ -106,13 +106,13 @@ public class BiometricsType implements Serializable {
         this.unity = unity;
     }
 
-    /*public LinkedList<Biometric> getBiometrics() {
-        return biometrics;
+    public LinkedList<Observation> getObservations() {
+        return observations;
     }
 
-    public void setBiometrics(LinkedList<Biometric> biometrics) {
-        this.biometrics = biometrics;
-    }*/
+    public void setObservations(LinkedList<Observation> observations) {
+        this.observations = observations;
+    }
 
     public Administrator getAdministrator() {
         return administrator;

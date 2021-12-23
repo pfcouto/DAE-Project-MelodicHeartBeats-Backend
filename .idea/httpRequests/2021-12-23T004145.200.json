@@ -1,0 +1,11 @@
+[
+  {
+    "date": "Sat Mar 18 00:00:00 UTC 2000",
+    "patient": "pLeandro",
+    "biometricsType": 2,
+    "quantitativeValue": 1,
+    "qualitativeValue": "Fraco",
+    "what": "perna",
+    "local": "Lisboa"
+  }
+]

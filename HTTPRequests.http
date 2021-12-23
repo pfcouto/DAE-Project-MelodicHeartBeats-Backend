@@ -21,8 +21,9 @@ POST http://localhost:8080/projetoDAE/api/biometricsType
 Content-Type: application/json
 
 {
-  "type": "teste",
-  "max": "3",
+  "name": "teste",
+  "description": "teste",
+  "valueMax": "3",
   "valueMin": "2",
   "unity": "g",
   "administratorUsername": "admin"
@@ -42,3 +43,27 @@ Content-Type: application/json
   "administratorUsername": "admin"
 }
 ###
+GET http://localhost:8080/projetoDAE/api/observations
+Accept: application/json
+###
+POST http://localhost:8080/projetoDAE/api/observations
+Content-Type: application/json
+
+{
+  "date": "2000-04-18",
+  "patient": "pLeandro",
+  "biometricType": 2,
+  "quantitativeValue": 1,
+  "qualitativeValue": "Fraco",
+  "what": "perna",
+  "local": "Lisboa"
+}
+###
+PATCH http://localhost:8080/projetoDAE/api/observations/update/3
+Content-Type: application/json
+
+{
+  "quantitativeValue": 1,
+  "qualitativeValue": "Muito",
+  "local": "Porto"
+}
