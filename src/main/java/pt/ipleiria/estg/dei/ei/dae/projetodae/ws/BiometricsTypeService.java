@@ -5,6 +5,10 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.BiometricsTypeDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.AdministratorBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.BiometricsTypeBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.BiometricsType;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyIllegalArgumentException;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -43,7 +47,7 @@ public class BiometricsTypeService {
 
     @GET
     @Path("{code}")
-    public Response getBiometricsTypeDetails(@PathParam("code") int code) {
+    public Response getBiometricsTypeDetails(@PathParam("code") int code) throws MyEntityNotFoundException {
         BiometricsType biometricsType = biometricsTypeBean.find(code);
         if (biometricsType != null) {
             return Response.ok(toDTO(biometricsType)).build();
@@ -55,7 +59,7 @@ public class BiometricsTypeService {
 
     @POST // means: to call this endpoint, we need to use the HTTP GET method
     @Path("/") // means: the relative url path is “/api/students/”
-    public Response createBiometricsTypesWS(BiometricsTypeDTO biometricsTypeDTO) {
+    public Response createBiometricsTypesWS(BiometricsTypeDTO biometricsTypeDTO) throws MyEntityNotFoundException, MyConstraintViolationException, MyIllegalArgumentException {
         BiometricsType biometricsType=biometricsTypeBean.create(
                 biometricsTypeDTO.getName(),
                 biometricsTypeDTO.getDescription(),
@@ -73,7 +77,7 @@ public class BiometricsTypeService {
 
     @DELETE
     @Path("{code}")
-    public Response delete(@PathParam("code") int code){
+    public Response delete(@PathParam("code") int code) throws MyEntityNotFoundException{
         BiometricsType biometricsType= biometricsTypeBean.find(code);
         if(biometricsType == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -86,8 +90,7 @@ public class BiometricsTypeService {
 
     @PATCH
     @Path("update/{code}")
-    public Response Update(@PathParam("code") int code,BiometricsTypeDTO biometricsTypeDTO){
-        System.out.println(biometricsTypeDTO.getValueMax());
+    public Response Update(@PathParam("code") int code,BiometricsTypeDTO biometricsTypeDTO) throws MyEntityNotFoundException,MyIllegalArgumentException {
         boolean updated=biometricsTypeBean.update(code,biometricsTypeDTO);
         //FUNCIONAAA
         if(!updated) {

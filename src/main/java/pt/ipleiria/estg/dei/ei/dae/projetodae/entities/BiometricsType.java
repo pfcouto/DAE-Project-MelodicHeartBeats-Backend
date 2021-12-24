@@ -37,6 +37,8 @@ public class BiometricsType implements Serializable {
     @JoinColumn(name = "ADMINISTRATOR_USERNAME")
     @NotNull
     private Administrator administrator;
+    @Version
+    private int version;
 
     public BiometricsType() {
         observations = new LinkedList<>();
@@ -49,6 +51,7 @@ public class BiometricsType implements Serializable {
         this.valueMin = valueMin;
         this.unity = unity;
         this.administrator = administrator;
+
         observations = new LinkedList<>();
     }
 
