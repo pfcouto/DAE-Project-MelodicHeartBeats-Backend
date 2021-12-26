@@ -31,11 +31,16 @@ public class ConfigBean {
             System.out.println("Hello Java EE!");
 
             doctorBean.create("dJoao","1234","Joao","1997-06-23","djoao@mail.pt","919000222","Of.1");
+            doctorBean.create("dLuis","1234","Luis","1986-03-25","dLuis@mail.pt","919000333","Of.2");
 
             patientBean.create("pLeandro","1234","Leandro","1997-06-23","pleandro@mail.pt","919000111");
+            patientBean.create("pLeonardo","1234","Leonardo","1997-06-23","pLeonardo@mail.pt","919000777");
 
 
             prescriptionBean.create("dJoao","pLeandro","TEXTO DA DESCRICAO","2020-06-23","2020-07-23");
+            prescriptionBean.create("dJoao","pLeandro","TEXTO DA DESCRICAO 1","2020-06-23","2020-07-23");
+            prescriptionBean.create("dLuis","pLeandro","TEXTO DA DESCRICAO 2","2020-06-23","2020-07-23");
+            prescriptionBean.create("dLuis","pLeonardo","TEXTO DA DESCRICAO 3","2020-06-23","2020-07-23");
 
             administratorBean.create("admin", "1234", "Administrator", "1987-02-19" ,"admin@mail.com", "963123123");
             biometricsTypeBean.create("teste","description",2,1,"g","admin");

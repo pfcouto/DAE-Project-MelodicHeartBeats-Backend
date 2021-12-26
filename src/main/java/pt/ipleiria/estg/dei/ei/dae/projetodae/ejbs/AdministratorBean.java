@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Administrator;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
@@ -10,7 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintViolationException;
-import java.util.Date;
 import java.util.List;
 
 @Stateless
@@ -50,6 +50,13 @@ public class AdministratorBean {
         }
     }
 
+    public void blockOrUnBlockAdministrator(String username) {
+        Administrator administrator = findAdministrator(username);
+        if (administrator != null) {
+            administrator.setBlocked(!administrator.isBlocked());
+        }
+    }
+
     public void updateAdministrator(String username, String name, String birthDate, String email, String phoneNumber) throws MyEntityNotFoundException {
         Administrator administrator = em.find(Administrator.class, username);
         if (administrator == null){
@@ -68,5 +75,13 @@ public class AdministratorBean {
             return null;
         }
         return administrator;
+    }
+    
+    public boolean changePasswordAdministrator(String username, String passwordOld, String passwordNew) throws MyEntityNotFoundException {
+        Administrator administrator = em.find(Administrator.class, username);
+        if (administrator == null){
+            throw new MyEntityNotFoundException("Administrator" + username + " NOT FOUND");
+        }
+        return administrator.changePassword(passwordOld, passwordNew);
     }
 }

@@ -48,21 +48,21 @@ public class PrescriptionBean {
         em.remove(prescription);
     }
 
-    public void updatePrescription(int id, String doctorName, String patientName, String description, String startDate, String endDate) throws MyEntityNotFoundException {
-        Doctor doctor = em.find(Doctor.class, doctorName);
-        if (doctor == null) {
-            throw new MyEntityNotFoundException();
-        }
-        Patient patient = em.find(Patient.class, patientName);
-        if (patient == null) {
-            throw new MyEntityNotFoundException();
-        }
+    public void updatePrescription(int id, String description, String startDate, String endDate) throws MyEntityNotFoundException {
+//        Doctor doctor = em.find(Doctor.class, doctorName);
+//        if (doctor == null) {
+//            throw new MyEntityNotFoundException();
+//        }
+//        Patient patient = em.find(Patient.class, patientName);
+//        if (patient == null) {
+//            throw new MyEntityNotFoundException();
+//        }
         Prescription prescription = em.find(Prescription.class, id);
         if (prescription == null) {
             throw new MyEntityNotFoundException();
         }
-        prescription.setDoctor(doctor);
-        prescription.setPatient(patient);
+//        prescription.setDoctor(doctor);
+//        prescription.setPatient(patient);
         prescription.setDescription(description);
         prescription.setStartDate(startDate);
         prescription.setEndDate(endDate);

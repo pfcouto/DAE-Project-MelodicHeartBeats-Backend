@@ -2,13 +2,10 @@ package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.AdministratorDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.BiometricsTypeDTO;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.DoctorDTO;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PrescriptionDTO;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.UserPasswordsDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.AdministratorBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Administrator;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.BiometricsType;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
@@ -79,6 +76,30 @@ public class AdministratorService {
                 .build();
     }
 
+    @PATCH
+    @Path("{administrator}")
+    public Response blockOrUnblockAdministrator(@PathParam("administrator") String username) {
+
+        administratorBean.blockOrUnBlockAdministrator(username);
+
+        Administrator administratorBlockedOrUnblocked = administratorBean.findAdministrator(username);
+
+        return Response.ok().build();
+
+    }
+
+    @PATCH
+    @Path("{administrator}/changePassword")
+    public Response changePasswordPatient(@PathParam("administrator") String username, UserPasswordsDTO userPasswordsDTO) throws MyEntityNotFoundException {
+        if (administratorBean.changePasswordAdministrator(username, userPasswordsDTO.getPasswordOld(), userPasswordsDTO.getPasswordNew())) {
+            return Response.ok().build();
+        }
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                .entity("ERROR_CHANGING_PASSWORD")
+                .build();
+
+    }
+
     @PUT
     @Path("{username}")
     public Response updateAdministrator(@PathParam("username") String username, AdministratorDTO administratorDTO) throws MyEntityNotFoundException {
@@ -113,7 +134,8 @@ public class AdministratorService {
                 administrator.getName(),
                 administrator.getBirthDate(),
                 administrator.getEmail(),
-                administrator.getPhoneNumber()
+                administrator.getPhoneNumber(),
+                administrator.isBlocked()
         );
     }
 
@@ -129,7 +151,8 @@ public class AdministratorService {
                 administrator.getName(),
                 administrator.getBirthDate(),
                 administrator.getEmail(),
-                administrator.getPhoneNumber()
+                administrator.getPhoneNumber(),
+                administrator.isBlocked()
         );
         administratorDTO.setBiometricsTypeDTOS(biometricsTypeDTOS);
         return administratorDTO;

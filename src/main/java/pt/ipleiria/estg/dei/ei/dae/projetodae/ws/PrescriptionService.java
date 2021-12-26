@@ -83,8 +83,8 @@ public class PrescriptionService {
         }
         prescriptionBean.updatePrescription(
                 prescriptionId,
-                presciptionDTO.getDoctor(),
-                presciptionDTO.getPatient(),
+//                presciptionDTO.getDoctor(),
+//                presciptionDTO.getPatient(),
                 presciptionDTO.getDescription(),
                 presciptionDTO.getStartDate(),
                 presciptionDTO.getEndDate()
