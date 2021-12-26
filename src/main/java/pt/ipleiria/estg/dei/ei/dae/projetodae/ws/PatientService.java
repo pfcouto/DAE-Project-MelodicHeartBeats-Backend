@@ -1,11 +1,10 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 
-import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.DoctorDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PatientDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PrescriptionDTO;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.UserPasswordsDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.DoctorBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.PatientBean;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
@@ -26,9 +25,18 @@ public class PatientService {
 
     @EJB
     PatientBean patientBean;
+    @EJB
+    DoctorBean doctorBean;
 
     @GET
     @Path("/")
+    public List<PatientDTO> getAllPatientsNotDeleted() {
+        System.out.println(patientBean.getAllPatientsNotDeleted());
+        return toDTOsNoPrescriptions(patientBean.getAllPatientsNotDeleted());
+    }
+
+    @GET
+    @Path("/all")
     public List<PatientDTO> getAllPatients() {
         return toDTOsNoPrescriptions(patientBean.getAllPatients());
     }
@@ -41,7 +49,7 @@ public class PatientService {
             return Response.ok(toDTOWithPrescriptions(patient)).build();
         }
         return Response.status(Response.Status.NOT_FOUND)
-                .entity("ERROR_FINDING_STUDENT")
+                .entity("ERROR_FINDING_PATIENT")
                 .build();
     }
 
@@ -98,15 +106,47 @@ public class PatientService {
 
         patientBean.deletePatient(username);
 
-        if (patientBean.findPatient(username) == null) {
-            return Response.ok().build();
+        Patient patientDeleted = patientBean.findPatient(username);
 
+        if (patientDeleted.isBlocked()) {
+            return Response.ok().build();
         }
 
         return Response.status(Response.Status.NOT_FOUND)
-                .entity("ERROR_FINDING_ADMINISTRATOR")
+                .entity("ERROR_FINDING_PATIENT")
                 .build();
     }
+
+    @PATCH
+    @Path("{patient}")
+    public Response blockOrUnblockPatient(@PathParam("patient") String username) {
+
+        patientBean.blockOrUnBlockPatient(username);
+
+        Patient patientDeletedOrUndeleted = patientBean.findPatient(username);
+
+//        if (patientDeletedOrUndeleted.isDeleted()) {
+        return Response.ok().build();
+//        }
+
+//        return Response.status(Response.Status.NOT_FOUND)
+//                .entity("ERROR_FINDING_PATIENT")
+//                .build();
+    }
+
+    @PATCH
+    @Path("{patient}/changePassword")
+    public Response changePasswordPatient(@PathParam("patient") String username, UserPasswordsDTO userPasswordsDTO) throws MyEntityNotFoundException {
+
+        if (patientBean.changePasswordPatient(username, userPasswordsDTO.getPasswordOld(), userPasswordsDTO.getPasswordNew())) {
+            return Response.ok().build();
+        }
+
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                .entity("ERROR_CHANGING_PASSWORD")
+                .build();
+    }
+
 
     @PUT
     @Path("{username}")
@@ -114,7 +154,7 @@ public class PatientService {
         Patient patient = patientBean.findPatient(username);
         if (patient == null) {
             return Response.status(Response.Status.NOT_FOUND)
-                    .entity("ERROR_FINDING_STUDENT")
+                    .entity("ERROR_FINDING_PATIENT")
                     .build();
         }
 
@@ -140,7 +180,8 @@ public class PatientService {
                 patient.getName(),
                 patient.getBirthDate(),
                 patient.getEmail(),
-                patient.getPhoneNumber()
+                patient.getPhoneNumber(),
+                patient.isBlocked()
         );
     }
 
@@ -156,7 +197,8 @@ public class PatientService {
                 patient.getName(),
                 patient.getBirthDate(),
                 patient.getEmail(),
-                patient.getPhoneNumber()
+                patient.getPhoneNumber(),
+                patient.isBlocked()
         );
         patientDTO.setPrescriptionDTOS(prescriptionsDTOS);
         return patientDTO;

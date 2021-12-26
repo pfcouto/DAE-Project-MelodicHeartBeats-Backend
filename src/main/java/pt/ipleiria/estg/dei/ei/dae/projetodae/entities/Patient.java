@@ -12,8 +12,15 @@ import java.util.LinkedList;
         @NamedQuery(
                 name = "getAllPatients",
                 query = "SELECT p FROM Patient p ORDER BY p.name" // JPQL
+        ),
+
+        @NamedQuery(
+                name = "getAllPatientsNotDeleted",
+                query = "SELECT p FROM Patient p WHERE p.blocked <> true ORDER BY p.name" // JPQL
         )
 })
+
+
 public class Patient extends User implements Serializable {
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE)
@@ -45,4 +52,6 @@ public class Patient extends User implements Serializable {
         if (prescription != null && prescriptions.contains(prescription))
             prescriptions.remove(prescription);
     }
+
+
 }

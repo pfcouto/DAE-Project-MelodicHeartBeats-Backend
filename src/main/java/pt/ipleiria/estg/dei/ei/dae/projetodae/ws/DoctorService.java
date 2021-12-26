@@ -2,6 +2,7 @@ package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.DoctorDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PrescriptionDTO;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.UserPasswordsDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.DoctorBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
@@ -102,8 +103,20 @@ public class DoctorService {
         }
 
         return Response.status(Response.Status.NOT_FOUND)
-                .entity("ERROR_FINDING_ADMINISTRATOR")
+                .entity("ERROR_FINDING_DOCTOR")
                 .build();
+    }
+
+    @PATCH
+    @Path("{doctor}")
+    public Response blockOrUnblockDoctor(@PathParam("doctor") String username) {
+
+        doctorBean.blockOrUnBlockDoctor(username);
+
+        Doctor doctorDeletedOrUndeleted = doctorBean.findDoctor(username);
+
+        return Response.ok().build();
+
     }
 
     @PUT
@@ -132,6 +145,19 @@ public class DoctorService {
                 .build();
     }
 
+    @PATCH
+    @Path("{doctor}/changePassword")
+    public Response changePasswordPatient(@PathParam("doctor") String username, UserPasswordsDTO userPasswordsDTO) throws MyEntityNotFoundException {
+
+        if (doctorBean.changePasswordDoctor(username, userPasswordsDTO.getPasswordOld(), userPasswordsDTO.getPasswordNew())) {
+            return Response.ok().build();
+        }
+
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                .entity("ERROR_CHANGING_PASSWORD")
+                .build();
+    }
+
     DoctorDTO toDTONoPrescriptions(Doctor doctor) {
         return new DoctorDTO(
                 doctor.getUsername(),
@@ -140,7 +166,8 @@ public class DoctorService {
                 doctor.getBirthDate(),
                 doctor.getEmail(),
                 doctor.getPhoneNumber(),
-                doctor.getOffice()
+                doctor.getOffice(),
+                doctor.isBlocked()
         );
     }
 
@@ -157,7 +184,8 @@ public class DoctorService {
                 doctor.getBirthDate(),
                 doctor.getEmail(),
                 doctor.getPhoneNumber(),
-                doctor.getOffice()
+                doctor.getOffice(),
+                doctor.isBlocked()
         );
         doctorDTO.setPrescriptionDTOS(prescriptionsDTOS);
         return doctorDTO;
