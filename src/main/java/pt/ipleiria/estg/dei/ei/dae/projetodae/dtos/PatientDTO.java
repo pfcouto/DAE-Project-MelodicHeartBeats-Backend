@@ -10,19 +10,21 @@ public class PatientDTO {
     String birthDate;
     String email;
     String phoneNumber;
+    boolean blocked;
     List<PrescriptionDTO> prescriptionDTOS;
 
     public PatientDTO() {
         prescriptionDTOS = new LinkedList<>();
     }
 
-    public PatientDTO(String username, String password, String name, String birthDate, String email, String phoneNumber) {
+    public PatientDTO(String username, String password, String name, String birthDate, String email, String phoneNumber, boolean blocked) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.birthDate = birthDate;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.blocked = blocked;
         prescriptionDTOS = new LinkedList<>();
     }
 
@@ -80,5 +82,13 @@ public class PatientDTO {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 }

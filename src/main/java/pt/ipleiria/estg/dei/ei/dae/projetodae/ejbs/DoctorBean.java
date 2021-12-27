@@ -1,6 +1,8 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
@@ -9,9 +11,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
-import javax.print.Doc;
 import javax.validation.ConstraintViolationException;
-import java.util.Date;
 import java.util.List;
 
 @Stateless
@@ -51,9 +51,16 @@ public class DoctorBean {
         }
     }
 
+    public void blockOrUnBlockDoctor(String username) {
+        Doctor doctor = findDoctor(username);
+        if (doctor != null) {
+            doctor.setBlocked(!doctor.isBlocked());
+        }
+    }
+
     public void updateDoctor(String username, String name, String birthDate, String email, String phoneNumber, String office) throws MyEntityNotFoundException {
         Doctor doctor = em.find(Doctor.class, username);
-        if (doctor == null){
+        if (doctor == null) {
             throw new MyEntityNotFoundException("Doctor" + username + " NOT FOUND");
         }
         em.lock(doctor, LockModeType.OPTIMISTIC);
@@ -65,4 +72,16 @@ public class DoctorBean {
     }
 
 
+    public List<Prescription> getPrescriptions(Doctor doctor) {
+        String query = "SELECT p FROM Prescription p WHERE p.doctor.username = '" + doctor.getUsername() + "'";
+        return em.createQuery(query, Prescription.class).getResultList();
+    }
+    
+    public boolean changePasswordDoctor(String username, String passwordOld, String passwordNew) throws MyEntityNotFoundException {
+        Doctor doctor = em.find(Doctor.class, username);
+        if (doctor == null){
+            throw new MyEntityNotFoundException("Doctor" + username + " NOT FOUND");
+        }
+        return doctor.changePassword(passwordOld, passwordNew);
+    }
 }

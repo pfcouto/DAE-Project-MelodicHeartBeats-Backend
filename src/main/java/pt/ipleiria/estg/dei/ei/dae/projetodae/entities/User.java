@@ -34,6 +34,8 @@ public class User implements Serializable {
     private String phoneNumber;
     @Version
     private int version;
+    @NotNull
+    private boolean blocked;
 
     public User() {
     }
@@ -47,6 +49,7 @@ public class User implements Serializable {
         this.birthDate.set(Integer.parseInt(date[0]), Integer.parseInt(date[1]) - 1, Integer.parseInt(date[2]));
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.blocked = false;
     }
 
     public String getUsername() {
@@ -100,6 +103,18 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
+    public void setBirthDate(Calendar birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
+    }
+
     public static String hashPassword(String password) {
         char[] encoded = null;
         try {
@@ -112,5 +127,13 @@ public class User implements Serializable {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
         return new String(encoded);
+    }
+
+    public boolean changePassword(String passwordOld, String passwordNew){
+        if (hashPassword(passwordOld).equals(this.password)){
+            setPassword(hashPassword(passwordNew));
+            return true;
+        }
+        return false;
     }
 }
