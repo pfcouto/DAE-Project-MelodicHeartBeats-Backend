@@ -1,25 +1,26 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.BiometricsTypeDTO;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.QualitativeValuesDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Administrator;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Observation;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.BiometricsType;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyIllegalArgumentException;
 
 import javax.ejb.Stateless;
 import javax.persistence.*;
-import javax.validation.ConstraintViolationException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Stateless
 public class BiometricsTypeBean {
     @PersistenceContext
     EntityManager em;
 
-    public BiometricsType create(String name,String description, int valueMax, int valueMin, String unity, String administratorUsername) throws MyEntityNotFoundException, MyConstraintViolationException, MyIllegalArgumentException {
+    public BiometricsType create(String name,String description, int valueMax, int valueMin, String unity, String administratorUsername,List<QualitativeValuesDTO> qualitativeValue) throws MyEntityNotFoundException, MyConstraintViolationException, MyIllegalArgumentException {
         if(valueMax<0){
             throw new MyIllegalArgumentException("The Max Value must be bigger or equal to 0!");
         }if(valueMin<0){
@@ -32,6 +33,9 @@ public class BiometricsTypeBean {
         if(administrator!=null){
             try {
                 BiometricsType biometricsType = new BiometricsType(name,description,valueMax,valueMin,unity,administrator);
+                for (QualitativeValuesDTO o : qualitativeValue) {
+                    biometricsType.getListOfQualitativeValues().put(o.value,o.meaning);
+                }
                 em.persist(biometricsType);
                 administrator.addBiometricsType(biometricsType);
                 em.merge(administrator);
@@ -60,6 +64,15 @@ public class BiometricsTypeBean {
     }
 
     public void delete(BiometricsType biometricsType) {
+        try{
+            if (!em.contains(biometricsType)) {
+                biometricsType = em.merge(biometricsType);
+            }
+            biometricsType.getAdministrator().removeBiometricType(biometricsType);
+            em.persist(biometricsType.getAdministrator());
+        }catch(PersistenceException exception){
+            throw new PersistenceException(exception);
+        }
         //get a list of Biometrics by Type.
         String queryString = "select b from Observation b where b.biometricsType=:code";
         Query query=em.createQuery( queryString );
@@ -68,15 +81,6 @@ public class BiometricsTypeBean {
     try{
         if(observations.isEmpty()){
             //hard Delete
-            try{
-                if (!em.contains(biometricsType)) {
-                    biometricsType = em.merge(biometricsType);
-                }
-                biometricsType.getAdministrator().removeBiometricType(biometricsType);
-                em.persist(biometricsType.getAdministrator());
-            }catch(PersistenceException exception){
-                throw new PersistenceException(exception);
-            }
             em.remove(biometricsType);
         }else{
             //soft delete
@@ -122,6 +126,11 @@ public class BiometricsTypeBean {
             else{
                 throw new MyIllegalArgumentException("The description should only contain 255 characters.");
             }
+            Map<Integer,String> listOfQualitativeValues=new HashMap<>();
+            for (QualitativeValuesDTO qualitative : biometricsTypeDTO.getQualitatives()) {
+                listOfQualitativeValues.put(qualitative.value,qualitative.meaning);
+            }
+            biometricsType.setListOfQualitativeValues(listOfQualitativeValues);
         }else{
              throw new MyEntityNotFoundException("The Biometric Type has not found");
         }

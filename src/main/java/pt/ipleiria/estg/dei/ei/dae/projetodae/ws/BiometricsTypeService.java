@@ -2,6 +2,7 @@ package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.AdministratorDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.BiometricsTypeDTO;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.QualitativeValuesDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.AdministratorBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.BiometricsTypeBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.BiometricsType;
@@ -14,7 +15,10 @@ import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Path("biometricsType") // url
@@ -25,8 +29,14 @@ public class BiometricsTypeService {
     BiometricsTypeBean biometricsTypeBean;
     AdministratorBean administratorBean;
     private BiometricsTypeDTO toDTO(BiometricsType biometricsType) {
-        AdministratorDTO administratorDTO = new AdministratorDTO(biometricsType.getAdministrator().getUsername(), biometricsType.getAdministrator().getName(), biometricsType.getAdministrator().getEmail(), biometricsType.getAdministrator().getPhoneNumber());
-        return new BiometricsTypeDTO(biometricsType.getCode(), biometricsType.getName(),biometricsType.getDescription(), biometricsType.getValueMax(), biometricsType.getValueMin(), biometricsType.getUnity(), administratorDTO.getUsername(),biometricsType.isDeleted());
+        //AdministratorDTO administratorDTO = new AdministratorDTO(biometricsType.getAdministrator().getUsername(), biometricsType.getAdministrator().getName(), biometricsType.getAdministrator().getEmail(), biometricsType.getAdministrator().getPhoneNumber());
+        List<QualitativeValuesDTO> qualitativeValuesDTOSList=new LinkedList<>();
+        for (Map.Entry<Integer, String> entry : biometricsType.getListOfQualitativeValues().entrySet()) {
+            QualitativeValuesDTO qualitativeValuesDTO=new QualitativeValuesDTO(entry.getKey(),entry.getValue());
+            qualitativeValuesDTOSList.add(qualitativeValuesDTO);
+        }
+
+        return new BiometricsTypeDTO(biometricsType.getCode(), biometricsType.getName(),biometricsType.getDescription(), biometricsType.getValueMax(), biometricsType.getValueMin(), biometricsType.getUnity(), biometricsType.getAdministrator().getUsername(),biometricsType.isDeleted(),qualitativeValuesDTOSList);
     }
 
     private List<BiometricsTypeDTO> toDTOs(List<BiometricsType> biometricsType) {
@@ -60,13 +70,15 @@ public class BiometricsTypeService {
     @POST // means: to call this endpoint, we need to use the HTTP GET method
     @Path("/") // means: the relative url path is “/api/students/”
     public Response createBiometricsTypesWS(BiometricsTypeDTO biometricsTypeDTO) throws MyEntityNotFoundException, MyConstraintViolationException, MyIllegalArgumentException {
+        System.out.println(biometricsTypeDTO);
         BiometricsType biometricsType=biometricsTypeBean.create(
                 biometricsTypeDTO.getName(),
                 biometricsTypeDTO.getDescription(),
                 biometricsTypeDTO.getValueMax(),
                 biometricsTypeDTO.getValueMin(),
                 biometricsTypeDTO.getUnity(),
-                biometricsTypeDTO.getAdministrator()
+                biometricsTypeDTO.getAdministrator(),
+                biometricsTypeDTO.getQualitatives()
         );
         if (biometricsType == null){
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();}

@@ -1,7 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.dtos;
-
 import java.io.Serializable;
 import java.util.LinkedList;
+import java.util.List;
 
 public class BiometricsTypeDTO implements Serializable {
     public int code;
@@ -10,6 +10,7 @@ public class BiometricsTypeDTO implements Serializable {
     public int valueMax=-1;
     public int valueMin =-1;
     public String unity;
+    public List<QualitativeValuesDTO> qualitatives;
     public LinkedList<ObservationDTO> biometricsDTO;
     public String admin;
     public boolean delete;
@@ -17,9 +18,10 @@ public class BiometricsTypeDTO implements Serializable {
 
     public BiometricsTypeDTO() {
         this.biometricsDTO=new LinkedList<>();
+        qualitatives=new LinkedList<>();
     }
 
-    public BiometricsTypeDTO(int code, String name,String description, int valueMax, int valueMin, String unity, String administratorUsername, boolean delete) {
+    public BiometricsTypeDTO(int code, String name,String description, int valueMax, int valueMin, String unity, String administratorUsername, boolean delete,List<QualitativeValuesDTO> qualitativeValuesDTOS) {
         this.code = code;
         this.name = name;
         this.description=description;
@@ -29,6 +31,19 @@ public class BiometricsTypeDTO implements Serializable {
         this.delete=delete;
         this.admin = administratorUsername;
         this.biometricsDTO=new LinkedList<>();
+        qualitatives=qualitativeValuesDTOS;
+    }
+
+    public List<QualitativeValuesDTO> getQualitatives() {
+        return qualitatives;
+    }
+
+    public void setQualitatives(List<QualitativeValuesDTO> qualitatives) {
+        this.qualitatives = qualitatives;
+    }
+
+    public void setBiometricsDTO(LinkedList<ObservationDTO> biometricsDTO) {
+        this.biometricsDTO = biometricsDTO;
     }
 
     public String getDescription() {

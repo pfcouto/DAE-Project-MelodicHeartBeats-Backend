@@ -1,10 +1,12 @@
 pt\ipleiria\estg\dei\ei\dae\projetodae\ejbs\PatientBean.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\entities\Observation.class
+pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\QualitativeValuesDTO.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\ObservationDTO.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\ws\DoctorService.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\ws\LoginService.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\ejbs\AdministratorBean.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\exceptions\MyIllegalArgumentException.class
+pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\UserPasswordsDTO.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\ws\AdministratorService.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\AdministratorDTO.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\BiometricsTypeDTO.class

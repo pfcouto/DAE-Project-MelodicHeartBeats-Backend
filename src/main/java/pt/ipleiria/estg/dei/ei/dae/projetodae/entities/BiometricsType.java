@@ -3,6 +3,7 @@ package pt.ipleiria.estg.dei.ei.dae.projetodae.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Objects;
@@ -31,6 +32,8 @@ public class BiometricsType implements Serializable {
     private int valueMin;
     @NotNull
     private String unity;
+    @ElementCollection
+    private Map<Integer,String> listOfQualitativeValues;
     @OneToMany(mappedBy = "biometricsType")
     private LinkedList<Observation> observations;
     private boolean deleted = Boolean.FALSE;
@@ -43,6 +46,7 @@ public class BiometricsType implements Serializable {
 
     public BiometricsType() {
         observations = new LinkedList<>();
+        listOfQualitativeValues=new HashMap<Integer,String>();
     }
 
     public BiometricsType(String name,String description, int valueMax, int valueMin, String unity, Administrator administrator) {
@@ -52,8 +56,17 @@ public class BiometricsType implements Serializable {
         this.valueMin = valueMin;
         this.unity = unity;
         this.administrator = administrator;
-
         observations = new LinkedList<>();
+        listOfQualitativeValues=new HashMap<Integer,String>();
+    }
+
+
+    public Map<Integer, String> getListOfQualitativeValues() {
+        return listOfQualitativeValues;
+    }
+
+    public void setListOfQualitativeValues(Map<Integer, String> listOfQualitativeValues) {
+        this.listOfQualitativeValues = listOfQualitativeValues;
     }
 
     public String getDescription() {

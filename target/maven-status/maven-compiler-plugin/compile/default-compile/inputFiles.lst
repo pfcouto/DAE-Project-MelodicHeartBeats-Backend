@@ -13,6 +13,7 @@ C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiri
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\ejbs\UserBean.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\ObservationDTO.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\ejbs\AdministratorBean.java
+C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\UserPasswordsDTO.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\ws\AdministratorService.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\ws\PrescriptionService.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\AdministratorDTO.java
@@ -24,6 +25,7 @@ C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiri
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\exceptions\MyEntityExistsException.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\exceptions\MyEntityNotFoundExceptionMapper.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\AuthDTO.java
+C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\QualitativeValuesDTO.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\HelloApplication.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\BiometricsTypeDTO.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\entities\Administrator.java
