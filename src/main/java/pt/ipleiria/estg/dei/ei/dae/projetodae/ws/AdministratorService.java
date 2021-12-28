@@ -90,7 +90,7 @@ public class AdministratorService {
 
     @PATCH
     @Path("{administrator}/changePassword")
-    public Response changePasswordPatient(@PathParam("administrator") String username, UserPasswordsDTO userPasswordsDTO) throws MyEntityNotFoundException {
+    public Response changePasswordAdministrator(@PathParam("administrator") String username, UserPasswordsDTO userPasswordsDTO) throws MyEntityNotFoundException {
         if (administratorBean.changePasswordAdministrator(username, userPasswordsDTO.getPasswordOld(), userPasswordsDTO.getPasswordNew())) {
             return Response.ok().build();
         }

@@ -61,15 +61,6 @@ public class BiometricsTypeBean {
     }
 
     public void delete(BiometricsType biometricsType) {
-        try{
-            if (!em.contains(biometricsType)) {
-                biometricsType = em.merge(biometricsType);
-            }
-            biometricsType.getAdministrator().removeBiometricType(biometricsType);
-            em.persist(biometricsType.getAdministrator());
-        }catch(PersistenceException exception){
-            throw new PersistenceException(exception);
-        }
         //get a list of Biometrics by Type.
         String queryString = "select b from Observation b where b.biometricsType=:code";
         Query query=em.createQuery( queryString );
@@ -78,6 +69,15 @@ public class BiometricsTypeBean {
     try{
         if(observations.isEmpty()){
             //hard Delete
+            try{
+                if (!em.contains(biometricsType)) {
+                    biometricsType = em.merge(biometricsType);
+                }
+                biometricsType.getAdministrator().removeBiometricType(biometricsType);
+                em.persist(biometricsType.getAdministrator());
+            }catch(PersistenceException exception){
+                throw new PersistenceException(exception);
+            }
             em.remove(biometricsType);
         }else{
             //soft delete
