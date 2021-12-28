@@ -1,6 +1,5 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 
-import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
@@ -11,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.validation.ConstraintViolationException;
 import java.util.List;
 
@@ -23,8 +23,8 @@ public class PatientBean {
     public void create(String username, String password, String name, String birthDate, String email, String phoneNumber) throws MyEntityExistsException, MyConstraintViolationException {
         Patient newPatient = findPatient(username);
 
-        if (newPatient != null){
-            throw new MyEntityExistsException("Patient with username: " + username + " already exists");
+        if (newPatient != null) {
+            throw new MyEntityExistsException("Patient with username: " + username + " already exists" );
         }
 
         try {
@@ -36,11 +36,11 @@ public class PatientBean {
     }
 
     public List<Patient> getAllPatients() {
-        return (List<Patient>) em.createNamedQuery("getAllPatients").getResultList();
+        return (List<Patient>) em.createNamedQuery("getAllPatients" ).getResultList();
     }
 
     public List<Patient> getAllPatientsNotDeleted() {
-        return (List<Patient>) em.createNamedQuery("getAllPatientsNotDeleted").getResultList();
+        return (List<Patient>) em.createNamedQuery("getAllPatientsNotDeleted" ).getResultList();
     }
 
     public Patient findPatient(String username) {
@@ -63,8 +63,8 @@ public class PatientBean {
 
     public void updatePatient(String username, String name, String birthDate, String email, String phoneNumber) throws MyEntityNotFoundException {
         Patient patient = em.find(Patient.class, username);
-        if (patient == null){
-            throw new MyEntityNotFoundException("Patient" + username + "t NOT FOUND");
+        if (patient == null) {
+            throw new MyEntityNotFoundException("Patient" + username + "t NOT FOUND" );
         }
         em.lock(patient, LockModeType.OPTIMISTIC);
         patient.setName(name);
@@ -74,14 +74,15 @@ public class PatientBean {
     }
 
     public List<Prescription> getPrescriptions(Patient patient) {
-        String query = "SELECT p FROM Prescription p WHERE p.patient.username = '" + patient.getUsername() + "'";
-        return em.createQuery(query, Prescription.class).getResultList();
+        Query query = em.createNamedQuery("getPrescriptionsOfPatient" );
+        query.setParameter("username", patient.getUsername());
+        return query.getResultList();
     }
-    
+
     public boolean changePasswordPatient(String username, String passwordOld, String passwordNew) throws MyEntityNotFoundException {
         Patient patient = findPatient(username);
-        if (patient == null){
-            throw new MyEntityNotFoundException("Patient" + username + " NOT FOUND");
+        if (patient == null) {
+            throw new MyEntityNotFoundException("Patient" + username + " NOT FOUND" );
         }
         return patient.changePassword(passwordOld, passwordNew);
     }
