@@ -2,6 +2,7 @@ package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.AdministratorDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.BiometricsTypeDTO;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.QualitativeValuesDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.UserPasswordsDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.AdministratorBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Administrator;
@@ -14,7 +15,9 @@ import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Path("administrators")
@@ -163,16 +166,14 @@ public class AdministratorService {
     }
 
     BiometricsTypeDTO toDTO(BiometricsType biometricsType) {
-        return new BiometricsTypeDTO(
-                biometricsType.getCode(),
-                biometricsType.getName(),
-                biometricsType.getDescription(),
-                biometricsType.getValueMax(),
-                biometricsType.getValueMin(),
-                biometricsType.getUnity(),
-                biometricsType.getAdministrator().getUsername(),
-                biometricsType.isDeleted()
-        );
+        //AdministratorDTO administratorDTO = new AdministratorDTO(biometricsType.getAdministrator().getUsername(), biometricsType.getAdministrator().getName(), biometricsType.getAdministrator().getEmail(), biometricsType.getAdministrator().getPhoneNumber());
+        List<QualitativeValuesDTO> qualitativeValuesDTOSList=new LinkedList<>();
+        for (Map.Entry<Integer, String> entry : biometricsType.getListOfQualitativeValues().entrySet()) {
+            QualitativeValuesDTO qualitativeValuesDTO=new QualitativeValuesDTO(entry.getKey(),entry.getValue());
+            qualitativeValuesDTOSList.add(qualitativeValuesDTO);
+        }
+
+        return new BiometricsTypeDTO(biometricsType.getCode(), biometricsType.getName(),biometricsType.getDescription(), biometricsType.getValueMax(), biometricsType.getValueMin(), biometricsType.getUnity(), biometricsType.getAdministrator().getUsername(),biometricsType.getDeleted_at().toString(),qualitativeValuesDTOSList);
     }
 
     private List<BiometricsTypeDTO> biometricsTypesToDTOs(List<BiometricsType> biometricsTypes) {

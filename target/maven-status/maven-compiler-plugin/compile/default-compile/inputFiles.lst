@@ -22,6 +22,7 @@ C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiri
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\DoctorDTO.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\jwt\Jwt.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\ejbs\JwtBean.java
+C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\ejbs\EmailBean.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\exceptions\MyEntityExistsException.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\exceptions\MyEntityNotFoundExceptionMapper.java
 C:\Users\waldo\Documents\Universidade\3Ano\Projetos\DAE\src\main\java\pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\AuthDTO.java
