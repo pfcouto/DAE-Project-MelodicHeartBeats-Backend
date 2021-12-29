@@ -12,6 +12,10 @@ import java.util.LinkedList;
         @NamedQuery(
                 name = "getAllDoctors",
                 query = "SELECT d FROM Doctor d ORDER BY d.name" // JPQL
+        ),
+        @NamedQuery(
+                name="getPrescriptionsOfDoctor",
+                query="SELECT p FROM Prescription p WHERE p.doctor.username = :username"
         )
 })
 public class Doctor extends User implements Serializable {

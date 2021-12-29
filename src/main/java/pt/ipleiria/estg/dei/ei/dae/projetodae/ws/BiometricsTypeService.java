@@ -91,6 +91,7 @@ public class BiometricsTypeService {
         );
         if (biometricsType == null){
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();}
+//        biometricsTypeBean.assignBiometricTypeToAdministrator(biometricsTypeDTO.getAdministrator(), biometricsType.getCode());
         return Response.status(Response.Status.CREATED)
                 .entity(toDTO(biometricsType))
                 .build();

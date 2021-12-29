@@ -3,6 +3,7 @@ package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.BiometricsTypeDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.QualitativeValuesDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Administrator;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Observation;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.BiometricsType;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
@@ -223,4 +224,19 @@ public class BiometricsTypeBean {
     public List<BiometricsType> getAllBiometricsTypesNonDeleted() {
         return (List<BiometricsType>) em.createNamedQuery("getAllBiometricsTypesNonDeleted").getResultList();
     }
+
+//    public void assignBiometricTypeToAdministrator(String administrator_useranme, int biometricType_code) throws MyEntityNotFoundException {
+//        Administrator administrator = em.find(Administrator.class, administrator_useranme);
+//        if (administrator == null) {
+//            throw new MyEntityNotFoundException("Administrator " + administrator_useranme + " does not exist");
+//        }
+//
+//        BiometricsType biometricsType = find(biometricType_code);
+//        if (biometricsType == null) {
+//            throw new MyEntityNotFoundException("BiometricsType " + biometricType_code + " does not exist");
+//        }
+//
+//        administrator.addBiometricsType(biometricsType);
+//        biometricsType.setAdministrator(administrator);
+//    }
 }
