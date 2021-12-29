@@ -31,6 +31,7 @@ pt\ipleiria\estg\dei\ei\dae\projetodae\HelloApplication.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\DoctorDTO.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\exceptions\MyEntityNotFoundExceptionMapper.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\exceptions\MyEntityNotFoundException.class
+pt\ipleiria\estg\dei\ei\dae\projetodae\ejbs\EmailBean.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\entities\BiometricsType.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\ws\PatientService.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\ws\PrescriptionService.class
