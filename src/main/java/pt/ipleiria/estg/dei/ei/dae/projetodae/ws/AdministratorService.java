@@ -38,7 +38,7 @@ public class AdministratorService {
             return Response.ok(toDTOWithBiometricsTypes(administrator)).build();
         }
         return Response.status(Response.Status.NOT_FOUND)
-                .entity("ERROR_FINDING_STUDENT")
+                .entity("ERROR_FINDING_ADMINISTRATOR")
                 .build();
     }
 
@@ -106,7 +106,7 @@ public class AdministratorService {
         Administrator administrator = administratorBean.findAdministrator(username);
         if (administrator == null) {
             return Response.status(Response.Status.NOT_FOUND)
-                    .entity("ERROR_FINDING_STUDENT")
+                    .entity("ERROR_FINDING_ADMINISTRATOR")
                     .build();
         }
 
