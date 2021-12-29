@@ -47,12 +47,12 @@ public class ConfigBean {
             prescriptionBean.create("dLuis","pLeonardo","TEXTO DA DESCRICAO 3","2020-06-23","2020-07-23");
 
             administratorBean.create("admin", "1234", "Administrator", "1987-02-19" ,"admin@mail.com", "963123123");
-            QualitativeValuesDTO qualitativeValuesDTO=new QualitativeValuesDTO(1,"Baixo");
+            QualitativeValuesDTO qualitativeValuesDTO=new QualitativeValuesDTO(2,"Baixo");
             List<QualitativeValuesDTO> teste=new LinkedList<>();
             teste.add(qualitativeValuesDTO);
             biometricsTypeBean.create("teste","description",2,1,"g","admin",teste);
             biometricsTypeBean.create("teste2","description",2,1,"g","admin",teste);
-            observationBean.create("2000-03-18","pLeandro",2,1,"Fraco","perna","Lisboa");
+            observationBean.create("2000-03-18","pLeandro",5,2,"perna","Lisboa");
             System.out.println("DEUUU");
 //            doctorBean.create("Lacerda", "1234", "Jorge Lacerda", "lacerga@mail.com", "967733870", "A");
 //            doctorBean.create("Silva", "1234", "Eduardo Silva", "silva@mail.com", "123123123", "B");

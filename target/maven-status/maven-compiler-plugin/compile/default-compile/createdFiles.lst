@@ -25,6 +25,7 @@ pt\ipleiria\estg\dei\ei\dae\projetodae\ejbs\BiometricsTypeBean.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\ws\ObservationService.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\exceptions\MyConstraintViolationException.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\HelloResource.class
+pt\ipleiria\estg\dei\ei\dae\projetodae\entities\Document.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\ejbs\ConfigBean.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\HelloApplication.class
 pt\ipleiria\estg\dei\ei\dae\projetodae\dtos\DoctorDTO.class
