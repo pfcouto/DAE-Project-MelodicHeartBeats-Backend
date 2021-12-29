@@ -6,6 +6,8 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.ObservationDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.ObservationBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.BiometricsType;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Observation;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyIllegalArgumentException;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -38,7 +40,7 @@ public class ObservationService {
 
     @GET
     @Path("{code}")
-    public Response getObservationDetails(@PathParam("code") int code) {
+    public Response getObservationDetails(@PathParam("code") int code) throws MyEntityNotFoundException {
         Observation observation = observationBean.find(code);
         if (observation != null) {
             return Response.ok(toDTO(observation)).build();
@@ -50,12 +52,11 @@ public class ObservationService {
 
     @POST // means: to call this endpoint, we need to use the HTTP GET method
     @Path("/") // means: the relative url path is “/api/students/”
-    public Response createObservationWS(ObservationDTO observationDTO) {
+    public Response createObservationWS(ObservationDTO observationDTO) throws MyEntityNotFoundException,MyIllegalArgumentException {
         Observation observation=observationBean.create(observationDTO.getDate(),
                 observationDTO.getPatient(),
                 observationDTO.getBiometricsType(),
                 observationDTO.getQuantitativeValue(),
-                observationDTO.getQualitativeValue(),
                 observationDTO.getWhat(),
                 observationDTO.getLocal()
         );
@@ -68,8 +69,7 @@ public class ObservationService {
 
     @PATCH
     @Path("update/{code}")
-    public Response Update(@PathParam("code") int code,ObservationDTO observationDTO){
-
+    public Response Update(@PathParam("code") int code,ObservationDTO observationDTO) throws MyEntityNotFoundException, MyIllegalArgumentException {
         boolean updated=observationBean.update(code,observationDTO);
         //FUNCIONAAA
         if(!updated) {

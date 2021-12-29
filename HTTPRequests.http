@@ -29,7 +29,7 @@ Content-Type: application/json
   "administratorUsername": "admin"
 }
 ###
-DELETE http://localhost:8080/projetoDAE/api/biometricsType/1
+DELETE http://localhost:8080/projetoDAE/api/biometricsType/6
 ###
 
 PATCH http://localhost:8080/projetoDAE/api/biometricsType/update/2
@@ -67,3 +67,22 @@ Content-Type: application/json
   "qualitativeValue": "Muito",
   "local": "Porto"
 }
+###
+
+POST http://localhost:8080/projetoDAE/api/biometricsType/upload HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlzcyI6InF1aWNrc3RhcnQtand0LWlzc3VlciIsImF1ZCI6Imp3dC1hdWRpZW5jZSIsImdyb3VwcyI6WyJBZG1pbmlzdHJhdG9yIl0sImV4cCI6MTY0MDgwMjg3OH0.IBlW4j8qgNvZQQPNuYQ_Jn4hxbADypUmFsD4z_33EnDUXOFoEJFyGxcYRi95t0y93UTkWruYF3yo05Xf059Sf8ClGiq6vLlPF1uHMCdj-14scJXGMbh9Ku7lr0DKZ4Kh58uZr5rfqKOVsJnWO-ng7wllfSz4mlETTm_ZawcjMkc2Z2eBjClEKse21goGqFHu7uI9M-e_mBuKEkyT0w0RSHc9goj2t80J5fozUeqRQXHZ_1tUBkeTkSHQ7TH76CT71VJZvPXL-L6NgOKOte_h_yLNS5Nb6TUs9t0Ct01qXKCfPcx1_i3fRyN0-hVaUA0OTryw833yiCLpyBO6x_3ytg
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="biometricType"
+
+< C:\Users\waldo\Documents\teste.csv
+
+--boundary
+Content-Disposition: form-data; name="username"
+
+admin
+
+--boundary
+
+###

@@ -1,9 +1,13 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 
+import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.QualitativeValuesDTO;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,13 +42,17 @@ public class ConfigBean {
 
 
             prescriptionBean.create("dJoao","pLeandro","TEXTO DA DESCRICAO","2020-06-23","2020-07-23");
-            prescriptionBean.create("dJoao","pLeandro","TEXTO DA DESCRICAO 1","2020-06-23","2020-07-23");
-            prescriptionBean.create("dLuis","pLeandro","TEXTO DA DESCRICAO 2","2020-06-23","2020-07-23");
+            prescriptionBean.create("dJoao","pLeandro","TEXTO DA DESCRICAO 1","2020-06-23","2022-07-23");
+            prescriptionBean.create("dLuis","pLeandro","TEXTO DA DESCRICAO 2","2022-06-23","2022-07-23");
             prescriptionBean.create("dLuis","pLeonardo","TEXTO DA DESCRICAO 3","2020-06-23","2020-07-23");
 
             administratorBean.create("admin", "1234", "Administrator", "1987-02-19" ,"admin@mail.com", "963123123");
-            biometricsTypeBean.create("teste","description",2,1,"g","admin");
-            observationBean.create("2000-03-18","pLeandro",2,1,"Fraco","perna","Lisboa");
+            QualitativeValuesDTO qualitativeValuesDTO=new QualitativeValuesDTO(2,"Baixo");
+            List<QualitativeValuesDTO> teste=new LinkedList<>();
+            teste.add(qualitativeValuesDTO);
+            biometricsTypeBean.create("teste","description",2,1,"g","admin",teste);
+            biometricsTypeBean.create("teste2","description",2,1,"g","admin",teste);
+            observationBean.create("2000-03-18","pLeandro",5,2,"perna","Lisboa");
             System.out.println("DEUUU");
 //            doctorBean.create("Lacerda", "1234", "Jorge Lacerda", "lacerga@mail.com", "967733870", "A");
 //            doctorBean.create("Silva", "1234", "Eduardo Silva", "silva@mail.com", "123123123", "B");

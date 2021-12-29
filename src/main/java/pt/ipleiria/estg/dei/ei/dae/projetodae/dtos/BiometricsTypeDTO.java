@@ -1,7 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.dtos;
-
 import java.io.Serializable;
 import java.util.LinkedList;
+import java.util.List;
 
 public class BiometricsTypeDTO implements Serializable {
     public int code;
@@ -10,25 +10,33 @@ public class BiometricsTypeDTO implements Serializable {
     public int valueMax=-1;
     public int valueMin =-1;
     public String unity;
-    public LinkedList<ObservationDTO> biometricsDTO;
+    public List<QualitativeValuesDTO> qualitatives;
     public String admin;
-    public boolean delete;
+    public String deleted_at;
 
 
     public BiometricsTypeDTO() {
-        this.biometricsDTO=new LinkedList<>();
+        qualitatives=new LinkedList<>();
     }
 
-    public BiometricsTypeDTO(int code, String name,String description, int valueMax, int valueMin, String unity, String administratorUsername, boolean delete) {
+    public BiometricsTypeDTO(int code, String name,String description, int valueMax, int valueMin, String unity, String administratorUsername, String deleted_at,List<QualitativeValuesDTO> qualitativeValuesDTOS) {
         this.code = code;
         this.name = name;
         this.description=description;
         this.valueMax = valueMax;
         this.valueMin = valueMin;
         this.unity = unity;
-        this.delete=delete;
+        this.deleted_at=deleted_at;
         this.admin = administratorUsername;
-        this.biometricsDTO=new LinkedList<>();
+        qualitatives=qualitativeValuesDTOS;
+    }
+
+    public List<QualitativeValuesDTO> getQualitatives() {
+        return qualitatives;
+    }
+
+    public void setQualitatives(List<QualitativeValuesDTO> qualitatives) {
+        this.qualitatives = qualitatives;
     }
 
     public String getDescription() {
@@ -47,12 +55,12 @@ public class BiometricsTypeDTO implements Serializable {
         this.admin = admin;
     }
 
-    public boolean isDelete() {
-        return delete;
+    public String getDeleted_at() {
+        return deleted_at;
     }
 
-    public void setDelete(boolean delete) {
-        this.delete = delete;
+    public void setDeleted_at(String deleted_at) {
+        this.deleted_at = deleted_at;
     }
 
     public int getCode() {
@@ -93,14 +101,6 @@ public class BiometricsTypeDTO implements Serializable {
 
     public void setUnity(String unity) {
         this.unity = unity;
-    }
-
-    public LinkedList<ObservationDTO> getBiometricsDTO() {
-        return biometricsDTO;
-    }
-
-    public void setBiometrics(LinkedList<ObservationDTO> biometricsDTO) {
-        this.biometricsDTO = biometricsDTO;
     }
 
     public String getAdministrator() {

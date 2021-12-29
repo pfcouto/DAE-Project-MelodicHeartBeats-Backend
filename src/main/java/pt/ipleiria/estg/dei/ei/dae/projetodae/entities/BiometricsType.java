@@ -3,9 +3,7 @@ package pt.ipleiria.estg.dei.ei.dae.projetodae.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 //import java.util.LinkedHashSet;
 
 @Entity
@@ -15,7 +13,10 @@ import java.util.Objects;
                 query = "SELECT b FROM BiometricsType b ORDER BY b.code" // JPQL
         ),
         @NamedQuery(name="getAllBiometricsTypesNonDeleted",
-                    query="SELECT b FROM BiometricsType b WHERE b.deleted=false ORDER BY b.code"
+                    query="SELECT b FROM BiometricsType b WHERE b.deleted_at='null' ORDER BY b.code"
+        ),
+        @NamedQuery(name="getAllObservationsByType",
+                query="select b from Observation b where b.biometricsType=:code"
         )
 })
 public class BiometricsType implements Serializable {
@@ -31,9 +32,14 @@ public class BiometricsType implements Serializable {
     private int valueMin;
     @NotNull
     private String unity;
+    @ElementCollection
+    @CollectionTable(name = "listOfQualitativeValues")
+    @Column(name = "Qualitative")
+    @MapKeyColumn(name = "Quantitative")
+    private Map<Integer,String> listOfQualitativeValues;
     @OneToMany(mappedBy = "biometricsType")
     private LinkedList<Observation> observations;
-    private boolean deleted = Boolean.FALSE;
+    private String deleted_at;
     @ManyToOne
     @JoinColumn(name = "ADMINISTRATOR_USERNAME")
     @NotNull
@@ -43,6 +49,7 @@ public class BiometricsType implements Serializable {
 
     public BiometricsType() {
         observations = new LinkedList<>();
+        listOfQualitativeValues=new HashMap<Integer,String>();
     }
 
     public BiometricsType(String name,String description, int valueMax, int valueMin, String unity, Administrator administrator) {
@@ -52,8 +59,18 @@ public class BiometricsType implements Serializable {
         this.valueMin = valueMin;
         this.unity = unity;
         this.administrator = administrator;
-
+        this.deleted_at="null";
         observations = new LinkedList<>();
+        listOfQualitativeValues=new HashMap<Integer,String>();
+
+    }
+
+    public Map<Integer, String> getListOfQualitativeValues() {
+        return listOfQualitativeValues;
+    }
+
+    public void setListOfQualitativeValues(Map<Integer, String> listOfQualitativeValues) {
+        this.listOfQualitativeValues = listOfQualitativeValues;
     }
 
     public String getDescription() {
@@ -64,12 +81,12 @@ public class BiometricsType implements Serializable {
         this.description = description;
     }
 
-    public boolean isDeleted() {
-        return deleted;
+    public String getDeleted_at() {
+        return deleted_at;
     }
 
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
+    public void setDeleted_at(String deleted_at) {
+        this.deleted_at = deleted_at;
     }
 
     public int getCode() {

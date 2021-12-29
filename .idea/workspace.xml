@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="00d0a9ba-0be2-42eb-92c6-fad13311fdd9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Document.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HTTPRequests.http" beforeDir="false" afterPath="$PROJECT_DIR$/HTTPRequests.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/BiometricsTypeDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/BiometricsTypeDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/BiometricsTypeBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/BiometricsTypeBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/ConfigBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/ConfigBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/ObservationBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/ObservationBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/BiometricsType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/BiometricsType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Observation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Observation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/BiometricsTypeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/BiometricsTypeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/ObservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/ObservationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/BiometricsTypeDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/BiometricsTypeDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/BiometricsTypeBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/BiometricsTypeBean.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/ConfigBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/ConfigBean.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/BiometricsType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/BiometricsType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Observation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Observation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/BiometricsTypeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/BiometricsTypeService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/BiometricsTypeDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/BiometricsTypeDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/BiometricsTypeBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/BiometricsTypeBean.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/ConfigBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/ConfigBean.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/BiometricsType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/BiometricsType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Observation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Observation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/BiometricsTypeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/BiometricsTypeService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/lib/resteasy-core-spi-4.6.1.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/projetoDAE.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE.war" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="22eEmsVv6Yf5IgUxMv44c39OVx5" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="postgresql" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../DAE/Praticas/academics" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RunManager" selected="HTTP Request.HTTPRequests#10">
+    <configuration name="HTTPRequests#10" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/HTTPRequests.http" index="10" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="HTTPRequests#5" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/HTTPRequests.http" index="5" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="HTTPRequests#7" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/HTTPRequests.http" index="7" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="HTTPRequests#8" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/HTTPRequests.http" index="8" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="HTTPRequests#9" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/HTTPRequests.http" index="9" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.HTTPRequests#10" />
+        <item itemvalue="HTTP Request.HTTPRequests#5" />
+        <item itemvalue="HTTP Request.HTTPRequests#8" />
+        <item itemvalue="HTTP Request.HTTPRequests#7" />
+        <item itemvalue="HTTP Request.HTTPRequests#9" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="00d0a9ba-0be2-42eb-92c6-fad13311fdd9" name="Changes" comment="" />
+      <created>1640189815357</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1640189815357</updated>
+      <workItem from="1640189816645" duration="21554000" />
+      <workItem from="1640307539994" duration="5526000" />
+      <workItem from="1640613947891" duration="1247000" />
+      <workItem from="1640615318594" duration="14709000" />
+      <workItem from="1640696511209" duration="5239000" />
+      <workItem from="1640726961028" duration="24738000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>

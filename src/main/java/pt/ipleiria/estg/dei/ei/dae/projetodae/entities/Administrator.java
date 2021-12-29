@@ -10,7 +10,7 @@ import java.util.LinkedList;
         @NamedQuery(
                 name = "getAllAdministrators",
                 query = "SELECT a FROM  Administrator a order by a.name"
-        )
+        ),
 })
 public class Administrator extends User implements Serializable {
 

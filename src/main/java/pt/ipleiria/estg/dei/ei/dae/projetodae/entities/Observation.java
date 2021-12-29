@@ -35,18 +35,20 @@ public class Observation implements Serializable {
     private String what;
     @NotNull
     private String local;
+    @Version
+    private int version;
 
     public Observation() {
     }
 
-    public Observation(String date, Patient patient, BiometricsType biometricsType, int quantitativeValue, String qualitativeValue, String what, String local) {
+    public Observation(String date, Patient patient, BiometricsType biometricsType, int quantitativeValue, String what, String local) {
         String[] ArrayDate = date.split("-");
         this.date = Calendar.getInstance();
         this.date.set(Integer.parseInt(ArrayDate[0]), Integer.parseInt(ArrayDate[1]) - 1, Integer.parseInt(ArrayDate[2]));
         this.patient = patient;
         this.biometricsType = biometricsType;
         this.quantitativeValue = quantitativeValue;
-        this.qualitativeValue=qualitativeValue;
+        this.qualitativeValue="";
         this.what=what;
         this.local = local;
     }
