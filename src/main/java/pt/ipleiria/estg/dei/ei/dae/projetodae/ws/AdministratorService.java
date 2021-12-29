@@ -164,7 +164,14 @@ public class AdministratorService {
 
     BiometricsTypeDTO toDTO(BiometricsType biometricsType) {
         return new BiometricsTypeDTO(
-                // TODO
+                biometricsType.getCode(),
+                biometricsType.getName(),
+                biometricsType.getDescription(),
+                biometricsType.getValueMax(),
+                biometricsType.getValueMin(),
+                biometricsType.getUnity(),
+                biometricsType.getAdministrator().getUsername(),
+                biometricsType.isDeleted()
         );
     }
 

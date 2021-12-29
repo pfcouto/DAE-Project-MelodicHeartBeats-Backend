@@ -50,8 +50,8 @@ public class PrescriptionService {
     }
 
     @GET
-    @Path("{prescription}" )
-    public Response getDoctorDetails(@PathParam("prescription" ) int prescriptionId) {
+    @Path("{prescription}")
+    public Response getPrescriptionDetails(@PathParam("prescription") int prescriptionId) {
         Prescription prescription = prescriptionBean.findPrescription(prescriptionId);
         if (prescription != null) {
             return Response.ok(toDTO(prescription)).build();
