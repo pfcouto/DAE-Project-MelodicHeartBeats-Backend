@@ -17,13 +17,18 @@ import java.util.*;
         ),
         @NamedQuery(name="getAllObservationsByType",
                 query="select b from Observation b where b.biometricsType=:code"
-        )
+        ),
+        @NamedQuery(name="getBiometricTypeByName",
+                query = "select b from BiometricsType b where b.name=:name"
+        ),
+
 })
 public class BiometricsType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int code;
     @NotNull
+    @Column(unique=true)
     private String name;
     private String description;
     @NotNull

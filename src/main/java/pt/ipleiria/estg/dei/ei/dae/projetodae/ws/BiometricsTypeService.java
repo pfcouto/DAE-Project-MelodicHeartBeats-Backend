@@ -24,7 +24,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -144,9 +143,15 @@ public class BiometricsTypeService {
                 }
                 String filepath = customDir.getCanonicalPath() + File.separator + filename;
                 writeFile(bytes, filepath);
-                biometricsTypeBean.readCsvFile(filepath);
+                int[] results=biometricsTypeBean.readCsvFile(filepath);
+                File file = new File(filepath);
+                if (file.delete()) {
+                    System.out.println("Deleted the file: " + file.getName());
+                } else {
+                    System.out.println("Failed to delete the file.");
+                }
                 return Response.status(200).entity("Uploaded file name : " +
-                        filename).build();
+                        filename+" - "+results[1]+" lines out of "+results[0]+" were inserted.").build();
             } catch (Exception e) {
                 e.printStackTrace();
             }
