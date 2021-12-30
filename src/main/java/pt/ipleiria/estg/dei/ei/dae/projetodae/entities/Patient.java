@@ -1,10 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.entities;
 
 import javax.persistence.*;
-import javax.swing.*;
 import java.io.Serializable;
-import java.util.Date;
-//import java.util.LinkedHashSet;
 import java.util.LinkedList;
 
 @Entity
@@ -19,8 +16,8 @@ import java.util.LinkedList;
                 query = "SELECT p FROM Patient p WHERE p.blocked <> true ORDER BY p.name" // JPQL
         ),
         @NamedQuery(
-                name="getPrescriptionsOfPatient",
-                query= "SELECT p FROM Prescription p WHERE p.patient.username = :username"
+                name = "getPrescriptionsOfPatient",
+                query = "SELECT p FROM Prescription p WHERE p.patient.username = :username"
         )
 })
 
@@ -30,13 +27,18 @@ public class Patient extends User implements Serializable {
     @OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE)
     private LinkedList<Prescription> prescriptions;
 
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE)
+    private LinkedList<PRC> prcs;
+
     public Patient() {
         prescriptions = new LinkedList<>();
+        prcs = new LinkedList<>();
     }
 
     public Patient(String username, String password, String name, String birthDate, String email, String phoneNumber) {
         super(username, password, name, birthDate, email, phoneNumber);
         prescriptions = new LinkedList<>();
+        prcs = new LinkedList<>();
     }
 
     public LinkedList<Prescription> getPrescriptions() {
@@ -45,6 +47,14 @@ public class Patient extends User implements Serializable {
 
     public void setPrescriptions(LinkedList<Prescription> prescriptions) {
         this.prescriptions = prescriptions;
+    }
+
+    public LinkedList<PRC> getPrcs() {
+        return prcs;
+    }
+
+    public void setPrcs(LinkedList<PRC> prcs) {
+        this.prcs = prcs;
     }
 
     public void addPrescription(Prescription prescription) {
@@ -57,5 +67,21 @@ public class Patient extends User implements Serializable {
             prescriptions.remove(prescription);
     }
 
+    public void addPRC(PRC prc) {
+        if (prc != null && !prcs.contains(prc))
+            prcs.add(prc);
+    }
 
+    public void removePRC(PRC prc) {
+        if (prc != null && prcs.contains(prc))
+            prcs.remove(prc);
+    }
+
+    public PRC getActivePRC() {
+        for (PRC prc : prcs) {
+            if (prc.isActive())
+                return prc;
+        }
+        return null;
+    }
 }

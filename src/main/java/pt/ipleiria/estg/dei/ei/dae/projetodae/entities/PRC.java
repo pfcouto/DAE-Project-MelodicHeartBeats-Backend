@@ -5,50 +5,51 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.LinkedList;
 
 @Entity
 @NamedQueries({
         @NamedQuery(
-                name = "getAllPrescriptions",
-                query = "SELECT p FROM Prescription p ORDER BY p.id" // JPQL
+                name = "getAllPRCs",
+                query = "SELECT p FROM PRC p ORDER BY p.id" // JPQL
         )
 })
-public class Prescription implements Serializable {
+public class PRC implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    @ManyToOne
-    @JoinColumn(name = "DOCTOR_ID")
-    @NotNull
-    private Doctor doctor;
+    int id;
     @ManyToOne
     @JoinColumn(name = "PATIENT_ID")
     @NotNull
     private Patient patient;
-    @ManyToOne
-    @JoinColumn(name = "PRC_ID")
+    @OneToMany(mappedBy = "prc", cascade = CascadeType.REMOVE)
+    private LinkedList<Prescription> prescriptions;
     @NotNull
-    private PRC prc;
-    private String description;
     private Calendar startDate;
+    @NotNull
     private Calendar endDate;
+    @NotNull
+    private boolean active;
+    @Version
+    private int version;
 
-    public Prescription() {
+    public PRC() {
+        prescriptions = new LinkedList<>();
     }
 
-    public Prescription(Doctor doctor, Patient patient, PRC prc, String description, String startDate, String endDate) {
-        this.doctor = doctor;
+    public PRC(Patient patient, String startDate, String endDate) {
         this.patient = patient;
-        this.description = description;
-        this.prc = prc;
 
-        String[] startDateStrings = startDate.split("-");
+        String[] date = startDate.split("-");
         this.startDate = Calendar.getInstance();
-        this.startDate.set(Integer.parseInt(startDateStrings[0]), Integer.parseInt(startDateStrings[1]) - 1, Integer.parseInt(startDateStrings[2]));
+        this.startDate.set(Integer.parseInt(date[0]), Integer.parseInt(date[1]) - 1, Integer.parseInt(date[2]));
 
-        String[] endDateStrings = endDate.split("-");
+        date = endDate.split("-");
         this.endDate = Calendar.getInstance();
-        this.endDate.set(Integer.parseInt(endDateStrings[0]), Integer.parseInt(endDateStrings[1]) - 1, Integer.parseInt(endDateStrings[2]));
+        this.endDate.set(Integer.parseInt(date[0]), Integer.parseInt(date[1]) - 1, Integer.parseInt(date[2]));
+
+        this.active = true;
+        prescriptions = new LinkedList<>();
     }
 
     public int getId() {
@@ -59,14 +60,6 @@ public class Prescription implements Serializable {
         this.id = id;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
     public Patient getPatient() {
         return patient;
     }
@@ -75,20 +68,12 @@ public class Prescription implements Serializable {
         this.patient = patient;
     }
 
-    public String getDescription() {
-        return description;
+    public LinkedList<Prescription> getPrescriptions() {
+        return prescriptions;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public PRC getPrc() {
-        return prc;
-    }
-
-    public void setPrc(PRC prc) {
-        this.prc = prc;
+    public void setPrescriptions(LinkedList<Prescription> prescriptions) {
+        this.prescriptions = prescriptions;
     }
 
     public String getStartDate() {
@@ -111,5 +96,23 @@ public class Prescription implements Serializable {
         String[] date = endDate.split("-");
         this.endDate = Calendar.getInstance();
         this.endDate.set(Integer.parseInt(date[0]), Integer.parseInt(date[1]) - 1, Integer.parseInt(date[2]));
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void addPrescription(Prescription prescription) {
+        if (prescription != null && !prescriptions.contains(prescription))
+            prescriptions.add(prescription);
+    }
+
+    public void removePrescription(Prescription prescription) {
+        if (prescription != null && prescriptions.contains(prescription))
+            prescriptions.remove(prescription);
     }
 }

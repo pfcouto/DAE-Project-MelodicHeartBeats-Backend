@@ -1,10 +1,12 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 
+import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PRCDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PatientDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PrescriptionDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.UserPasswordsDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.DoctorBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.PatientBean;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.PRC;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
@@ -33,6 +35,50 @@ public class PatientService {
     public List<PatientDTO> getAllPatientsNotDeleted() {
         System.out.println(patientBean.getAllPatientsNotDeleted());
         return toDTOsNoPrescriptions(patientBean.getAllPatientsNotDeleted());
+    }
+
+    PRCDTO prcToDTO(PRC prc) {
+        return new PRCDTO(
+                prc.getId(),
+                prc.getPatient().getUsername(),
+                prc.getStartDate(),
+                prc.getEndDate(),
+                prc.isActive()
+        );
+    }
+
+    private List<PRCDTO> prcToDTOs(List<PRC> prcs) {
+        return prcs.stream().map(this::prcToDTO).collect(Collectors.toList());
+    }
+
+    @GET
+    @Path("{patient}/prcs")
+    public Response getPatientPRCs(@PathParam("patient") String username) {
+        Patient patient = patientBean.findPatient(username);
+        if (patient == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("ERROR_FINDING_PATIENT")
+                    .build();
+        }
+        if (patient.getPrcs().size() < 1) {
+            return Response.noContent().build();
+        }
+        return Response.ok(prcToDTOs(patient.getPrcs())).build();
+    }
+
+    @GET
+    @Path("{patient}/prc")
+    public Response getPatientActivePRC(@PathParam("patient") String username) {
+        Patient patient = patientBean.findPatient(username);
+        if (patient == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("ERROR_FINDING_PATIENT")
+                    .build();
+        }
+        if (patient.getActivePRC() == null) {
+            return Response.noContent().build();
+        }
+        return Response.ok(prcToDTO(patient.getActivePRC())).build();
     }
 
     @GET
