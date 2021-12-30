@@ -171,7 +171,8 @@ public class AdministratorService {
                 biometricsType.getValueMin(),
                 biometricsType.getUnity(),
                 biometricsType.getAdministrator().getUsername(),
-                biometricsType.isDeleted()
+                biometricsType.getDeleted_at(),
+                null
         );
     }
 
