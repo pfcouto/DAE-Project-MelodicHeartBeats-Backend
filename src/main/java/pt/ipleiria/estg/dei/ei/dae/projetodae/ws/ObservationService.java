@@ -1,10 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 
-import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.AdministratorDTO;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.BiometricsTypeDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.ObservationDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.ObservationBean;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.BiometricsType;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Observation;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyIllegalArgumentException;
@@ -24,7 +21,7 @@ public class ObservationService {
     ObservationBean observationBean;
 
     private ObservationDTO toDTO(Observation observation) {
-        return new ObservationDTO(observation.getId(),observation.getDate().toString(),observation.getPatient().getUsername(),observation.getBiometricsType().getCode(),observation.getQuantitativeValue(),observation.getQualitativeValue(),observation.getWhat(),observation.getLocal());
+        return new ObservationDTO(observation.getId(), observation.getDate().toString(), observation.getPatient().getUsername(), observation.getBiometricsType().getCode(), observation.getQuantitativeValue(), observation.getQualitativeValue(), observation.getWhat(), observation.getLocal());
     }
 
     private List<ObservationDTO> toDTOs(List<Observation> observations) {
@@ -52,16 +49,17 @@ public class ObservationService {
 
     @POST // means: to call this endpoint, we need to use the HTTP GET method
     @Path("/") // means: the relative url path is “/api/students/”
-    public Response createObservationWS(ObservationDTO observationDTO) throws MyEntityNotFoundException,MyIllegalArgumentException {
-        Observation observation=observationBean.create(observationDTO.getDate(),
+    public Response createObservationWS(ObservationDTO observationDTO) throws MyEntityNotFoundException, MyIllegalArgumentException {
+        Observation observation = observationBean.create(observationDTO.getDate(),
                 observationDTO.getPatient(),
                 observationDTO.getBiometricsType(),
                 observationDTO.getQuantitativeValue(),
                 observationDTO.getWhat(),
                 observationDTO.getLocal()
         );
-        if (observation == null){
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();}
+        if (observation == null) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
         return Response.status(Response.Status.CREATED)
                 .entity(toDTO(observation))
                 .build();
@@ -69,10 +67,9 @@ public class ObservationService {
 
     @PATCH
     @Path("update/{code}")
-    public Response Update(@PathParam("code") int code,ObservationDTO observationDTO) throws MyEntityNotFoundException, MyIllegalArgumentException {
-        boolean updated=observationBean.update(code,observationDTO);
-        //FUNCIONAAA
-        if(!updated) {
+    public Response Update(@PathParam("code") int code, ObservationDTO observationDTO) throws MyEntityNotFoundException, MyIllegalArgumentException {
+        boolean updated = observationBean.update(code, observationDTO);
+        if (!updated) {
             return Response.status(Response.Status.NOT_MODIFIED).build();
         }
         return Response.status(Response.Status.OK)

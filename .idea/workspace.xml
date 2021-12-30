@@ -4,20 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00d0a9ba-0be2-42eb-92c6-fad13311fdd9" name="Changes" comment="">
+    <list default="true" id="750787e7-e1fc-4b5a-843a-3c81d7990349" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/BiometricsTypeBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/BiometricsTypeBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/BiometricsType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/BiometricsType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/BiometricsTypeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/BiometricsTypeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/BiometricsTypeBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/BiometricsTypeBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/BiometricsType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/BiometricsType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/BiometricsTypeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/BiometricsTypeService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/BiometricsTypeBean.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/BiometricsTypeBean.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/BiometricsType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/BiometricsType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/BiometricsTypeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE-1.0-SNAPSHOT/WEB-INF/classes/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/BiometricsTypeService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/projetoDAE.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/projetoDAE.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/ObservationBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/ObservationBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Observation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Observation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/AdministratorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/AdministratorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/ObservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/ObservationService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +35,22 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="JPA Inspector" value="true" />
+        <entry key="JPA Palette" value="true" />
+        <entry key="JPA Structure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="JPA Inspector" value="false" />
+        <entry key="JPA Palette" value="false" />
+        <entry key="JPA Structure" value="false" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectId" id="22eEmsVv6Yf5IgUxMv44c39OVx5" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -53,7 +61,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../DAE/Praticas/academics" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Praticas/academics" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunManager" selected="HTTP Request.HTTPRequests#10">
