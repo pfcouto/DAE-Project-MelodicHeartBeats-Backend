@@ -11,6 +11,7 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundExcepti
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyIllegalArgumentException;
 
 import javax.ejb.Stateless;
+import javax.json.Json;
 import javax.persistence.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,6 +39,10 @@ public class BiometricsTypeBean {
         Administrator administrator=em.find(Administrator.class,administratorUsername);
         if(administrator!=null){
             try {
+                BiometricsType biometricsTypeAlreadyExists=find(name);
+                if(biometricsTypeAlreadyExists!=null){
+                    throw new MyEntityNotFoundException("The Biometric Type name is already in use!");
+                }
                 BiometricsType biometricsType = new BiometricsType(name,description,valueMax,valueMin,unity,administrator);
                 for (QualitativeValuesDTO o : qualitativeValues) {
                     if(o.value>valueMax || o.value<valueMin){
@@ -70,6 +75,17 @@ public class BiometricsTypeBean {
         else {
             throw new MyEntityNotFoundException("The Biometric Type has not found");
         }
+    }
+
+    public BiometricsType find(String name) throws MyEntityNotFoundException{
+        try{
+            Query query=em.createNamedQuery("getBiometricTypeByName");
+            query.setParameter("name",name);
+            return (BiometricsType) query.getSingleResult();
+        }catch (NoResultException e){
+            return null;
+        }
+
     }
 
     public void delete(BiometricsType biometricsType) {
@@ -112,7 +128,13 @@ public class BiometricsTypeBean {
         BiometricsType biometricsType=em.find(BiometricsType.class,code);
         if(biometricsType!=null){
             em.lock(biometricsType, LockModeType.OPTIMISTIC);
-            if(biometricsTypeDTO.getName()!=""){
+            if(!biometricsTypeDTO.getName().equals("")){
+                if(!biometricsTypeDTO.getName().equals(biometricsType.getName())){
+                    BiometricsType biometricsTypeAlreadyExists=find(biometricsTypeDTO.getName());
+                    if(biometricsTypeAlreadyExists!=null){
+                        throw new MyEntityNotFoundException("The Biometric Type name is already in use!");
+                    }
+                }
                 biometricsType.setName(biometricsTypeDTO.getName());
             }else{
                 throw new MyIllegalArgumentException("The Name should not be empty");
@@ -155,9 +177,6 @@ public class BiometricsTypeBean {
             }
             Map<Integer,String> listOfQualitativeValues=new HashMap<>();
             for (QualitativeValuesDTO qualitative : biometricsTypeDTO.getQualitatives()) {
-                if(biometricsType.getListOfQualitativeValues().containsKey(qualitative.value)){
-                    throw new MyIllegalArgumentException("The Quantitive value should be unique.");
-                }
                 if(qualitative.value>biometricsTypeDTO.getValueMax() || qualitative.value<biometricsTypeDTO.getValueMin()){
                     throw new MyIllegalArgumentException("All Quantitatives values should be between "+ biometricsTypeDTO.getValueMax()+" and " + biometricsTypeDTO.getValueMin() + "!");
                 }
@@ -176,19 +195,13 @@ public class BiometricsTypeBean {
     }
 
 
-    public void readCsvFile(String filepath) throws FileNotFoundException, MyConstraintViolationException, MyEntityNotFoundException, MyIllegalArgumentException {
+    public int[] readCsvFile(String filepath) throws FileNotFoundException, MyConstraintViolationException, MyEntityNotFoundException, MyIllegalArgumentException {
         try {
             File file=new File(filepath);
-            /*FileWriter myWriter = new FileWriter(file);
-            myWriter.write("waldomiro,grande,50,1,w,admin,60-teste:20-teste2:30-teste3");
-            myWriter.write(System.getProperty( "line.separator" ));
-            myWriter.write("Pedro,grande Pedro,50,1,w,admin,10-teste:20-teste2:30-teste3,teste");
-            myWriter.write(System.getProperty( "line.separator" ));
-            myWriter.write("Pedro2,grande Pedro2,50,1,w,admin,10-teste:20-teste2:30-teste3");
-            myWriter.close();*/
             Scanner sc = new Scanner(file);
             //sets the delimiter pattern
-            int line_number=1;
+            int currentLine=1;
+            int linesRead=0;
             while (sc.hasNextLine())  //returns a boolean value
             {
                 String[] fields=sc.nextLine().split(",");
@@ -204,21 +217,24 @@ public class BiometricsTypeBean {
                     }
                     try{
                         create(fields[0],fields[1],Integer.parseInt(fields[2]),Integer.parseInt(fields[3]),fields[4],fields[5],qualitativeValuesDTOList);
+                        linesRead++;
                     }catch (Exception e){
-                        System.out.println("ERROR "+line_number+": "+e.getMessage());
+                        System.out.println("ERROR "+currentLine+": "+e.getMessage());
                     }
                 }else {
-                    System.out.println("A linha: "+ line_number + " nao apresenta o formato correto.");
+                    System.out.println("A linha: "+ currentLine + " nao apresenta o formato correto.");
                 }
-                line_number++;
+                currentLine++;
                 //System.out.print(parts[6]);//find and returns the next complete token from this scanner
             }
             sc.close();  //closes the scanner
             System.out.println("Successfully wrote to the file.");
+            return new int[] {currentLine, linesRead};
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        return new int[] {0,0};
     }
 
     public List<BiometricsType> getAllBiometricsTypesNonDeleted() {
