@@ -125,7 +125,6 @@ public class BiometricsTypeService {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response upload(MultipartFormDataInput input) throws MyEntityNotFoundException,
             IOException {
-
         Map<String, List<InputPart>> uploadForm = input.getFormDataMap();
         // Get file data to save
         String username = uploadForm.get("username").get(0).getBodyAsString();
