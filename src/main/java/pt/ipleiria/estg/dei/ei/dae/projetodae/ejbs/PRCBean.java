@@ -22,6 +22,9 @@ public class PRCBean {
 
         PRC prc = new PRC(patient, startDate, endDate);
         em.merge(prc);
+
+        patient.addPRC(prc);
+        em.merge(patient);
     }
 
     public List<PRC> getAllprcs() {
