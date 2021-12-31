@@ -75,6 +75,19 @@ public class BiometricsTypeService {
                 .build();
     }
 
+    @GET
+    @Path("/byName/{name}")
+    public Response getBiometricsTypeDetails(@PathParam("name") String name) throws MyEntityNotFoundException {
+        BiometricsType biometricsType = biometricsTypeBean.find(name);
+        if (biometricsType != null) {
+            return Response.ok(toDTO(biometricsType)).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND)
+                .entity("ERROR_FINDING_BIOMETRIC_TYPE")
+                .build();
+    }
+
+
     @POST // means: to call this endpoint, we need to use the HTTP GET method
     @Path("/") // means: the relative url path is “/api/students/”
     public Response createBiometricsTypesWS(BiometricsTypeDTO biometricsTypeDTO) throws MyEntityNotFoundException, MyConstraintViolationException, MyIllegalArgumentException {

@@ -1,7 +1,9 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.ObservationDTO;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.BiometricsTypeBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.ObservationBean;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.BiometricsType;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Observation;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyIllegalArgumentException;
@@ -19,9 +21,11 @@ import java.util.stream.Collectors;
 public class ObservationService {
     @EJB
     ObservationBean observationBean;
+    @EJB
+    BiometricsTypeBean biometricsTypeBean;
 
     private ObservationDTO toDTO(Observation observation) {
-        return new ObservationDTO(observation.getId(), observation.getDate().toString(), observation.getPatient().getUsername(), observation.getBiometricsType().getCode(), observation.getQuantitativeValue(), observation.getQualitativeValue(), observation.getWhat(), observation.getLocal());
+        return new ObservationDTO(observation.getId(), observation.getDate().toString(), observation.getPatient().getUsername(), observation.getBiometricsType().getName(), observation.getQuantitativeValue(), observation.getQualitativeValue(), observation.getWhat(), observation.getLocal());
     }
 
     private List<ObservationDTO> toDTOs(List<Observation> observations) {
@@ -52,7 +56,7 @@ public class ObservationService {
     public Response createObservationWS(ObservationDTO observationDTO) throws MyEntityNotFoundException, MyIllegalArgumentException {
         Observation observation = observationBean.create(observationDTO.getDate(),
                 observationDTO.getPatient(),
-                observationDTO.getBiometricsType(),
+                Integer.parseInt(observationDTO.getBiometricType()),
                 observationDTO.getQuantitativeValue(),
                 observationDTO.getWhat(),
                 observationDTO.getLocal()

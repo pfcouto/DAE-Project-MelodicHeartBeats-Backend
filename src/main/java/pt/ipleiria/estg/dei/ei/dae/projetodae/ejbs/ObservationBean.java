@@ -7,6 +7,7 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyIllegalArgumentException;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
@@ -19,6 +20,8 @@ import java.util.Map;
 public class ObservationBean {
     @PersistenceContext
     EntityManager em;
+    @EJB
+    BiometricsTypeBean biometricsTypeBean;
 
     public Observation create(String date, String patientUsername, int biometricName, int quantitativeValue, String what, String local) throws MyEntityNotFoundException, MyIllegalArgumentException {
         BiometricsType biometricsType = em.find(BiometricsType.class, biometricName);
@@ -85,8 +88,8 @@ public class ObservationBean {
                     throw new MyIllegalArgumentException("The quantitative value should should be between " + observation.getBiometricsType().getValueMax() + " and " + observation.getBiometricsType().getValueMin());
                 }
                 observation.setQuantitativeValue(observationDTO.getQuantitativeValue());
-
-                BiometricsType biometricsType = em.find(BiometricsType.class, observationDTO.getBiometricsType());
+                BiometricsType biometricsType = biometricsTypeBean.find(observationDTO.biometricType);
+                System.out.println(biometricsType.getCode());
                 if (biometricsType == null) {
                     throw new MyEntityNotFoundException("Biometric Type not found");
                 }

@@ -77,7 +77,7 @@ public class BiometricsTypeBean {
         }
     }
 
-    public BiometricsType find(String name) throws MyEntityNotFoundException{
+    public BiometricsType find(String name){
         try{
             Query query=em.createNamedQuery("getBiometricTypeByName");
             query.setParameter("name",name);
