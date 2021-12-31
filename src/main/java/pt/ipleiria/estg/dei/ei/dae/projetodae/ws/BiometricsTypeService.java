@@ -51,14 +51,14 @@ public class BiometricsTypeService {
         return biometricsType.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
-    @GET // means: to call this endpoint, we need to use the HTTP GET method
-    @Path("/") // means: the relative url path is “/api/students/”
+    @GET
+    @Path("/")
     public List<BiometricsTypeDTO> getAllBiometricsTypesWS() {
         return toDTOs(biometricsTypeBean.getAllBiometricsTypes());
     }
 
-    @GET // means: to call this endpoint, we need to use the HTTP GET method
-    @Path("/nonDeleted") // means: the relative url path is “/api/students/”
+    @GET
+    @Path("/nonDeleted")
     public List<BiometricsTypeDTO> getAllBiometricsTypesNonDeletedWS() {
         return toDTOs(biometricsTypeBean.getAllBiometricsTypesNonDeleted());
     }
@@ -75,8 +75,8 @@ public class BiometricsTypeService {
                 .build();
     }
 
-    @POST // means: to call this endpoint, we need to use the HTTP GET method
-    @Path("/") // means: the relative url path is “/api/students/”
+    @POST
+    @Path("/")
     public Response createBiometricsTypesWS(BiometricsTypeDTO biometricsTypeDTO) throws MyEntityNotFoundException, MyConstraintViolationException, MyIllegalArgumentException {
         System.out.println(biometricsTypeDTO);
         BiometricsType biometricsType=biometricsTypeBean.create(

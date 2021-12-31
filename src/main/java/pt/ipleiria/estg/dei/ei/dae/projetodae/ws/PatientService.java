@@ -1,11 +1,9 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 
-import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PRCDTO;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PatientDTO;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PrescriptionDTO;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.UserPasswordsDTO;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.*;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.DoctorBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.PatientBean;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Observation;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.PRC;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
@@ -49,6 +47,35 @@ public class PatientService {
 
     private List<PRCDTO> prcToDTOs(List<PRC> prcs) {
         return prcs.stream().map(this::prcToDTO).collect(Collectors.toList());
+    }
+
+    private ObservationDTO toDTO(Observation observation) {
+        return new ObservationDTO(
+                observation.getId(),
+                observation.getDate(),
+                observation.getPatient().getUsername(),
+                observation.getBiometricsType().getCode(),
+                observation.getBiometricsType().getName(),
+                observation.getQuantitativeValue(),
+                observation.getQualitativeValue(),
+                observation.getWhat(),
+                observation.getLocal());
+    }
+
+    private List<ObservationDTO> observationtosDTOs(List<Observation> observations) {
+        return observations.stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
+    @GET
+    @Path("{patient}/observations")
+    public Response getObservationsOfPatient(@PathParam("patient") String username) {
+        Patient patient = patientBean.findPatient(username);
+        if (patient == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("ERROR_FINDING_PATIENT")
+                    .build();
+        }
+        return Response.ok(observationtosDTOs(patientBean.getAllObservations(patient))).build();
     }
 
     @GET

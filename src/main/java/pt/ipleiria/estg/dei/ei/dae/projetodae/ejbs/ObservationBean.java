@@ -86,7 +86,7 @@ public class ObservationBean {
                 }
                 observation.setQuantitativeValue(observationDTO.getQuantitativeValue());
 
-                BiometricsType biometricsType = em.find(BiometricsType.class, observationDTO.getBiometricsType());
+                BiometricsType biometricsType = em.find(BiometricsType.class, observationDTO.getBiometricType());
                 if (biometricsType == null) {
                     throw new MyEntityNotFoundException("Biometric Type not found");
                 }

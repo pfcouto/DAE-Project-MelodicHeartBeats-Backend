@@ -21,15 +21,24 @@ public class ObservationService {
     ObservationBean observationBean;
 
     private ObservationDTO toDTO(Observation observation) {
-        return new ObservationDTO(observation.getId(), observation.getDate().toString(), observation.getPatient().getUsername(), observation.getBiometricsType().getCode(), observation.getQuantitativeValue(), observation.getQualitativeValue(), observation.getWhat(), observation.getLocal());
+        return new ObservationDTO(
+                observation.getId(),
+                observation.getDate(),
+                observation.getPatient().getUsername(),
+                observation.getBiometricsType().getCode(),
+                observation.getBiometricsType().getName(),
+                observation.getQuantitativeValue(),
+                observation.getQualitativeValue(),
+                observation.getWhat(),
+                observation.getLocal());
     }
 
     private List<ObservationDTO> toDTOs(List<Observation> observations) {
         return observations.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
-    @GET // means: to call this endpoint, we need to use the HTTP GET method
-    @Path("/") // means: the relative url path is “/api/students/”
+    @GET
+    @Path("/")
     public List<ObservationDTO> getAllObservationsWS() {
         return toDTOs(observationBean.getAllObservations());
     }
@@ -47,12 +56,12 @@ public class ObservationService {
                 .build();
     }
 
-    @POST // means: to call this endpoint, we need to use the HTTP GET method
-    @Path("/") // means: the relative url path is “/api/students/”
+    @POST
+    @Path("/")
     public Response createObservationWS(ObservationDTO observationDTO) throws MyEntityNotFoundException, MyIllegalArgumentException {
         Observation observation = observationBean.create(observationDTO.getDate(),
                 observationDTO.getPatient(),
-                observationDTO.getBiometricsType(),
+                observationDTO.getBiometricType(),
                 observationDTO.getQuantitativeValue(),
                 observationDTO.getWhat(),
                 observationDTO.getLocal()
