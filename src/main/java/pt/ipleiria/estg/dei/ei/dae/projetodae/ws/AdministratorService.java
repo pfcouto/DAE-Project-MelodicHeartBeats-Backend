@@ -166,14 +166,21 @@ public class AdministratorService {
     }
 
     BiometricsTypeDTO toDTO(BiometricsType biometricsType) {
-        //AdministratorDTO administratorDTO = new AdministratorDTO(biometricsType.getAdministrator().getUsername(), biometricsType.getAdministrator().getName(), biometricsType.getAdministrator().getEmail(), biometricsType.getAdministrator().getPhoneNumber());
-        List<QualitativeValuesDTO> qualitativeValuesDTOSList=new LinkedList<>();
+        List<QualitativeValuesDTO> qualitativeValuesDTOSList = new LinkedList<>();
         for (Map.Entry<Integer, String> entry : biometricsType.getListOfQualitativeValues().entrySet()) {
-            QualitativeValuesDTO qualitativeValuesDTO=new QualitativeValuesDTO(entry.getKey(),entry.getValue());
+            QualitativeValuesDTO qualitativeValuesDTO = new QualitativeValuesDTO(entry.getKey(), entry.getValue());
             qualitativeValuesDTOSList.add(qualitativeValuesDTO);
         }
-
-        return new BiometricsTypeDTO(biometricsType.getCode(), biometricsType.getName(),biometricsType.getDescription(), biometricsType.getValueMax(), biometricsType.getValueMin(), biometricsType.getUnity(), biometricsType.getAdministrator().getUsername(),biometricsType.getDeleted_at().toString(),qualitativeValuesDTOSList);
+        return new BiometricsTypeDTO(
+                biometricsType.getCode(),
+                biometricsType.getName(),
+                biometricsType.getDescription(),
+                biometricsType.getValueMax(),
+                biometricsType.getValueMin(),
+                biometricsType.getUnity(),
+                biometricsType.getAdministrator().getUsername(),
+                biometricsType.getDeleted_at(),
+                qualitativeValuesDTOSList);
     }
 
     private List<BiometricsTypeDTO> biometricsTypesToDTOs(List<BiometricsType> biometricsTypes) {

@@ -31,6 +31,7 @@ public class BiometricsTypeDTO implements Serializable {
         qualitatives=qualitativeValuesDTOS;
     }
 
+
     public List<QualitativeValuesDTO> getQualitatives() {
         return qualitatives;
     }

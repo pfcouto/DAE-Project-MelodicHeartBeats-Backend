@@ -1,13 +1,10 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.entities;
 
-import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.ObservationDTO;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 @Entity
 @NamedQueries({
@@ -28,8 +25,8 @@ public class Observation implements Serializable {
     @NotNull
     @ManyToOne
     private BiometricsType biometricsType;
-    private int quantitativeValue;
     @NotNull
+    private int quantitativeValue;
     private String qualitativeValue;
     @NotNull
     private String what;
@@ -41,15 +38,15 @@ public class Observation implements Serializable {
     public Observation() {
     }
 
-    public Observation(String date, Patient patient, BiometricsType biometricsType, int quantitativeValue, String what, String local) {
+    public Observation(String date, Patient patient, BiometricsType biometricsType, int quantitativeValue, String qualitativeValue, String what, String local) {
         String[] ArrayDate = date.split("-");
         this.date = Calendar.getInstance();
         this.date.set(Integer.parseInt(ArrayDate[0]), Integer.parseInt(ArrayDate[1]) - 1, Integer.parseInt(ArrayDate[2]));
         this.patient = patient;
         this.biometricsType = biometricsType;
         this.quantitativeValue = quantitativeValue;
-        this.qualitativeValue="";
-        this.what=what;
+        this.qualitativeValue = qualitativeValue;
+        this.what = what;
         this.local = local;
     }
 
