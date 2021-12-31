@@ -88,8 +88,8 @@ public class ObservationBean {
                     throw new MyIllegalArgumentException("The quantitative value should should be between " + observation.getBiometricsType().getValueMax() + " and " + observation.getBiometricsType().getValueMin());
                 }
                 observation.setQuantitativeValue(observationDTO.getQuantitativeValue());
-                BiometricsType biometricsType = biometricsTypeBean.find(observationDTO.biometricType);
-                System.out.println(biometricsType.getCode());
+
+                BiometricsType biometricsType = em.find(BiometricsType.class, observationDTO.getBiometricType());
                 if (biometricsType == null) {
                     throw new MyEntityNotFoundException("Biometric Type not found");
                 }

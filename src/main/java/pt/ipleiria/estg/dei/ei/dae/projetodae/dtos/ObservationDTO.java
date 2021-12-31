@@ -1,20 +1,14 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.dtos;
 
-import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.BiometricsType;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
-
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
 
 public class ObservationDTO implements Serializable {
     public int code;
     public String date;
     public String patient;
-    public String biometricType;
-    public int quantitativeValue=-1;
+    public int biometricType;
+    public String biometricTypeName;
+    public int quantitativeValue = -1;
     public String qualitativeValue;
     public String what;
     public String local;
@@ -23,15 +17,32 @@ public class ObservationDTO implements Serializable {
     public ObservationDTO() {
     }
 
-    public ObservationDTO(int code,String date, String patient, String biometricsType, int quantitativeValue, String qualitativeValue, String what, String local) {
-        this.code=code;
+    public ObservationDTO(int code, String date, String patient, int biometricType, String biometricTypeName, int quantitativeValue, String qualitativeValue, String what, String local) {
+        this.code = code;
         this.date = date;
         this.patient = patient;
-        this.biometricType = biometricsType;
+        this.biometricType = biometricType;
+        this.biometricTypeName = biometricTypeName;
         this.quantitativeValue = quantitativeValue;
         this.qualitativeValue = qualitativeValue;
         this.what = what;
         this.local = local;
+    }
+
+    public int getBiometricType() {
+        return biometricType;
+    }
+
+    public void setBiometricType(int biometricType) {
+        this.biometricType = biometricType;
+    }
+
+    public String getBiometricTypeName() {
+        return biometricTypeName;
+    }
+
+    public void setBiometricTypeName(String biometricTypeName) {
+        this.biometricTypeName = biometricTypeName;
     }
 
     public int getCode() {
@@ -56,14 +67,6 @@ public class ObservationDTO implements Serializable {
 
     public void setPatient(String patient) {
         this.patient = patient;
-    }
-
-    public String getBiometricType() {
-        return biometricType;
-    }
-
-    public void setBiometricType(String biometricType) {
-        this.biometricType = biometricType;
     }
 
     public int getQuantitativeValue() {

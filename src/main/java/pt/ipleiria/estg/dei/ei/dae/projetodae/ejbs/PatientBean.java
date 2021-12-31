@@ -1,5 +1,6 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Observation;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationException;
@@ -85,5 +86,11 @@ public class PatientBean {
             throw new MyEntityNotFoundException("Patient" + username + " NOT FOUND" );
         }
         return patient.changePassword(passwordOld, passwordNew);
+    }
+
+    public List<Observation> getAllObservations(Patient patient) {
+        Query query = em.createNamedQuery("getObservationsOfPatient" );
+        query.setParameter("username", patient.getUsername());
+        return query.getResultList();
     }
 }
