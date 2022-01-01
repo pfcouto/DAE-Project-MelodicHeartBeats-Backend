@@ -141,7 +141,7 @@ public class PatientService {
 
     @GET
     @Path("{patient}/prescriptions")
-    public Response getDoctorPrescriptions(@PathParam("patient") String username) {
+    public Response getPatientPrescriptions(@PathParam("patient") String username) {
         Patient patient = patientBean.findPatient(username);
         if (patient == null) {
             return Response.status(Response.Status.NOT_FOUND)
