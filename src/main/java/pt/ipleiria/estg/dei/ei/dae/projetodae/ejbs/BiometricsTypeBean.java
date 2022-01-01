@@ -130,7 +130,7 @@ public class BiometricsTypeBean {
             em.lock(biometricsType, LockModeType.OPTIMISTIC);
             if(!biometricsTypeDTO.getName().equals("")){
                 if(!biometricsTypeDTO.getName().equals(biometricsType.getName())){
-                    BiometricsType biometricsTypeAlreadyExists=find(biometricsTypeDTO.getName());
+                    BiometricsType biometricsTypeAlreadyExists=find(biometricsTypeDTO.getCode());
                     if(biometricsTypeAlreadyExists!=null){
                         throw new MyEntityNotFoundException("The Biometric Type name is already in use!");
                     }
