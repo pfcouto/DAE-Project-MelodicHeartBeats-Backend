@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.PRC;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
@@ -15,10 +16,14 @@ public class PrescriptionBean {
     @PersistenceContext
     EntityManager em;
 
-    public int create(String doctorUsername, String patientUsername, String description, String startDate, String endDate) {
+    public int create(String doctorUsername, String patientUsername, String description, String startDate, String endDate) throws MyEntityNotFoundException {
         Doctor doctor = findDoctor(doctorUsername);
         Patient patient = findPatient(patientUsername);
-        Prescription prescription = new Prescription(doctor, patient, description, startDate, endDate);
+        PRC activePrc = patient.getActivePRC();
+        if (activePrc == null) {
+            throw new MyEntityNotFoundException("Active PRC not found");
+        }
+        Prescription prescription = new Prescription(doctor, patient, activePrc, description, startDate, endDate);
         em.persist(prescription);
         return prescription.getId();
     }
@@ -49,20 +54,10 @@ public class PrescriptionBean {
     }
 
     public void updatePrescription(int id, String description, String startDate, String endDate) throws MyEntityNotFoundException {
-//        Doctor doctor = em.find(Doctor.class, doctorName);
-//        if (doctor == null) {
-//            throw new MyEntityNotFoundException();
-//        }
-//        Patient patient = em.find(Patient.class, patientName);
-//        if (patient == null) {
-//            throw new MyEntityNotFoundException();
-//        }
         Prescription prescription = em.find(Prescription.class, id);
         if (prescription == null) {
             throw new MyEntityNotFoundException();
         }
-//        prescription.setDoctor(doctor);
-//        prescription.setPatient(patient);
         prescription.setDescription(description);
         prescription.setStartDate(startDate);
         prescription.setEndDate(endDate);
@@ -88,8 +83,6 @@ public class PrescriptionBean {
 
         doctor.addPrescription(prescription);
         patient.addPrescription(prescription);
-        prescription.setDoctor(doctor);
-        prescription.setPatient(patient);
     }
 
     public void unassignPrescriptionFromPatientAndDoctor(int prescription_id) throws MyEntityNotFoundException {

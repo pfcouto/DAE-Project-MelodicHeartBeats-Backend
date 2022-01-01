@@ -11,7 +11,10 @@ import java.util.Calendar;
         @NamedQuery(
                 name = "getAllObservations",
                 query = "SELECT b from Observation b order by b.date"
-        )
+        ),
+        @NamedQuery(
+                name = "getObservationsOfPatient",
+                query = "SELECT b FROM Observation b WHERE b.patient.username = :username")
 })
 public class Observation implements Serializable {
     @Id

@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.QualitativeValuesDTO;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -40,11 +41,10 @@ public class ConfigBean {
             patientBean.create("pLeandro","1234","Leandro","1997-06-23","pleandro@mail.pt","919000111");
             patientBean.create("pLeonardo","1234","Leonardo","1997-06-23","pLeonardo@mail.pt","919000777");
 
-
-            prescriptionBean.create("dJoao","pLeandro","TEXTO DA DESCRICAO","2020-06-23","2020-07-23");
-            prescriptionBean.create("dJoao","pLeandro","TEXTO DA DESCRICAO 1","2020-06-23","2022-07-23");
-            prescriptionBean.create("dLuis","pLeandro","TEXTO DA DESCRICAO 2","2022-06-23","2022-07-23");
-            prescriptionBean.create("dLuis","pLeonardo","TEXTO DA DESCRICAO 3","2020-06-23","2020-07-23");
+//            prescriptionBean.create("dJoao","pLeandro","TEXTO DA DESCRICAO","2020-06-23","2020-07-23");
+//            prescriptionBean.create("dJoao","pLeandro","TEXTO DA DESCRICAO 1","2020-06-23","2022-07-23");
+//            prescriptionBean.create("dLuis","pLeandro","TEXTO DA DESCRICAO 2","2022-06-23","2022-07-23");
+//            prescriptionBean.create("dLuis","pLeonardo","TEXTO DA DESCRICAO 3","2020-06-23","2020-07-23");
 
             administratorBean.create("admin", "1234", "Administrator", "1987-02-19" ,"admin@mail.com", "963123123");
             QualitativeValuesDTO qualitativeValuesDTO=new QualitativeValuesDTO(2,"Baixo");
@@ -52,7 +52,7 @@ public class ConfigBean {
             teste.add(qualitativeValuesDTO);
             biometricsTypeBean.create("teste","description",2,1,"g","admin",teste);
             biometricsTypeBean.create("teste2","description",2,1,"g","admin",teste);
-            observationBean.create("2000-03-18","pLeandro",5,2,"perna","Lisboa");
+            observationBean.create("2000-03-18","pLeandro",1,2,"perna","Lisboa");
             System.out.println("DEUUU");
 //            doctorBean.create("Lacerda", "1234", "Jorge Lacerda", "lacerga@mail.com", "967733870", "A");
 //            doctorBean.create("Silva", "1234", "Eduardo Silva", "silva@mail.com", "123123123", "B");
