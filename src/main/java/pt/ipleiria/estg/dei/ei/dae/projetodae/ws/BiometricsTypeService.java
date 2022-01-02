@@ -55,7 +55,6 @@ public class BiometricsTypeService {
 
     @GET
     @Path("/")
-    @RolesAllowed({"Administrator"})
     public List<BiometricsTypeDTO> getAllBiometricsTypesWS() {
 
         return toDTOs(biometricsTypeBean.getAllBiometricsTypes());
@@ -63,7 +62,6 @@ public class BiometricsTypeService {
 
     @GET
     @Path("/nonDeleted")
-    @RolesAllowed({"Administrator"})
     public List<BiometricsTypeDTO> getAllBiometricsTypesNonDeletedWS() {
         return toDTOs(biometricsTypeBean.getAllBiometricsTypesNonDeleted());
     }

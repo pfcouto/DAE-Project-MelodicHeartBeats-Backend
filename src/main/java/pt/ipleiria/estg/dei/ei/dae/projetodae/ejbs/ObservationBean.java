@@ -9,10 +9,7 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyIllegalArgumentExcept
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.LockModeType;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Map;
 

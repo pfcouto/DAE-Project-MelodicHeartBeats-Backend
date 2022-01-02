@@ -10,8 +10,11 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyIllegalArgumentExcept
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,8 +24,8 @@ import java.util.stream.Collectors;
 public class ObservationService {
     @EJB
     ObservationBean observationBean;
-    @EJB
-    BiometricsTypeBean biometricsTypeBean;
+    @Context
+    private SecurityContext securityContext;
 
     private ObservationDTO toDTO(Observation observation) {
         return new ObservationDTO(
@@ -47,8 +50,7 @@ public class ObservationService {
         return toDTOs(observationBean.getAllObservations());
     }
 
-
-    @GET
+   @GET
     @Path("{code}")
     public Response getObservationDetails(@PathParam("code") int code) throws MyEntityNotFoundException {
         Observation observation = observationBean.find(code);
@@ -59,6 +61,7 @@ public class ObservationService {
                 .entity("ERROR_FINDING_BIOMETRIC_TYPE")
                 .build();
     }
+
 
     @POST
     @Path("/")
