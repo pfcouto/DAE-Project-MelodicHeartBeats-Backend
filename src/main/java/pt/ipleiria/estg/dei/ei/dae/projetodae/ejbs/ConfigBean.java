@@ -53,6 +53,7 @@ public class ConfigBean {
             biometricsTypeBean.create("teste","description",2,1,"g","admin",teste);
             biometricsTypeBean.create("teste2","description",2,1,"g","admin",teste);
             observationBean.create("2000-03-18","pLeandro",1,2,"perna","Lisboa");
+            observationBean.create("2000-03-18","pLeonardo",1,2,"perna","Lisboa");
             System.out.println("DEUUU");
 //            doctorBean.create("Lacerda", "1234", "Jorge Lacerda", "lacerga@mail.com", "967733870", "A");
 //            doctorBean.create("Silva", "1234", "Eduardo Silva", "silva@mail.com", "123123123", "B");
