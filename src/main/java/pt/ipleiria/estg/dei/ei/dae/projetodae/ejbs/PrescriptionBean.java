@@ -7,8 +7,10 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.Stateless;
+import javax.naming.directory.InvalidAttributesException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Calendar;
 import java.util.List;
 
 @Stateless
@@ -16,15 +18,38 @@ public class PrescriptionBean {
     @PersistenceContext
     EntityManager em;
 
-    public int create(String doctorUsername, String patientUsername, String description, String startDate, String endDate) throws MyEntityNotFoundException {
+    public int create(String doctorUsername, String patientUsername, String description, String startDate, String endDate) throws MyEntityNotFoundException, InvalidAttributesException {
         Doctor doctor = findDoctor(doctorUsername);
         Patient patient = findPatient(patientUsername);
         PRC activePrc = patient.getActivePRC();
         if (activePrc == null) {
             throw new MyEntityNotFoundException("Active PRC not found");
         }
+        // Start Date Prescription into calendar
+        Calendar startDateCalendar = Calendar.getInstance();
+        String[] startDateArray = startDate.split("-");
+        startDateCalendar.set(Integer.parseInt(startDateArray[0]), Integer.parseInt(startDateArray[1]) - 1, Integer.parseInt(startDateArray[2]));
+        // End Date Prescription into calendar
+        Calendar endDateCalendar = Calendar.getInstance();
+        String[] endDateArray = endDate.split("-");
+        endDateCalendar.set(Integer.parseInt(endDateArray[0]), Integer.parseInt(endDateArray[1]) - 1, Integer.parseInt(endDateArray[2]));
+
+        // Start Date PRC into calendar
+        Calendar startDatePRCCalendar = Calendar.getInstance();
+        String[] startDatePRCArray = activePrc.getStartDate().split("-");
+        startDatePRCCalendar.set(Integer.parseInt(startDatePRCArray[0]), Integer.parseInt(startDatePRCArray[1]) - 1, Integer.parseInt(startDatePRCArray[2]));
+        // End Date PRC into calendar
+        Calendar endDatePRCCalendar = Calendar.getInstance();
+        String[] endDatePRCArray = activePrc.getEndDate().split("-");
+        endDatePRCCalendar.set(Integer.parseInt(endDatePRCArray[0]), Integer.parseInt(endDatePRCArray[1]) - 1, Integer.parseInt(endDatePRCArray[2]));
+
+        if (startDateCalendar.before(startDatePRCCalendar) || endDateCalendar.after(endDatePRCCalendar)) {
+            throw new InvalidAttributesException("Dates don't match PRC limit dates");
+        }
+
         Prescription prescription = new Prescription(doctor, patient, activePrc, description, startDate, endDate);
         em.persist(prescription);
+        activePrc.addPrescription(prescription);
         return prescription.getId();
     }
 
