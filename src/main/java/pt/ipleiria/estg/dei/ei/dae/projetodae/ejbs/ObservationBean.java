@@ -9,10 +9,7 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyIllegalArgumentExcept
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.LockModeType;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Map;
 
@@ -23,8 +20,9 @@ public class ObservationBean {
     @EJB
     BiometricsTypeBean biometricsTypeBean;
 
-    public Observation create(String date, String patientUsername, int biometricName, int quantitativeValue, String what, String local) throws MyEntityNotFoundException, MyIllegalArgumentException {
-        BiometricsType biometricsType = em.find(BiometricsType.class, biometricName);
+
+    public Observation create(String date, String patientUsername, int biometricCode, int quantitativeValue, String what, String local) throws MyEntityNotFoundException, MyIllegalArgumentException {
+        BiometricsType biometricsType = em.find(BiometricsType.class, biometricCode);
         if (biometricsType != null) {
             if (quantitativeValue > biometricsType.getValueMax() || quantitativeValue < biometricsType.getValueMin()) {
                 throw new MyIllegalArgumentException("The quantitative value should should be between " + biometricsType.getValueMax() + " and " + biometricsType.getValueMin());

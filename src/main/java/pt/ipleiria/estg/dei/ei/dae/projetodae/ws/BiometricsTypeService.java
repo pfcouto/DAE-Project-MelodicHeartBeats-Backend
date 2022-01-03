@@ -15,15 +15,15 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundExcepti
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyIllegalArgumentException;
 
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.Principal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +35,9 @@ import java.util.stream.Collectors;
 public class BiometricsTypeService {
     @EJB
     BiometricsTypeBean biometricsTypeBean;
-    AdministratorBean administratorBean;
+
+    @Context
+    private SecurityContext securityContext;
     private BiometricsTypeDTO toDTO(BiometricsType biometricsType) {
         //AdministratorDTO administratorDTO = new AdministratorDTO(biometricsType.getAdministrator().getUsername(), biometricsType.getAdministrator().getName(), biometricsType.getAdministrator().getEmail(), biometricsType.getAdministrator().getPhoneNumber());
         List<QualitativeValuesDTO> qualitativeValuesDTOSList=new LinkedList<>();
@@ -54,6 +56,7 @@ public class BiometricsTypeService {
     @GET
     @Path("/")
     public List<BiometricsTypeDTO> getAllBiometricsTypesWS() {
+
         return toDTOs(biometricsTypeBean.getAllBiometricsTypes());
     }
 
@@ -66,6 +69,12 @@ public class BiometricsTypeService {
     @GET
     @Path("{code}")
     public Response getBiometricsTypeDetails(@PathParam("code") int code) throws MyEntityNotFoundException {
+        Principal principal = securityContext.getUserPrincipal();
+        if(!(securityContext.isUserInRole("Administrator") ||
+                securityContext.isUserInRole("Doctor"))) {
+            return Response.status(Response.Status.FORBIDDEN).build();
+        }
+
         BiometricsType biometricsType = biometricsTypeBean.find(code);
         if (biometricsType != null) {
             return Response.ok(toDTO(biometricsType)).build();
