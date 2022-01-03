@@ -51,6 +51,7 @@
         </web-resource-collection>
         <auth-constraint>
             <role-name>Administrator</role-name>
+            <role-name>Doctor</role-name>
         </auth-constraint>
     </security-constraint>
     <security-constraint>
@@ -98,6 +99,7 @@
         </web-resource-collection>
         <auth-constraint>
             <role-name>Administrator</role-name>
+            <role-name>Doctor</role-name>
         </auth-constraint>
     </security-constraint>
     <security-constraint>
