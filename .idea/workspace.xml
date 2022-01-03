@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="750787e7-e1fc-4b5a-843a-3c81d7990349" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/PRCBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/PRCBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/PrescriptionBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/PrescriptionBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,6 +111,7 @@
       <workItem from="1640987795396" duration="795000" />
       <workItem from="1641058427642" duration="9761000" />
       <workItem from="1641142733556" duration="4894000" />
+      <workItem from="1641204150722" duration="3039000" />
     </task>
     <servers />
   </component>
