@@ -11,6 +11,7 @@ import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -69,7 +70,12 @@ public class PRCService {
 
     @GET
     @Path("/")
-    public List<PRCDTO> getAllPRCS() {
+    public List<PRCDTO> getAllPRCS() throws MyEntityNotFoundException {
+
+        List<PRC> listAux = prcBean.getAllprcs();
+
+        updateActivePRCs(listAux);
+
         return toDTOs(prcBean.getAllprcs());
     }
 
@@ -83,8 +89,11 @@ public class PRCService {
 
     @GET
     @Path("{prc}")
-    public Response getPRCDetails(@PathParam("prc") int prcId) {
+    public Response getPRCDetails(@PathParam("prc") int prcId) throws MyEntityNotFoundException {
         PRC prc = prcBean.findPRC(prcId);
+        List<PRC> prcs = new LinkedList<>();
+        prcs.add(prc);
+        updateActivePRCs(prcs);
         if (prc != null) {
             return Response.ok(toDTO(prc)).build();
         }
@@ -96,8 +105,11 @@ public class PRCService {
 
     @GET
     @Path("{prc}/withPrescriptions")
-    public Response getPRCDetailsWithDetails(@PathParam("prc") int prcId) {
+    public Response getPRCDetailsWithDetails(@PathParam("prc") int prcId) throws MyEntityNotFoundException {
         PRC prc = prcBean.findPRC(prcId);
+        List<PRC> prcs = new LinkedList<>();
+        prcs.add(prc);
+        updateActivePRCs(prcs);
         if (prc != null) {
             return Response.ok(toDTOWithPrescriptions(prc)).build();
         }
@@ -126,5 +138,23 @@ public class PRCService {
         }
         return Response.status(Response.Status.OK)
                 .build();
+    }
+
+    private void updateActivePRCs (List<PRC> prcs) throws MyEntityNotFoundException {
+        if (prcs == null){
+            return;
+        }
+        for(PRC prc : prcs){
+            if (prc.isActive()){
+                String[] split = prc.getEndDate().split("-");
+                Calendar prcDate = Calendar.getInstance();
+                prcDate.set(Integer.parseInt(split[0]), Integer.parseInt(split[1]) -1 , Integer.parseInt(split[2]));
+                if (Calendar.getInstance().after(prcDate) ){
+
+                    prcBean.updateActive(prc.getId(), false);
+                }
+            }
+
+        }
     }
 }
