@@ -7,6 +7,7 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundExcepti
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import java.util.Calendar;
 import java.util.List;
@@ -24,10 +25,10 @@ public class PRCBean {
         }
 
         PRC prc = new PRC(patient, startDate, endDate);
-        em.merge(prc);
+        em.persist(prc);
 
         patient.addPRC(prc);
-        em.merge(patient);
+        em.persist(patient);
     }
 
     public List<PRC> getAllprcs() {
@@ -43,6 +44,7 @@ public class PRCBean {
         if (active && patient.getActivePRC() != null && !patient.getActivePRC().equals(prc)) {
             throw new IllegalArgumentException("Patient has already an active PRC");
         }
+        em.lock(prc, LockModeType.OPTIMISTIC);
         prc.setActive(active);
         em.persist(prc);
         return true;
@@ -73,6 +75,7 @@ public class PRCBean {
                 throw new IllegalArgumentException("PRC has prescriptions ending later than end date inserted");
             }
         }
+        em.lock(prc, LockModeType.OPTIMISTIC);
         prc.setEndDate(endDate);
         em.persist(prc);
         return true;

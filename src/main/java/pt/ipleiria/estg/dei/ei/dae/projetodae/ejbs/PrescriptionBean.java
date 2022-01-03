@@ -9,6 +9,7 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundExcepti
 import javax.ejb.Stateless;
 import javax.naming.directory.InvalidAttributesException;
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import java.util.Calendar;
 import java.util.List;
@@ -48,8 +49,8 @@ public class PrescriptionBean {
         }
 
         Prescription prescription = new Prescription(doctor, patient, activePrc, description, startDate, endDate);
-        em.persist(prescription);
         activePrc.addPrescription(prescription);
+        em.persist(prescription);
         return prescription.getId();
     }
 
@@ -83,9 +84,11 @@ public class PrescriptionBean {
         if (prescription == null) {
             throw new MyEntityNotFoundException();
         }
+        em.lock(prescription, LockModeType.OPTIMISTIC);
         prescription.setDescription(description);
         prescription.setStartDate(startDate);
         prescription.setEndDate(endDate);
+        em.persist(prescription);
     }
 
     public void assignPrescriptionToPatientAndDoctor(String doctor_username,
@@ -108,6 +111,8 @@ public class PrescriptionBean {
 
         doctor.addPrescription(prescription);
         patient.addPrescription(prescription);
+        em.persist(doctor);
+        em.persist(patient);
     }
 
     public void unassignPrescriptionFromPatientAndDoctor(int prescription_id) throws MyEntityNotFoundException {
@@ -130,6 +135,9 @@ public class PrescriptionBean {
         prescription.setDoctor(null);
         patient.removePrescription(prescription);
         doctor.removePrescription(prescription);
+        em.persist(prescription);
+        em.persist(doctor);
+        em.persist(patient);
     }
 
 }
