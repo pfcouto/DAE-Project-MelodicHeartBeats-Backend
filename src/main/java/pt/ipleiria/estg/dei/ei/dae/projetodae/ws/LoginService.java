@@ -15,7 +15,9 @@ import javax.ws.rs.core.Response;
 import java.text.ParseException;
 import java.util.logging.Logger;
 
-@Path("/auth")
+@Path("auth")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class LoginService {
     private static final Logger log =
             Logger.getLogger(LoginService.class.getName());
@@ -25,9 +27,7 @@ public class LoginService {
     UserBean userBean;
 
     @POST
-    @Path("/login")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("login")
     public Response authenticateUser(AuthDTO auth) {
         try {
             User user = userBean.authenticate(auth.getUsername(), auth.getPassword());
