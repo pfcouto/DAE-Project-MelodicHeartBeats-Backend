@@ -30,39 +30,39 @@ public class ConfigBean {
     ObservationBean observationBean;
     @EJB
     RuleBean ruleBean;
+    @EJB
+    PRCBean prcBean;
+
 
     @PostConstruct
     public void populateDB() {
         try {
             System.out.println("Hello Java EE!");
-
             doctorBean.create("dJoao", "1234", "Joao", "1997-06-23", "djoao@mail.pt", "919000222", "Of.1");
             doctorBean.create("dLuis", "1234", "Luis", "1986-03-25", "dLuis@mail.pt", "919000333", "Of.2");
-
             patientBean.create("pLeandro", "1234", "Leandro", "1997-06-23", "pleandro@mail.pt", "919000111");
-            patientBean.create("pLeonardo", "1234", "Leonardo", "1997-06-23", "pLeonardo@mail.pt", "919000777");
-
-//            prescriptionBean.create("dJoao","pLeandro","TEXTO DA DESCRICAO","2020-06-23","2020-07-23");
-//            prescriptionBean.create("dJoao","pLeandro","TEXTO DA DESCRICAO 1","2020-06-23","2022-07-23");
-//            prescriptionBean.create("dLuis","pLeandro","TEXTO DA DESCRICAO 2","2022-06-23","2022-07-23");
-//            prescriptionBean.create("dLuis","pLeonardo","TEXTO DA DESCRICAO 3","2020-06-23","2020-07-23");
-
+            patientBean.create("pManuel", "1234", "Manuel", "1972-08-11", "pManuel@mail.pt", "919000777");
             administratorBean.create("admin", "1234", "Administrator", "1987-02-19", "admin@mail.com", "963123123");
-            QualitativeValuesDTO qualitativeValuesDTO = new QualitativeValuesDTO(2, "Baixo");
-            List<QualitativeValuesDTO> teste = new LinkedList<>();
-            teste.add(qualitativeValuesDTO);
-            biometricsTypeBean.create("teste","description",2,1,"g","admin",teste);
-            biometricsTypeBean.create("teste2","description",2,1,"g","admin",teste);
-            observationBean.create("2000-03-18","pLeandro",1,2,"perna","Lisboa",null);
-            observationBean.create("2000-03-18","pLeandro",1,2,"perna","Lisboa","dJoao");
-            observationBean.create("2000-03-18","pLeonardo",1,2,"perna","Lisboa",null);
-            System.out.println("DEUUU");
-//            doctorBean.create("Lacerda", "1234", "Jorge Lacerda", "lacerga@mail.com", "967733870", "A");
-//            doctorBean.create("Silva", "1234", "Eduardo Silva", "silva@mail.com", "123123123", "B");
-//
-//            patientBean.create("patient", "1234", "Patient1",  "patient@mail.com", "963321321" );
+            administratorBean.create("admin2", "1234", "Administrator2", "2000-02-19", "admin2@mail.com", "963123124");
 
-            ruleBean.create(1, "=", 2, "Exercicio Fisico", 45);
+            QualitativeValuesDTO qualitativeValuesDTO = new QualitativeValuesDTO(35, "Baixo");
+            QualitativeValuesDTO qualitativeValuesDTO2 = new QualitativeValuesDTO(37, "Medio");
+            QualitativeValuesDTO qualitativeValuesDTO3 = new QualitativeValuesDTO(39, "Alto");
+            List<QualitativeValuesDTO> qualitativeValuesDTOList = new LinkedList<>();
+            qualitativeValuesDTOList.add(qualitativeValuesDTO);
+            qualitativeValuesDTOList.add(qualitativeValuesDTO2);
+            qualitativeValuesDTOList.add(qualitativeValuesDTO3);
+            List<QualitativeValuesDTO> qualitativeValuesDTOListVazia = new LinkedList<>();
+            biometricsTypeBean.create("Temperatura corpural","Temperatura medida em baixo do braco",45,30,"C","admin",qualitativeValuesDTOList);
+            biometricsTypeBean.create("Pulsacao","Pulsacao cardiaca medida em BMP",250,40,"BMP","admin2",qualitativeValuesDTOListVazia);
+            observationBean.create("2021-08-20","pManuel",1,36,"temperatura medida no Braco","Lisboa",null);
+            observationBean.create("2021-09-20","pManuel",1,35,"temperatura medida no Braco","Leiria","dJoao");
+            observationBean.create("2021-10-20","pManuel",1,40,"temperatura medida no Braco","Coimbra",null);
+            observationBean.create("2021-08-20","pManuel",2,72,"pulsacao medida no Braco","Lisboa","dLuis");
+            ruleBean.create(1, ">", 37, "Tomar banho de agua morna, nao muito quente, nao muito fria", 1);
+            ruleBean.create(2, ">", 70, "exercicios fisico leve 2x por dia", 45);
+            prcBean.create("pManuel","2021-08-05","2022-08-05");
+            prescriptionBean.create("dJoao","pManuel","Comprimido Y 1x ao almoço","2021-08-05","2021-09-05");
 
         } catch (Exception e) {
             logger.log(Level.SEVERE, e.getMessage());
