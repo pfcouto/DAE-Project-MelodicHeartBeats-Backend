@@ -79,11 +79,11 @@ public class RuleBean {
         for (Observation observation : allObservations) {
             for (Rule rule : getAllRules()) {
                 if (rule.getExp().equals("<") && observation.getQuantitativeValue() < rule.getValue()) {
-                    prescriptions.add(getPrescriptionForRule(rule, observation.getPatient()));
+                    addUniquePrescription(prescriptions, getPrescriptionForRule(rule, observation.getPatient()));
                 } else if (rule.getExp().equals("=") && observation.getQuantitativeValue() == rule.getValue()) {
-                    prescriptions.add(getPrescriptionForRule(rule, observation.getPatient()));
+                    addUniquePrescription(prescriptions, getPrescriptionForRule(rule, observation.getPatient()));
                 } else if (rule.getExp().equals(">") && observation.getQuantitativeValue() > rule.getValue()) {
-                    prescriptions.add(getPrescriptionForRule(rule, observation.getPatient()));
+                    addUniquePrescription(prescriptions, getPrescriptionForRule(rule, observation.getPatient()));
                 }
             }
         }
@@ -106,11 +106,11 @@ public class RuleBean {
         for (Observation observation : observations) {
             for (Rule rule : getAllRules()) {
                 if (rule.getExp().equals("<") && observation.getQuantitativeValue() < rule.getValue()) {
-                    prescriptions.add(getPrescriptionForRule(rule, patient));
+                    addUniquePrescription(prescriptions, getPrescriptionForRule(rule, patient));
                 } else if (rule.getExp().equals("=") && observation.getQuantitativeValue() == rule.getValue()) {
-                    prescriptions.add(getPrescriptionForRule(rule, patient));
+                    addUniquePrescription(prescriptions, getPrescriptionForRule(rule, patient));
                 } else if (rule.getExp().equals(">") && observation.getQuantitativeValue() > rule.getValue()) {
-                    prescriptions.add(getPrescriptionForRule(rule, patient));
+                    addUniquePrescription(prescriptions, getPrescriptionForRule(rule, patient));
                 }
             }
         }
@@ -129,5 +129,31 @@ public class RuleBean {
 
         Prescription prescription = new Prescription(null, patient, patient.getActivePRC(), rule.getDescription(), formattedStart, formattedEnd);
         return prescription;
+    }
+
+    public boolean addUniquePrescription(List<Prescription> prescriptions, Prescription newP) {
+        for (Prescription p : prescriptions) {
+            if (compareEqualPrescriptons(p, newP)) {
+                return false;
+            }
+        }
+        prescriptions.add(newP);
+        return true;
+    }
+
+    private boolean compareEqualPrescriptons(Prescription p1, Prescription p2) {
+        if (!p1.getDescription().equals(p2.getDescription())) {
+            return false;
+        }
+        if (!p1.getStartDate().equals(p2.getStartDate())) {
+            return false;
+        }
+        if (!p1.getEndDate().equals(p2.getEndDate())) {
+            return false;
+        }
+        if (!p1.getPatient().getUsername().equals(p2.getPatient().getUsername())) {
+            return false;
+        }
+        return true;
     }
 }
