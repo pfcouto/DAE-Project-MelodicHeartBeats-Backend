@@ -271,7 +271,7 @@ public class PatientService {
     PrescriptionDTO toPrescriptionDTO(Prescription prescription) {
         return new PrescriptionDTO(
                 prescription.getId(),
-                prescription.getDoctor().getUsername(),
+                prescription.getDoctor() == null ? null : prescription.getDoctor().getUsername(),
                 prescription.getPatient().getUsername(),
                 prescription.getDescription(),
                 prescription.getStartDate(),
