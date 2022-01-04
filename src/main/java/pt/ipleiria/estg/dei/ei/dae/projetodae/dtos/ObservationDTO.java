@@ -12,12 +12,13 @@ public class ObservationDTO implements Serializable {
     public String qualitativeValue;
     public String what;
     public String local;
+    public String doctor;
 
 
     public ObservationDTO() {
     }
 
-    public ObservationDTO(int code, String date, String patient, int biometricType, String biometricTypeName, int quantitativeValue, String qualitativeValue, String what, String local) {
+    public ObservationDTO(int code, String date, String patient, int biometricType, String biometricTypeName, int quantitativeValue, String qualitativeValue, String what, String local,String doctor) {
         this.code = code;
         this.date = date;
         this.patient = patient;
@@ -27,7 +28,9 @@ public class ObservationDTO implements Serializable {
         this.qualitativeValue = qualitativeValue;
         this.what = what;
         this.local = local;
+        this.doctor=doctor;
     }
+
 
     public int getBiometricType() {
         return biometricType;
@@ -67,6 +70,14 @@ public class ObservationDTO implements Serializable {
 
     public void setPatient(String patient) {
         this.patient = patient;
+    }
+
+    public String getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(String doctor) {
+        this.doctor = doctor;
     }
 
     public int getQuantitativeValue() {

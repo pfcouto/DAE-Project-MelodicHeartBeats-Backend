@@ -35,6 +35,8 @@ public class Observation implements Serializable {
     private String what;
     @NotNull
     private String local;
+    @ManyToOne
+    private Doctor doctor;
     @Version
     private int version;
 
@@ -52,6 +54,12 @@ public class Observation implements Serializable {
         this.what = what;
         this.local = local;
     }
+
+    public Observation(String date, Patient patient, BiometricsType biometricsType, int quantitativeValue, String qualitativeValue, String what, String local,Doctor doctor) {
+       this(date,patient,biometricsType,quantitativeValue,qualitativeValue,what,local);
+       this.doctor = doctor;
+    }
+
 
 
     public int getId() {
@@ -95,6 +103,14 @@ public class Observation implements Serializable {
 
     public void setPatient(Patient patient) {
         this.patient = patient;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
     public BiometricsType getBiometricsType() {

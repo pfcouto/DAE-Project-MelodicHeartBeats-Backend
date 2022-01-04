@@ -23,15 +23,20 @@ public class Doctor extends User implements Serializable {
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.REMOVE)
     private LinkedList<Prescription> prescriptions;
 
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.REMOVE)
+    private LinkedList<Observation> observations;
+
     public Doctor() {
         super();
         prescriptions = new LinkedList<>();
+        observations=new LinkedList<>();
     }
 
     public Doctor(String username, String password, String name, String birthDate, String email, String phoneNumber, String office) {
         super(username, password, name, birthDate, email, phoneNumber);
         this.office = office;
         prescriptions = new LinkedList<>();
+        observations=new LinkedList<>();
     }
 
     public String getOffice() {
@@ -41,6 +46,26 @@ public class Doctor extends User implements Serializable {
     public void setOffice(String office) {
         this.office = office;
     }
+
+
+    public LinkedList<Observation> getObservations() {
+        return observations;
+    }
+
+    public void setObservations(LinkedList<Observation> observations) {
+        this.observations = observations;
+    }
+
+    public void addObservation(Observation observation) {
+        if (observation != null && !observations.contains(observation))
+            observations.add(observation);
+    }
+
+    public void removeObservation(Observation observation) {
+        if (observation != null && observations.contains(observation))
+            observations.remove(observation);
+    }
+
 
     public void addPrescription(Prescription prescription) {
         if (prescription != null && !prescriptions.contains(prescription))

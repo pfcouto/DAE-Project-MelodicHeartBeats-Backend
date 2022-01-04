@@ -2,6 +2,7 @@ package pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.ObservationDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.BiometricsType;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Doctor;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Observation;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
@@ -21,7 +22,7 @@ public class ObservationBean {
     BiometricsTypeBean biometricsTypeBean;
 
 
-    public Observation create(String date, String patientUsername, int biometricCode, int quantitativeValue, String what, String local) throws MyEntityNotFoundException, MyIllegalArgumentException {
+    public Observation create(String date, String patientUsername, int biometricCode, int quantitativeValue, String what, String local, String doctorUsername) throws MyEntityNotFoundException, MyIllegalArgumentException {
         BiometricsType biometricsType = em.find(BiometricsType.class, biometricCode);
         if (biometricsType != null) {
             if (quantitativeValue > biometricsType.getValueMax() || quantitativeValue < biometricsType.getValueMin()) {
@@ -44,7 +45,18 @@ public class ObservationBean {
                         }
                     }
                     Observation observation = new Observation(date, patient, biometricsType, quantitativeValue, qualitativeValue, what, local);
+                    if(doctorUsername!=null){
+                        Doctor doctor=em.find(Doctor.class,doctorUsername);
+                        if(doctor==null){
+                            throw new MyEntityNotFoundException("The Doctor has not found");
+                        }
+                        observation.setDoctor(doctor);
+                        doctor.addObservation(observation);
+                        em.merge(doctor);
+                    }
                     em.persist(observation);
+                    patient.addObservation(observation);
+                    em.merge(patient);
                     biometricsType.getObservations().add(observation);
                     em.merge(biometricsType);
                     return observation;

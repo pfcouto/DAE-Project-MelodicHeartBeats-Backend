@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import java.security.Principal;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Path("observations") // url
@@ -26,23 +27,6 @@ public class ObservationService {
     ObservationBean observationBean;
     @Context
     private SecurityContext securityContext;
-
-    private ObservationDTO toDTO(Observation observation) {
-        return new ObservationDTO(
-                observation.getId(),
-                observation.getDate(),
-                observation.getPatient().getUsername(),
-                observation.getBiometricsType().getCode(),
-                observation.getBiometricsType().getName(),
-                observation.getQuantitativeValue(),
-                observation.getQualitativeValue(),
-                observation.getWhat(),
-                observation.getLocal());
-    }
-
-    private List<ObservationDTO> toDTOs(List<Observation> observations) {
-        return observations.stream().map(this::toDTO).collect(Collectors.toList());
-    }
 
     @GET
     @Path("/")
@@ -62,7 +46,6 @@ public class ObservationService {
                 .build();
     }
 
-
     @POST
     @Path("/")
     public Response createObservationWS(ObservationDTO observationDTO) throws MyEntityNotFoundException, MyIllegalArgumentException {
@@ -71,7 +54,8 @@ public class ObservationService {
                 observationDTO.getBiometricType(),
                 observationDTO.getQuantitativeValue(),
                 observationDTO.getWhat(),
-                observationDTO.getLocal()
+                observationDTO.getLocal(),
+                observationDTO.getDoctor()
         );
         if (observation == null) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
@@ -84,11 +68,37 @@ public class ObservationService {
     @PATCH
     @Path("update/{code}")
     public Response Update(@PathParam("code") int code, ObservationDTO observationDTO) throws MyEntityNotFoundException, MyIllegalArgumentException {
+        Observation observation=observationBean.find(code);
+        Principal principal = securityContext.getUserPrincipal();
+        if(!(securityContext.isUserInRole("Doctor") ||
+                securityContext.isUserInRole("Patient") &&
+                        principal.getName().equals(observation.getPatient().getUsername()) &&
+                        observation.getDoctor()==null)) {
+            return Response.status(Response.Status.FORBIDDEN).build();
+        }
         boolean updated = observationBean.update(code, observationDTO);
         if (!updated) {
             return Response.status(Response.Status.NOT_MODIFIED).build();
         }
         return Response.status(Response.Status.OK)
                 .build();
+    }
+
+    private ObservationDTO toDTO(Observation observation) {
+        return new ObservationDTO(
+                observation.getId(),
+                observation.getDate(),
+                observation.getPatient().getUsername(),
+                observation.getBiometricsType().getCode(),
+                observation.getBiometricsType().getName(),
+                observation.getQuantitativeValue(),
+                observation.getQualitativeValue(),
+                observation.getWhat(),
+                observation.getLocal(),
+                observation.getDoctor()!=null?observation.getDoctor().getUsername():"null");
+    }
+
+    private List<ObservationDTO> toDTOs(List<Observation> observations) {
+        return observations.stream().map(this::toDTO).collect(Collectors.toList());
     }
 }
