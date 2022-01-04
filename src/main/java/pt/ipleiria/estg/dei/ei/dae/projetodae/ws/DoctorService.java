@@ -12,8 +12,11 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundExcepti
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +27,8 @@ public class DoctorService {
 
     @EJB
     DoctorBean doctorBean;
+    @Context
+    private SecurityContext securityContext;
 
     @GET
     @Path("/")
@@ -34,6 +39,13 @@ public class DoctorService {
     @GET
     @Path("{doctor}")
     public Response getDoctorDetails(@PathParam("doctor") String username) {
+
+        Principal principal = securityContext.getUserPrincipal();
+        if(!(securityContext.isUserInRole("Administrator") ||
+                securityContext.isUserInRole("Doctor") && principal.getName().equals(username))) {
+            return Response.status(Response.Status.FORBIDDEN).build();
+        }
+
         Doctor doctor = doctorBean.findDoctor(username);
         if (doctor != null) {
             return Response.ok(toDTOWithPrescriptions(doctor)).build();

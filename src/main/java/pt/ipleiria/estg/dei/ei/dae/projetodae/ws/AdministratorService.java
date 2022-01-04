@@ -13,8 +13,11 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundExcepti
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
+import java.security.Principal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +29,8 @@ import java.util.stream.Collectors;
 public class AdministratorService {
     @EJB
     AdministratorBean administratorBean;
+    @Context
+    private SecurityContext securityContext;
 
     @GET
     @Path("/")
@@ -36,6 +41,12 @@ public class AdministratorService {
     @GET
     @Path("{administrator}")
     public Response getAdministratorDetails(@PathParam("administrator") String username) {
+
+        Principal principal = securityContext.getUserPrincipal();
+        if(!(securityContext.isUserInRole("Administrator") && principal.getName().equals(username))) {
+            return Response.status(Response.Status.FORBIDDEN).build();
+        }
+
         Administrator administrator = administratorBean.findAdministrator(username);
         if (administrator != null) {
             return Response.ok(toDTOWithBiometricsTypes(administrator)).build();

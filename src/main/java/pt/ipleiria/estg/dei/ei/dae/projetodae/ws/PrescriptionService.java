@@ -10,6 +10,7 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundExcepti
 
 import javax.ejb.EJB;
 import javax.mail.MessagingException;
+import javax.naming.directory.InvalidAttributesException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -64,7 +65,7 @@ public class PrescriptionService {
 
     @POST
     @Path("/" )
-    public Response createNewPrescription(PrescriptionDTO prescriptionDTO) throws MyEntityNotFoundException, MessagingException {
+    public Response createNewPrescription(PrescriptionDTO prescriptionDTO) throws MyEntityNotFoundException, InvalidAttributesException {
         int prescriptionId = prescriptionBean.create(
                 prescriptionDTO.getDoctor(),
                 prescriptionDTO.getPatient(),
