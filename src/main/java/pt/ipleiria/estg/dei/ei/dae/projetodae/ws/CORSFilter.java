@@ -14,8 +14,9 @@ public class CORSFilter implements ContainerResponseFilter {
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
         MultivaluedMap<String, Object> headers = responseContext.getHeaders();
         headers.add("Access-Control-Allow-Origin", "*");
-        headers.add("Access-Control-Allow-Methods", "GET, PUT, POST, OPTIONS");
+        headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE, PATCH");
         headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization, Accept, Accept-Language");
+
 
         if (requestContext.getMethod().equals("OPTIONS"))
             responseContext.setStatus(200);

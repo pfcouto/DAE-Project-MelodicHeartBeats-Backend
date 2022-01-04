@@ -142,16 +142,6 @@ public class PatientService {
         return prescriptions.stream().map(this::toPrescriptionDTO).collect(Collectors.toList());
     }
 
-    PrescriptionDTO toPrescriptionDTO(Prescription prescription) {
-        return new PrescriptionDTO(
-                prescription.getId(),
-                prescription.getDoctor() == null ? null : prescription.getDoctor().getUsername(),
-                prescription.getPatient().getUsername(),
-                prescription.getDescription(),
-                prescription.getStartDate(),
-                prescription.getEndDate()
-        );
-    }
 
     @POST
     @Path("/")
