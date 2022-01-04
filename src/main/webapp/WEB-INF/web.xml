@@ -272,6 +272,43 @@
         </auth-constraint>
     </security-constraint>
 
+    <!--    RULES     -->
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>RULES List</web-resource-name>
+            <url-pattern>/api/rules</url-pattern>
+            <http-method>GET</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Administrator</role-name>
+            <role-name>Doctor</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>rules create</web-resource-name>
+            <url-pattern>/api/rules</url-pattern>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Administrator</role-name>
+            <role-name>Doctor</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>rules update and delete</web-resource-name>
+            <url-pattern>/api/rules/*</url-pattern>
+            <http-method>PUT</http-method>
+            <http-method>DELETE</http-method>
+            <http-method>PATCH</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Administrator</role-name>
+            <role-name>Doctor</role-name>
+        </auth-constraint>
+    </security-constraint>
     <security-role>
         <description>Administrator role</description>
         <role-name>Administrator</role-name>

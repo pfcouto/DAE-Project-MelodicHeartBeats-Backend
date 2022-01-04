@@ -11,6 +11,7 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyConstraintViolationEx
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityExistsException;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -90,6 +91,7 @@ public class PatientService {
 
     @GET
     @Path("{patient}/suggestedPrescriptions")
+    @RolesAllowed("Doctor")
     public Response getSuggestedPrescriptionsOfPatient(@PathParam("patient") String username) throws MyEntityNotFoundException {
         Patient patient = patientBean.findPatient(username);
         if (patient == null) {

@@ -9,6 +9,7 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.naming.directory.InvalidAttributesException;
 import javax.ws.rs.*;
@@ -59,6 +60,7 @@ public class PrescriptionService {
 
     @GET
     @Path("suggestedPrescriptions")
+    @RolesAllowed("Doctor")
     public Response getSuggestedPrescriptions() {
         List<Prescription> allPrescriptions = ruleBean.getAllPrescriptions();
         if (allPrescriptions == null || allPrescriptions.size() < 1) {
