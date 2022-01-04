@@ -71,7 +71,8 @@ public class BiometricsTypeService {
     public Response getBiometricsTypeDetails(@PathParam("code") int code) throws MyEntityNotFoundException {
         Principal principal = securityContext.getUserPrincipal();
         if(!(securityContext.isUserInRole("Administrator") ||
-                securityContext.isUserInRole("Doctor"))) {
+                securityContext.isUserInRole("Doctor") ||
+                securityContext.isUserInRole("Patient") )) {
             return Response.status(Response.Status.FORBIDDEN).build();
         }
 

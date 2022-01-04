@@ -27,16 +27,21 @@ public class Patient extends User implements Serializable {
     @OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE)
     private LinkedList<Prescription> prescriptions;
 
+    @OneToMany(mappedBy = "patient",cascade = CascadeType.REMOVE)
+    private LinkedList<Observation> observations;
+
     @OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE)
     private LinkedList<PRC> prcs;
 
     public Patient() {
+        observations=new LinkedList<>();
         prescriptions = new LinkedList<>();
         prcs = new LinkedList<>();
     }
 
     public Patient(String username, String password, String name, String birthDate, String email, String phoneNumber) {
         super(username, password, name, birthDate, email, phoneNumber);
+        observations=new LinkedList<>();
         prescriptions = new LinkedList<>();
         prcs = new LinkedList<>();
     }
@@ -66,6 +71,25 @@ public class Patient extends User implements Serializable {
         if (prescription != null && prescriptions.contains(prescription))
             prescriptions.remove(prescription);
     }
+
+    public LinkedList<Observation> getObservations() {
+        return observations;
+    }
+
+    public void setObservations(LinkedList<Observation> observations) {
+        this.observations = observations;
+    }
+
+    public void addObservation(Observation observation) {
+        if (observation != null && !observations.contains(observation))
+            observations.add(observation);
+    }
+
+    public void removeObservation(Observation observation) {
+        if (observation != null && observations.contains(observation))
+            observations.remove(observation);
+    }
+
 
     public void addPRC(PRC prc) {
         if (prc != null && !prcs.contains(prc))

@@ -40,37 +40,6 @@ public class PatientService {
         return toDTOsNoPrescriptions(patientBean.getAllPatientsNotDeleted());
     }
 
-    PRCDTO prcToDTO(PRC prc) {
-        return new PRCDTO(
-                prc.getId(),
-                prc.getPatient().getUsername(),
-                prc.getStartDate(),
-                prc.getEndDate(),
-                prc.isActive()
-        );
-    }
-
-    private List<PRCDTO> prcToDTOs(List<PRC> prcs) {
-        return prcs.stream().map(this::prcToDTO).collect(Collectors.toList());
-    }
-
-    private ObservationDTO toDTO(Observation observation) {
-        return new ObservationDTO(
-                observation.getId(),
-                observation.getDate(),
-                observation.getPatient().getUsername(),
-                observation.getBiometricsType().getCode(),
-                observation.getBiometricsType().getName(),
-                observation.getQuantitativeValue(),
-                observation.getQualitativeValue(),
-                observation.getWhat(),
-                observation.getLocal());
-    }
-
-    private List<ObservationDTO> observationtosDTOs(List<Observation> observations) {
-        return observations.stream().map(this::toDTO).collect(Collectors.toList());
-    }
-
     @GET
     @Path("{patient}/observations")
     public Response getObservationsOfPatient(@PathParam("patient") String username) {
@@ -148,23 +117,8 @@ public class PatientService {
                     .entity("ERROR_FINDING_PATIENT")
                     .build();
         }
-        return Response.ok(toDTOs(patientBean.getPrescriptions(patient))).build();
+        return Response.ok(prescriptionsToDTOs(patientBean.getPrescriptions(patient))).build();
 
-    }
-
-    private List<PrescriptionDTO> toDTOs(List<Prescription> prescriptions) {
-        return prescriptions.stream().map(this::toPrescriptionDTO).collect(Collectors.toList());
-    }
-
-    PrescriptionDTO toPrescriptionDTO(Prescription prescription) {
-        return new PrescriptionDTO(
-                prescription.getId(),
-                prescription.getDoctor().getUsername(),
-                prescription.getPatient().getUsername(),
-                prescription.getDescription(),
-                prescription.getStartDate(),
-                prescription.getEndDate()
-        );
     }
 
     @POST
@@ -277,6 +231,8 @@ public class PatientService {
 
     PatientDTO toDTOWithPrescriptions(Patient patient) {
         List<PrescriptionDTO> prescriptionsDTOS = prescriptionsToDTOs(patient.getPrescriptions());
+        List<ObservationDTO> observationDTOS = observationtosDTOs(patient.getObservations());
+        List<PRCDTO> prcdtos=prcToDTOs(patient.getPrcs());
         PatientDTO patientDTO = new PatientDTO(
                 patient.getUsername(),
                 null,
@@ -287,6 +243,8 @@ public class PatientService {
                 patient.isBlocked()
         );
         patientDTO.setPrescriptionDTOS(prescriptionsDTOS);
+        patientDTO.setObservationDTOS(observationDTOS);
+        patientDTO.setPrcdtos(prcdtos);
         return patientDTO;
     }
 
@@ -294,11 +252,11 @@ public class PatientService {
         return patients.stream().map(this::toDTOWithPrescriptions).collect(Collectors.toList());
     }
 
-    PrescriptionDTO toDTO(Prescription prescription) {
+    PrescriptionDTO toPrescriptionDTO(Prescription prescription) {
         return new PrescriptionDTO(
                 prescription.getId(),
-                prescription.getDoctor().getName(),
-                prescription.getPatient().getName(),
+                prescription.getDoctor().getUsername(),
+                prescription.getPatient().getUsername(),
                 prescription.getDescription(),
                 prescription.getStartDate(),
                 prescription.getEndDate()
@@ -306,7 +264,39 @@ public class PatientService {
     }
 
     private List<PrescriptionDTO> prescriptionsToDTOs(List<Prescription> prescriptions) {
-        return prescriptions.stream().map(this::toDTO).collect(Collectors.toList());
+        return prescriptions.stream().map(this::toPrescriptionDTO).collect(Collectors.toList());
+    }
+
+    private ObservationDTO toDTO(Observation observation) {
+        return new ObservationDTO(
+                observation.getId(),
+                observation.getDate(),
+                observation.getPatient().getUsername(),
+                observation.getBiometricsType().getCode(),
+                observation.getBiometricsType().getName(),
+                observation.getQuantitativeValue(),
+                observation.getQualitativeValue(),
+                observation.getWhat(),
+                observation.getLocal(),
+                observation.getDoctor()!=null?observation.getDoctor().getUsername():"null");
+    }
+
+    private List<ObservationDTO> observationtosDTOs(List<Observation> observations) {
+        return observations.stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
+    PRCDTO prcToDTO(PRC prc) {
+        return new PRCDTO(
+                prc.getId(),
+                prc.getPatient().getUsername(),
+                prc.getStartDate(),
+                prc.getEndDate(),
+                prc.isActive()
+        );
+    }
+
+    private List<PRCDTO> prcToDTOs(List<PRC> prcs) {
+        return prcs.stream().map(this::prcToDTO).collect(Collectors.toList());
     }
 
 }

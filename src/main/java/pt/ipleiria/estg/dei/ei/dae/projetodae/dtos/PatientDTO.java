@@ -12,9 +12,13 @@ public class PatientDTO {
     String phoneNumber;
     boolean blocked;
     List<PrescriptionDTO> prescriptionDTOS;
+    List<ObservationDTO> observationDTOS;
+    List<PRCDTO> prcdtos;
 
     public PatientDTO() {
         prescriptionDTOS = new LinkedList<>();
+        observationDTOS=new LinkedList<>();
+        prcdtos=new LinkedList<>();
     }
 
     public PatientDTO(String username, String password, String name, String birthDate, String email, String phoneNumber, boolean blocked) {
@@ -26,6 +30,8 @@ public class PatientDTO {
         this.phoneNumber = phoneNumber;
         this.blocked = blocked;
         prescriptionDTOS = new LinkedList<>();
+        observationDTOS=new LinkedList<>();
+        prcdtos=new LinkedList<>();
     }
 
     public String getUsername() {
@@ -66,6 +72,22 @@ public class PatientDTO {
 
     public void setPrescriptionDTOS(List<PrescriptionDTO> prescriptionDTOS) {
         this.prescriptionDTOS = prescriptionDTOS;
+    }
+
+    public List<ObservationDTO> getObservationDTOS() {
+        return observationDTOS;
+    }
+
+    public void setObservationDTOS(List<ObservationDTO> observationDTOS) {
+        this.observationDTOS = observationDTOS;
+    }
+
+    public List<PRCDTO> getPrcdtos() {
+        return prcdtos;
+    }
+
+    public void setPrcdtos(List<PRCDTO> prcdtos) {
+        this.prcdtos = prcdtos;
     }
 
     public String getBirthDate() {
