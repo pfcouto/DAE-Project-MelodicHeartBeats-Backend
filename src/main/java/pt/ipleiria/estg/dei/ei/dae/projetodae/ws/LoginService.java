@@ -32,6 +32,9 @@ public class LoginService {
         try {
             User user = userBean.authenticate(auth.getUsername(), auth.getPassword());
             if (user != null) {
+                if(user.isBlocked()){
+                    return Response.status(Response.Status.UNAUTHORIZED).build();
+                }
                 if (user.getUsername() != null) {
                     log.info("Generating JWT for user " + user.getUsername());
                 }
