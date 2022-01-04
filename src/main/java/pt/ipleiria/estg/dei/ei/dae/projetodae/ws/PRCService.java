@@ -12,9 +12,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Calendar;
 import javax.ws.rs.core.SecurityContext;
 import java.security.Principal;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -118,7 +118,7 @@ public class PRCService {
     @GET
     @Path("{prc}/withPrescriptions")
 
-    public Response getPRCDetailsWithPrescriptions(@PathParam("prc") int prcId) {
+    public Response getPRCDetailsWithPrescriptions(@PathParam("prc") int prcId) throws MyEntityNotFoundException {
         PRC prc = prcBean.findPRC(prcId);
         if (prc == null) {
             return Response.status(Response.Status.NOT_FOUND)
@@ -160,16 +160,16 @@ public class PRCService {
                 .build();
     }
 
-    private void updateActivePRCs (List<PRC> prcs) throws MyEntityNotFoundException {
-        if (prcs == null){
+    private void updateActivePRCs(List<PRC> prcs) throws MyEntityNotFoundException {
+        if (prcs == null) {
             return;
         }
-        for(PRC prc : prcs){
-            if (prc.isActive()){
+        for (PRC prc : prcs) {
+            if (prc.isActive()) {
                 String[] split = prc.getEndDate().split("-");
                 Calendar prcDate = Calendar.getInstance();
-                prcDate.set(Integer.parseInt(split[0]), Integer.parseInt(split[1]) -1 , Integer.parseInt(split[2]));
-                if (Calendar.getInstance().after(prcDate) ){
+                prcDate.set(Integer.parseInt(split[0]), Integer.parseInt(split[1]) - 1, Integer.parseInt(split[2]));
+                if (Calendar.getInstance().after(prcDate)) {
 
                     prcBean.updateActive(prc.getId(), false);
                 }
