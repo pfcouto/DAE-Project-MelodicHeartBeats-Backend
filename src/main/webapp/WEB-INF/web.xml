@@ -238,6 +238,39 @@
         </auth-constraint>
     </security-constraint>
 
+    <!--    PRCs     -->
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>PRCs List</web-resource-name>
+            <url-pattern>/api/prcs</url-pattern>
+            <http-method>GET</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Administrator</role-name>
+            <role-name>Doctor</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>PRCs create</web-resource-name>
+            <url-pattern>/api/prcs</url-pattern>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Doctor</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>PRCs patch and delete</web-resource-name>
+            <url-pattern>/api/prcs/*</url-pattern>
+            <http-method>PATCH</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Doctor</role-name>
+        </auth-constraint>
+    </security-constraint>
 
     <security-role>
         <description>Administrator role</description>
