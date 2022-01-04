@@ -9,8 +9,11 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundExcepti
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
+import java.security.Principal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +25,8 @@ public class PRCService {
 
     @EJB
     PRCBean prcBean;
+    @Context
+    private SecurityContext securityContext;
 
     PRCDTO toDTO(PRC prc) {
         return new PRCDTO(
@@ -84,26 +89,38 @@ public class PRCService {
     @GET
     @Path("{prc}")
     public Response getPRCDetails(@PathParam("prc") int prcId) {
-        PRC prc = prcBean.findPRC(prcId);
-        if (prc != null) {
-            return Response.ok(toDTO(prc)).build();
-        }
-        return Response.status(Response.Status.NOT_FOUND)
-                .entity("ERROR_FINDING_PRC")
-                .build();
 
+        PRC prc = prcBean.findPRC(prcId);
+        if (prc == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("ERROR_FINDING_PRC")
+                    .build();
+        }
+
+        Principal principal = securityContext.getUserPrincipal();
+        if (securityContext.isUserInRole("Patient") && !principal.getName().equals(prc.getPatient().getUsername())) {
+            return Response.status(Response.Status.FORBIDDEN).build();
+        }
+
+        return Response.ok(toDTO(prc)).build();
     }
 
     @GET
     @Path("{prc}/withPrescriptions")
-    public Response getPRCDetailsWithDetails(@PathParam("prc") int prcId) {
+    public Response getPRCDetailsWithPrescriptions(@PathParam("prc") int prcId) {
         PRC prc = prcBean.findPRC(prcId);
-        if (prc != null) {
-            return Response.ok(toDTOWithPrescriptions(prc)).build();
+        if (prc == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("ERROR_FINDING_PRC")
+                    .build();
         }
-        return Response.status(Response.Status.NOT_FOUND)
-                .entity("ERROR_FINDING_PRC")
-                .build();
+
+        Principal principal = securityContext.getUserPrincipal();
+        if (securityContext.isUserInRole("Patient") && !principal.getName().equals(prc.getPatient().getUsername())) {
+            return Response.status(Response.Status.FORBIDDEN).build();
+        }
+
+        return Response.ok(toDTOWithPrescriptions(prc)).build();
     }
 
     @PATCH

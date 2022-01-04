@@ -5,8 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="750787e7-e1fc-4b5a-843a-3c81d7990349" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/dtos/RuleDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/RuleBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Rule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/RuleService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/ConfigBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ejbs/ConfigBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Prescription.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/entities/Prescription.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/PRCService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/PRCService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/PatientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/PatientService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/PrescriptionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pt/ipleiria/estg/dei/ei/dae/projetodae/ws/PrescriptionService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +76,13 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs" />
+      <recent name="pt.ipleiria.estg.dei.ei.dae.projetodae.ws" />
+      <recent name="pt.ipleiria.estg.dei.ei.dae.projetodae.entities" />
+    </key>
+  </component>
   <component name="RunManager" selected="HTTP Request.HTTPRequests#10">
     <configuration name="HTTPRequests#10" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/HTTPRequests.http" index="10" runType="Run single request">
       <method v="2" />
@@ -111,7 +126,7 @@
       <workItem from="1640987795396" duration="795000" />
       <workItem from="1641058427642" duration="9761000" />
       <workItem from="1641142733556" duration="4894000" />
-      <workItem from="1641204150722" duration="3039000" />
+      <workItem from="1641204150722" duration="22069000" />
     </task>
     <servers />
   </component>

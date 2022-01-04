@@ -1,8 +1,8 @@
 package pt.ipleiria.estg.dei.ei.dae.projetodae.ws;
 
 import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.*;
-import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.DoctorBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.PatientBean;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.RuleBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Observation;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.PRC;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
@@ -29,14 +29,13 @@ public class PatientService {
     @EJB
     PatientBean patientBean;
     @EJB
-    DoctorBean doctorBean;
+    RuleBean ruleBean;
     @Context
     private SecurityContext securityContext;
 
     @GET
     @Path("/")
     public List<PatientDTO> getAllPatientsNotDeleted() {
-        System.out.println(patientBean.getAllPatientsNotDeleted());
         return toDTOsNoPrescriptions(patientBean.getAllPatientsNotDeleted());
     }
 
@@ -70,6 +69,13 @@ public class PatientService {
     private List<ObservationDTO> observationtosDTOs(List<Observation> observations) {
         return observations.stream().map(this::toDTO).collect(Collectors.toList());
     }
+
+    @GET
+    @Path("/all")
+    public List<PatientDTO> getAllPatients() {
+        return toDTOsNoPrescriptions(patientBean.getAllPatients());
+    }
+
 
     @GET
     @Path("{patient}/observations")
@@ -114,17 +120,28 @@ public class PatientService {
     }
 
     @GET
-    @Path("/all")
-    public List<PatientDTO> getAllPatients() {
-        return toDTOsNoPrescriptions(patientBean.getAllPatients());
+    @Path("{patient}/suggestedPrescriptions")
+    public Response getSuggestedPrescriptionsOfPatient(@PathParam("patient") String username) throws MyEntityNotFoundException {
+        Patient patient = patientBean.findPatient(username);
+        if (patient == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("ERROR_FINDING_PATIENT")
+                    .build();
+        }
+        List<Prescription> allPrescriptions = ruleBean.getPrescriptionsOfPatient(username);
+        if (allPrescriptions == null || allPrescriptions.size() < 1) {
+            return Response.noContent().build();
+        }
+        return Response.ok(toDTOs(allPrescriptions)).build();
     }
+
 
     @GET
     @Path("{patient}")
     public Response getPatientDetails(@PathParam("patient") String username) {
 
         Principal principal = securityContext.getUserPrincipal();
-        if(!(securityContext.isUserInRole("Administrator") ||
+        if (!(securityContext.isUserInRole("Administrator") ||
                 securityContext.isUserInRole("Doctor") ||
                 securityContext.isUserInRole("Patient") && principal.getName().equals(username))) {
             return Response.status(Response.Status.FORBIDDEN).build();
@@ -159,7 +176,7 @@ public class PatientService {
     PrescriptionDTO toPrescriptionDTO(Prescription prescription) {
         return new PrescriptionDTO(
                 prescription.getId(),
-                prescription.getDoctor().getUsername(),
+                prescription.getDoctor() == null ? null : prescription.getDoctor().getUsername(),
                 prescription.getPatient().getUsername(),
                 prescription.getDescription(),
                 prescription.getStartDate(),
@@ -211,13 +228,7 @@ public class PatientService {
 
         Patient patientDeletedOrUndeleted = patientBean.findPatient(username);
 
-//        if (patientDeletedOrUndeleted.isDeleted()) {
         return Response.ok().build();
-//        }
-
-//        return Response.status(Response.Status.NOT_FOUND)
-//                .entity("ERROR_FINDING_PATIENT")
-//                .build();
     }
 
     @PATCH

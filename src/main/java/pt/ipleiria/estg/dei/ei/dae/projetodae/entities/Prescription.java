@@ -30,8 +30,12 @@ public class Prescription implements Serializable {
     @NotNull
     private PRC prc;
     private String description;
+    @NotNull
     private Calendar startDate;
+    @NotNull
     private Calendar endDate;
+    @Version
+    private int version;
 
     public Prescription() {
     }
@@ -42,13 +46,17 @@ public class Prescription implements Serializable {
         this.description = description;
         this.prc = prc;
 
-        String[] startDateStrings = startDate.split("-");
-        this.startDate = Calendar.getInstance();
-        this.startDate.set(Integer.parseInt(startDateStrings[0]), Integer.parseInt(startDateStrings[1]) - 1, Integer.parseInt(startDateStrings[2]));
+        if (startDate != null) {
+            String[] startDateStrings = startDate.split("-");
+            this.startDate = Calendar.getInstance();
+            this.startDate.set(Integer.parseInt(startDateStrings[0]), Integer.parseInt(startDateStrings[1]) - 1, Integer.parseInt(startDateStrings[2]));
 
-        String[] endDateStrings = endDate.split("-");
-        this.endDate = Calendar.getInstance();
-        this.endDate.set(Integer.parseInt(endDateStrings[0]), Integer.parseInt(endDateStrings[1]) - 1, Integer.parseInt(endDateStrings[2]));
+        }
+        if (endDate != null) {
+            String[] endDateStrings = endDate.split("-");
+            this.endDate = Calendar.getInstance();
+            this.endDate.set(Integer.parseInt(endDateStrings[0]), Integer.parseInt(endDateStrings[1]) - 1, Integer.parseInt(endDateStrings[2]));
+        }
     }
 
     public int getId() {

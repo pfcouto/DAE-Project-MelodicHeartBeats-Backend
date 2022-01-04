@@ -4,20 +4,23 @@ import pt.ipleiria.estg.dei.ei.dae.projetodae.dtos.PrescriptionDTO;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.EmailBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.PatientBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.PrescriptionBean;
+import pt.ipleiria.estg.dei.ei.dae.projetodae.ejbs.RuleBean;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Patient;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.entities.Prescription;
 import pt.ipleiria.estg.dei.ei.dae.projetodae.exceptions.MyEntityNotFoundException;
 
 import javax.ejb.EJB;
-import javax.mail.MessagingException;
 import javax.naming.directory.InvalidAttributesException;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Path("prescriptions" )
+@Path("prescriptions")
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
 public class PrescriptionService {
@@ -27,11 +30,15 @@ public class PrescriptionService {
     EmailBean emailBean;
     @EJB
     PatientBean patientBean;
+    @EJB
+    RuleBean ruleBean;
+    @Context
+    private SecurityContext securityContext;
 
     PrescriptionDTO toDTO(Prescription prescription) {
         return new PrescriptionDTO(
                 prescription.getId(),
-                prescription.getDoctor().getUsername(),
+                prescription.getDoctor() == null ? null : prescription.getDoctor().getUsername(),
                 prescription.getPatient().getUsername(),
                 prescription.getDescription(),
                 prescription.getStartDate(),
@@ -44,27 +51,43 @@ public class PrescriptionService {
     }
 
     @GET
-    @Path("/" )
+    @Path("/")
 
     public List<PrescriptionDTO> getAllPrescriptions() {
         return toDTOs(prescriptionBean.getAllPrescriptions());
     }
 
     @GET
+    @Path("suggestedPrescriptions")
+    public Response getSuggestedPrescriptions() {
+        List<Prescription> allPrescriptions = ruleBean.getAllPrescriptions();
+        if (allPrescriptions == null || allPrescriptions.size() < 1) {
+            return Response.noContent().build();
+        }
+        return Response.ok(toDTOs(allPrescriptions)).build();
+    }
+
+    @GET
     @Path("{prescription}")
     public Response getPrescriptionDetails(@PathParam("prescription") int prescriptionId) {
-        Prescription prescription = prescriptionBean.findPrescription(prescriptionId);
-        if (prescription != null) {
-            return Response.ok(toDTO(prescription)).build();
-        }
-        return Response.status(Response.Status.NOT_FOUND)
-                .entity("ERROR_FINDING_PRESCRIPTION" )
-                .build();
 
+        Prescription prescription = prescriptionBean.findPrescription(prescriptionId);
+        if (prescription == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("ERROR_FINDING_PRESCRIPTION")
+                    .build();
+        }
+
+        Principal principal = securityContext.getUserPrincipal();
+        if (securityContext.isUserInRole("Patient") && !principal.getName().equals(prescription.getPatient().getUsername())) {
+            return Response.status(Response.Status.FORBIDDEN).build();
+        }
+
+        return Response.ok(toDTO(prescription)).build();
     }
 
     @POST
-    @Path("/" )
+    @Path("/")
     public Response createNewPrescription(PrescriptionDTO prescriptionDTO) throws MyEntityNotFoundException, InvalidAttributesException {
         int prescriptionId = prescriptionBean.create(
                 prescriptionDTO.getDoctor(),
@@ -86,18 +109,16 @@ public class PrescriptionService {
     }
 
     @PUT
-    @Path("{prescription}" )
-    public Response createNewPrescription(@PathParam("prescription" ) int prescriptionId, PrescriptionDTO presciptionDTO) throws MyEntityNotFoundException {
+    @Path("{prescription}")
+    public Response createNewPrescription(@PathParam("prescription") int prescriptionId, PrescriptionDTO presciptionDTO) throws MyEntityNotFoundException {
         Prescription prescription = prescriptionBean.findPrescription(prescriptionId);
         if (prescription == null) {
             return Response.status(Response.Status.NOT_FOUND)
-                    .entity("ERROR_FINDING_PRESCRIPTION" )
+                    .entity("ERROR_FINDING_PRESCRIPTION")
                     .build();
         }
         prescriptionBean.updatePrescription(
                 prescriptionId,
-//                presciptionDTO.getDoctor(),
-//                presciptionDTO.getPatient(),
                 presciptionDTO.getDescription(),
                 presciptionDTO.getStartDate(),
                 presciptionDTO.getEndDate()
@@ -111,9 +132,10 @@ public class PrescriptionService {
                 .build();
     }
 
+
     @DELETE
-    @Path("{prescription}" )
-    public Response deleteDoctor(@PathParam("prescription" ) int prescriptionId) throws MyEntityNotFoundException {
+    @Path("{prescription}")
+    public Response deleteDoctor(@PathParam("prescription") int prescriptionId) throws MyEntityNotFoundException {
 
         prescriptionBean.deletePrescription(prescriptionId);
 
@@ -123,7 +145,7 @@ public class PrescriptionService {
         }
 
         return Response.status(Response.Status.NOT_FOUND)
-                .entity("ERROR_FINDING_PRESCRIPTION" )
+                .entity("ERROR_FINDING_PRESCRIPTION")
                 .build();
     }
 }
